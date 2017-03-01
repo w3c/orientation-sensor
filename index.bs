@@ -1,0 +1,167 @@
+<pre class="metadata">
+Title: DeviceOrientationSensor
+Status: ED
+Level: 1
+ED: https://w3c.github.io/orientation-sensor/
+Shortname: orientation-sensor
+TR: http://www.w3.org/TR/orientation-sensor/
+Editor: Mikhail Pozdnyakov 78325, Intel Corporation, http://intel.com/
+Editor: Alexander Shalamov 78335, Intel Corporation, https://intel.com/
+Editor: Kenneth Rohde Christiansen      , Intel Corporation, http://intel.com/
+Editor: Anssi Kostiainen 41974, Intel Corporation, http://intel.com/
+Group: dap
+Abstract:
+  This specification defines a concrete sensor interface to monitor
+  the rate of rotation around the device's local three primary axes.
+Version History: https://github.com/w3c/orientation-sensor/commits/gh-pages/index.bs
+!Bug Reports: <a href="https://www.github.com/w3c/orientation-sensor/issues/new">via the w3c/orientation-sensor repository on GitHub</a>
+Indent: 2
+Repository: w3c/orientation-sensor
+Markup Shorthands: markdown on
+Inline Github Issues: title
+!Test Suite: <a href="https://github.com/w3c/web-platform-tests/tree/master/orientation-sensor">web-platform-tests on GitHub</a>
+Boilerplate: omit issues-index, omit conformance
+</pre>
+<pre class="anchors">
+urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
+  type: dfn
+    text: high-level
+    text: sensor
+    text: latest reading
+    text: default sensor
+    text: construct a sensor object; url: construct-sensor-object
+</pre>
+
+Introduction {#intro}
+============
+
+The DeviceOrientationSensor API extends the Generic Sensor API [[GENERIC-SENSOR]]
+to provide information that describes the device's physical orientation in a stationary
+three dimensional Cartesian coordinate system.
+
+Examples {#examples}
+========
+
+<div class="example">
+    <pre highlight="js">
+    let sensor = new DeviceOrientationSensor();
+    let matrix = new Float32Array(16);
+    sensor.start();
+    
+    sensor.onchange = () => {
+        sensor.populateMatrix(matrix);
+    };
+
+    sensor.onerror = event => console.log(event.error.name, event.error.message);
+    </pre>
+</div>
+
+Security and Privacy Considerations {#security-and-privacy}
+===================================
+
+There are no specific security and privacy considerations
+beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
+
+Model {#model}
+=====
+
+The orientation sensors's associated {{Sensor}} subclass is the {{DeviceOrientationSensor}} class.
+
+Orientation sensor is a [=high-level=] sensor which is created through [=sensor-fusion=]
+of [=low-level=] motion sensors (accelerometer, gyroscope, magnetometer).
+
+A [=latest reading=] per [=sensor=] of orientation type includes one [=map/entries=]
+whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
+The elements of the [=list=] are equal to components of a unit quaternion representing orientation
+of the device in a three dimensional Cartesian coordinate system (x, y, z), where x-axis points east,
+y-axis points north and z-axis points up and is perpendicular to the plane made up of x and y axis.
+
+API {#api}
+===
+
+The DeviceOrientationSensor Interface {#deviceorientationsensor-interface}
+-------------------------------------
+
+<pre class="idl">
+  [Constructor(optional SensorOptions sensorOptions)]
+  interface DeviceOrientationSensor : Sensor {
+    void populateQuaternion(Float32Array array);
+    void populateMatrix(Float32Array array);
+  };
+</pre>
+
+To <dfn>Construct a DeviceOrientationSensor Object</dfn> the user agent must invoke the
+<a>construct a Sensor object</a> abstract operation.
+
+### DeviceOrientationSensor.populateQuaternion() ### {#deviceorientationsensor-populatequaternion}
+
+<div algorithm="to populate quaternion">
+The {{DeviceOrientationSensor/populateQuaternion()}} method must run these steps or their [=equivalent=]:
+    1.  If |array| parameter is not {{Float32Array}}, [=throw=] an
+        "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
+    1.  If |array| parameter is {{Float32Array}} with size other than four, [=throw=] an
+        "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
+    1.  If the value of sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
+        [=throw=] an "{{InvalidStateError!!exception}}" {{DOMException}} and abort these steps.
+    1.  Run these sub-steps [=in parallel=]:
+        1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
+        1.  If |quaternion| is `null`, then abort these steps.
+        1.  Copy |quaternion| into |array| parameter
+</div>
+
+### DeviceOrientationSensor.populateMatrix() ### {#deviceorientationsensor-populatematrix}
+
+<div algorithm="to populate matrix">
+The {{DeviceOrientationSensor/populateMatrix()}} method must run these steps or their [=equivalent=]:
+
+</div>
+
+Use-Cases and Requirements {#usecases-requirements}
+==========================
+
+Use cases {#usecases}
+---------
+
+    1. A 3D compass web application monitor's the device's orientation and aligns the compass heading in a three-dimensional space.
+    1. A web-based game uses the device's orientation relative to the Earth's surface as user input. For example, simulation of Ball-in-a-maze puzzle.
+    1. A WebVR API polyfill implementation tracks the headset's (or mobile device's for mobile VR) orientation.
+    1. A mapping web application orientates the 2D map with the orientation of the device.
+
+Functional requirements {#functional-requirements}
+-----------------------
+
+    1. The API must provide data that describes the device's physical orientation in a stationary 3D coordinate system.
+    1. The API must provide data in representation that matches that of the WebGL interfaces and methods.
+    1. The API must address the VR requirements for high performance and low motion-to-photon latency, and not introduce significant overhead over corresponding native platform APIs.
+    1. The API must extend Generic Sensor and inherit its functionality and satisfy its requirements.
+
+Non-functional requirements {#nonfunctional-requirements}
+---------------------------
+
+    1. The API must provide developer friendly and consistent higher level abstractions optimised for the common use cases.
+
+
+Acknowledgements {#acknowledgements}
+================
+
+Tobie Langel for the work on Generic Sensor API.
+
+Conformance {#conformance}
+===========
+
+Conformance requirements are expressed with a combination of
+descriptive assertions and RFC 2119 terminology. The key words "MUST",
+"MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this
+document are to be interpreted as described in RFC 2119.
+However, for readability, these words do not appear in all uppercase
+letters in this specification.
+
+All of the text of this specification is normative except sections
+explicitly marked as non-normative, examples, and notes. [[!RFC2119]]
+
+A <dfn>conformant user agent</dfn> must implement all the requirements
+listed in this specification that are applicable to user agents.
+
+The IDL fragments in this specification must be interpreted as required for
+conforming IDL fragments, as described in the Web IDL specification. [[!WEBIDL]]
