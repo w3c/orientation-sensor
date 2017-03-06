@@ -18,18 +18,53 @@ Version History: https://github.com/w3c/orientation-sensor/commits/gh-pages/inde
 Indent: 2
 Repository: w3c/orientation-sensor
 Markup Shorthands: markdown on
-Inline Github Issues: title
+Inline Github Issues: true
 !Test Suite: <a href="https://github.com/w3c/web-platform-tests/tree/master/orientation-sensor">web-platform-tests on GitHub</a>
 Boilerplate: omit issues-index, omit conformance
 </pre>
 <pre class="anchors">
 urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
   type: dfn
-    text: high-level
-    text: sensor
-    text: latest reading
-    text: default sensor
+    text: activated
     text: construct a sensor object; url: construct-sensor-object
+    text: default sensor
+    text: equivalent
+    text: high-level
+    text: low-level
+    text: latest reading
+    text: sensor
+    text: sensor-fusion
+</pre>
+
+<pre class="anchors">
+urlPrefix: https://w3c.github.io/accelerometer; spec: ACCELEROMETER
+  type: dfn
+    text: local coordinate system
+</pre>
+
+<pre class="link-defaults">
+spec:infra;
+  type:dfn;
+    text:list
+spec:generic-sensor-1;
+  type:enum-value;
+    text:"activated"
+</pre>
+
+<pre class=biblio>
+{
+    "QUATERNIONS": {
+        "authors": [
+            "Kuipers, Jack B"
+        ],
+        "id": "QUATERNIONS",
+        "href": "http://www.emis.ams.org/proceedings/Varna/vol1/GEOM09.pdf",
+        "title": "Quaternions and rotation sequences. Vol. 66.",
+        "date": "1999",
+        "status": "Informational",
+        "publisher": "Princeton university press"
+    }
+}
 </pre>
 
 Introduction {#intro}
@@ -70,11 +105,23 @@ The orientation sensors's associated {{Sensor}} subclass is the {{DeviceOrientat
 Orientation sensor is a [=high-level=] sensor which is created through [=sensor-fusion=]
 of [=low-level=] motion sensors (accelerometer, gyroscope, magnetometer).
 
-A [=latest reading=] per [=sensor=] of orientation type includes one [=map/entries=]
+A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
-The elements of the [=list=] are equal to components of a unit quaternion representing orientation
-of the device in a three dimensional Cartesian coordinate system (x, y, z), where x-axis points east,
-y-axis points north and z-axis points up and is perpendicular to the plane made up of x and y axis.
+The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
+[cos(θ/2), V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2)] where V is the unit vector representing
+the axis of rotation. The quaternion represents rotation of a device hosting motion sensors in relation to a <dfn>Earth's reference coordinate system</dfn> defined as a three
+dimensional Cartesian coordinate system (x, y, z), where:
+
+ - x-axis is a vector product of y.z that is tangential to the ground and points east.
+ - y-axis is tangential to the ground and points towards magnetic north.
+ - z-axis points towards the sky and is perpendicular to the plane made up of x and y axes.
+
+The device's <a>local coordinate system</a> is the same as defined by [=low-level=] motion sensors.
+
+Note: Figure below represents the case where device's <a>local coordinate system</a> and <a>Earth's reference coordinate system</a> are aligned, therefore,
+orientation sensor's [=latest reading=] would represent 0 (rad) [[SI]] rotation about each axis.
+
+<img src="device_orientation_sensor_coordinate_system.png" srcset="device_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;" alt="DeviceOrientationSensor coordinate system.">
 
 API {#api}
 ===
