@@ -2,7 +2,7 @@
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-  <title>DeviceOrientationSensor</title>
+  <title>OrientationSensor</title>
   <meta content="ED" name="w3c-status">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
@@ -419,7 +419,7 @@
 	[data-algorithm]:not(.heading) {
 	  padding: .5em;
 	  border: thin solid #ddd; border-radius: .5em;
-	  margin: .5em 0;
+	  margin: .5em calc(-0.5em - 1px);
 	}
 	[data-algorithm]:not(.heading) > :first-child {
 	  margin-top: 0;
@@ -969,6 +969,8 @@ Possible extra rowspan handling
 		/* Reverse color scheme */
 		color: black;
 		border-color: #3980B5;
+		border-bottom-width: 3px !important;
+		margin-bottom: 0px !important;
 	}
 	.toc a:visited {
 		border-color: #054572;
@@ -1181,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed 1.0.0" name="generator">
+  <meta content="Bikeshed version 6502bba05cb4f82ef5545cd14be1b0c8bf55e17b" name="generator">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1427,7 +1429,7 @@ pre.idl.highlight { color: #708090; }
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
-   <h1 class="p-name no-ref" id="title">DeviceOrientationSensor</h1>
+   <h1 class="p-name no-ref" id="title">OrientationSensor</h1>
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-07">7 March 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1480,7 +1482,7 @@ the rate of rotation around the device’s local three primary axes.</p>
 	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
 	An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="http://www.w3.org/2015/Process-20150901/" id="w3c_process_revision">1 September 2015 W3C Process Document</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/2017/Process-20170301/" id="w3c_process_revision">1 March 2017 W3C Process Document</a>. </p>
    <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -1495,10 +1497,10 @@ the rate of rotation around the device’s local three primary axes.</p>
      <a href="#api"><span class="secno">5</span> <span class="content">API</span></a>
      <ol class="toc">
       <li>
-       <a href="#deviceorientationsensor-interface"><span class="secno">5.1</span> <span class="content">The DeviceOrientationSensor Interface</span></a>
+       <a href="#orientationsensor-interface"><span class="secno">5.1</span> <span class="content">The OrientationSensor Interface</span></a>
        <ol class="toc">
-        <li><a href="#deviceorientationsensor-populatequaternion"><span class="secno">5.1.1</span> <span class="content">DeviceOrientationSensor.populateQuaternion()</span></a>
-        <li><a href="#deviceorientationsensor-populatematrix"><span class="secno">5.1.2</span> <span class="content">DeviceOrientationSensor.populateMatrix()</span></a>
+        <li><a href="#orientationsensor-populatequaternion"><span class="secno">5.1.1</span> <span class="content">OrientationSensor.populateQuaternion()</span></a>
+        <li><a href="#orientationsensor-populatematrix"><span class="secno">5.1.2</span> <span class="content">OrientationSensor.populateMatrix()</span></a>
        </ol>
      </ol>
     <li>
@@ -1527,28 +1529,35 @@ the rate of rotation around the device’s local three primary axes.</p>
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-   <p>The DeviceOrientationSensor API extends the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-sensor">[GENERIC-SENSOR]</a> to provide information that describes the device’s physical orientation in a stationary
-three dimensional Cartesian coordinate system.</p>
+   <p>The OrientationSensor API extends the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-sensor">[GENERIC-SENSOR]</a> to provide information that describes the device’s physical orientation.</p>
+   <p>The base object describes the orientation in relation to <a data-link-type="dfn" href="#earths-reference-coordinate-system" id="ref-for-earths-reference-coordinate-system-1">Earth’s reference
+coordinate system</a>, thus in a stationary three dimensional Cartesian
+coordinate system.</p>
+   <p>Inheriting objects can describe the orientation in relation to other stationary
+directions, such as true north, or even non stationary directions, like in
+relation to a devices own z-position, drifting towards its latest most stable
+z-position.</p>
    <h2 class="heading settled" data-level="2" id="examples"><span class="secno">2. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
-   <div class="example" id="example-52dba4a1">
-    <a class="self-link" href="#example-52dba4a1"></a> 
-<pre class="highlight"><span class="kd">let</span> sensor <span class="o">=</span> <span class="k">new</span> DeviceOrientationSensor<span class="p">(</span><span class="p">)</span><span class="p">;</span>
-<span class="kd">let</span> matrix <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="p">;</span>
+   <div class="example" id="example-331cef3d">
+    <a class="self-link" href="#example-331cef3d"></a> 
+<pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> OrientationSensor<span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="p">;</span>
 sensor<span class="p">.</span>start<span class="p">(</span><span class="p">)</span><span class="p">;</span>
     
-sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">(</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
-    sensor<span class="p">.</span>populateMatrix<span class="p">(</span>matrix<span class="p">)</span><span class="p">;</span>
+sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">(</span><span class="p">)</span> <span class="p">=></span> <span class="p">{</span>
+  sensor<span class="p">.</span>populateMatrix<span class="p">(</span>mat4<span class="p">)</span><span class="p">;</span>
 <span class="p">}</span><span class="p">;</span>
 
-sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
 </pre>
    </div>
    <h2 class="heading settled" data-level="3" id="security-and-privacy"><span class="secno">3. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy"></a></h2>
    <p>There are no specific security and privacy considerations
 beyond those described in the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-sensor">[GENERIC-SENSOR]</a>.</p>
    <h2 class="heading settled" data-level="4" id="model"><span class="secno">4. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
-   <p>The orientation sensors’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#deviceorientationsensor" id="ref-for-deviceorientationsensor-1">DeviceOrientationSensor</a></code> class.</p>
-   <p>Orientation sensor is a <a data-link-type="dfn" href="https://w3c.github.io/sensors#high-level">high-level</a> sensor which is created through <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a> of <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors (accelerometer, gyroscope, magnetometer).</p>
+   <p>The orientation sensors’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-1">OrientationSensor</a></code> class.</p>
+   <p>The orientation sensor is a <a data-link-type="dfn" href="https://w3c.github.io/sensors#high-level">high-level</a> sensor which is created through <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a> of the <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors (accelerometer, gyroscope, magnetometer). The type of fusion
+is platform specific and can happen in software or hardware, i.e. on a sensor hub.</p>
    <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a> per <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor">sensor</a> of orientation type includes an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">entry</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key">key</a> is "quaternion" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value">value</a> contains a four element <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>.
 The elements of the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> are equal to components of a unit quaternion <a data-link-type="biblio" href="#biblio-quaternions">[QUATERNIONS]</a> [cos(θ/2), V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2)] where V is the unit vector representing
 the axis of rotation. The quaternion represents rotation of a device hosting motion sensors in relation to a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="earths-reference-coordinate-system">Earth’s reference coordinate system</dfn> defined as a three
@@ -1562,55 +1571,55 @@ dimensional Cartesian coordinate system (x, y, z), where:</p>
      <p>z-axis points towards the sky and is perpendicular to the plane made up of x and y axes.</p>
    </ul>
    <p>The device’s <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#local-coordinate-system">local coordinate system</a> is the same as defined by <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors.</p>
-   <p class="note" role="note">Note: Figure below represents the case where device’s <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#local-coordinate-system">local coordinate system</a> and <a data-link-type="dfn" href="#earths-reference-coordinate-system" id="ref-for-earths-reference-coordinate-system-1">Earth’s reference coordinate system</a> are aligned, therefore,
+   <p class="note" role="note"><span>Note:</span> Figure below represents the case where device’s <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#local-coordinate-system">local coordinate system</a> and <a data-link-type="dfn" href="#earths-reference-coordinate-system" id="ref-for-earths-reference-coordinate-system-2">Earth’s reference coordinate system</a> are aligned, therefore,
 orientation sensor’s <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a> would represent 0 (rad) <a data-link-type="biblio" href="#biblio-si">[SI]</a> rotation about each axis.</p>
    <p><img alt="DeviceOrientationSensor coordinate system." src="device_orientation_sensor_coordinate_system.png" srcset="device_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;"></p>
    <h2 class="heading settled" data-level="5" id="api"><span class="secno">5. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
-   <h3 class="heading settled" data-level="5.1" id="deviceorientationsensor-interface"><span class="secno">5.1. </span><span class="content">The DeviceOrientationSensor Interface</span><a class="self-link" href="#deviceorientationsensor-interface"></a></h3>
-<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="DeviceOrientationSensor" data-dfn-type="constructor" data-export="" data-lt="DeviceOrientationSensor(sensorOptions)|DeviceOrientationSensor()" id="dom-deviceorientationsensor-deviceorientationsensor">Constructor<a class="self-link" href="#dom-deviceorientationsensor-deviceorientationsensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="DeviceOrientationSensor/DeviceOrientationSensor(sensorOptions)" data-dfn-type="argument" data-export="" id="dom-deviceorientationsensor-deviceorientationsensor-sensoroptions-sensoroptions">sensorOptions<a class="self-link" href="#dom-deviceorientationsensor-deviceorientationsensor-sensoroptions-sensoroptions"></a></dfn>)]
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="deviceorientationsensor">DeviceOrientationSensor</dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor">Sensor</a> {
-  <span class="kt">void</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DeviceOrientationSensor" data-dfn-type="method" data-export="" data-lt="populateQuaternion(array)" id="dom-deviceorientationsensor-populatequaternion">populateQuaternion</dfn>(<span class="kt">Float32Array</span> <dfn class="nv idl-code" data-dfn-for="DeviceOrientationSensor/populateQuaternion(array)" data-dfn-type="argument" data-export="" id="dom-deviceorientationsensor-populatequaternion-array-array">array<a class="self-link" href="#dom-deviceorientationsensor-populatequaternion-array-array"></a></dfn>);
-  <span class="kt">void</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DeviceOrientationSensor" data-dfn-type="method" data-export="" data-lt="populateMatrix(array)" id="dom-deviceorientationsensor-populatematrix">populateMatrix</dfn>(<span class="kt">Float32Array</span> <dfn class="nv idl-code" data-dfn-for="DeviceOrientationSensor/populateMatrix(array)" data-dfn-type="argument" data-export="" id="dom-deviceorientationsensor-populatematrix-array-array">array<a class="self-link" href="#dom-deviceorientationsensor-populatematrix-array-array"></a></dfn>);
+   <h3 class="heading settled" data-level="5.1" id="orientationsensor-interface"><span class="secno">5.1. </span><span class="content">The OrientationSensor Interface</span><a class="self-link" href="#orientationsensor-interface"></a></h3>
+<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="OrientationSensor" data-dfn-type="constructor" data-export="" data-lt="OrientationSensor(sensorOptions)|OrientationSensor()" id="dom-orientationsensor-orientationsensor">Constructor<a class="self-link" href="#dom-orientationsensor-orientationsensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="OrientationSensor/OrientationSensor(sensorOptions)" data-dfn-type="argument" data-export="" id="dom-orientationsensor-orientationsensor-sensoroptions-sensoroptions">sensorOptions<a class="self-link" href="#dom-orientationsensor-orientationsensor-sensoroptions-sensoroptions"></a></dfn>)]
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="orientationsensor">OrientationSensor</dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor">Sensor</a> {
+  <span class="kt">void</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="OrientationSensor" data-dfn-type="method" data-export="" data-lt="populateQuaternion(targetBuffer)" id="dom-orientationsensor-populatequaternion">populateQuaternion</dfn>(<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Float32Array"><span class="kt">Float32Array</span></a> <dfn class="nv idl-code" data-dfn-for="OrientationSensor/populateQuaternion(targetBuffer)" data-dfn-type="argument" data-export="" id="dom-orientationsensor-populatequaternion-targetbuffer-targetbuffer">targetBuffer<a class="self-link" href="#dom-orientationsensor-populatequaternion-targetbuffer-targetbuffer"></a></dfn>);
+  <span class="kt">void</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="OrientationSensor" data-dfn-type="method" data-export="" data-lt="populateMatrix(targetBuffer)" id="dom-orientationsensor-populatematrix">populateMatrix</dfn>(<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Float32Array"><span class="kt">Float32Array</span></a> <dfn class="nv idl-code" data-dfn-for="OrientationSensor/populateMatrix(targetBuffer)" data-dfn-type="argument" data-export="" id="dom-orientationsensor-populatematrix-targetbuffer-targetbuffer">targetBuffer<a class="self-link" href="#dom-orientationsensor-populatematrix-targetbuffer-targetbuffer"></a></dfn>);
 };
 </pre>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-a-deviceorientationsensor-object">Construct a DeviceOrientationSensor Object<a class="self-link" href="#construct-a-deviceorientationsensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
-   <h4 class="heading settled" data-level="5.1.1" id="deviceorientationsensor-populatequaternion"><span class="secno">5.1.1. </span><span class="content">DeviceOrientationSensor.populateQuaternion()</span><a class="self-link" href="#deviceorientationsensor-populatequaternion"></a></h4>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-a-orientationsensor-object">Construct a OrientationSensor Object<a class="self-link" href="#construct-a-orientationsensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
+   <h4 class="heading settled" data-level="5.1.1" id="orientationsensor-populatequaternion"><span class="secno">5.1.1. </span><span class="content">OrientationSensor.populateQuaternion()</span><a class="self-link" href="#orientationsensor-populatequaternion"></a></h4>
    <div class="algorithm" data-algorithm="to populate quaternion">
-     The <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationsensor-populatequaternion" id="ref-for-dom-deviceorientationsensor-populatequaternion-1">populateQuaternion()</a></code> method must run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sensors#equivalent">equivalent</a>: 
+     The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatequaternion" id="ref-for-dom-orientationsensor-populatequaternion-1">populateQuaternion()</a></code> method must run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sensors#equivalent">equivalent</a>: 
     <ol>
      <li data-md="">
-      <p>If <var>array</var> parameter is not <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> an
-  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and abort these steps.</p>
+      <p>If <var>targetBuffer</var> is not of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
+  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
-      <p>If <var>array</var> parameter is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> with size other than four, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> an
-  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and abort these steps.</p>
+      <p>If <var>targetBuffer</var> is of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> with a size other than four, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
+  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
-      <p>If the value of sensor_instance|.<a data-link-type="dfn" href="https://w3c.github.io/sensors/#state">[[state]]</a> is not <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-sensorstate-activated">"activated"</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> an "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and abort these steps.</p>
+      <p>If the value of sensor_instance|.<a data-link-type="dfn" href="https://w3c.github.io/sensors/#state">[[state]]</a> is not <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-sensorstate-activated">"activated"</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> an "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
       <p>Run these sub-steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:</p>
       <ol>
        <li data-md="">
         <p>Let <var>quaternion</var> be the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["quaternion"]</p>
        <li data-md="">
-        <p>If <var>quaternion</var> is <code>null</code>, then abort these steps.</p>
+        <p>If <var>quaternion</var> is <code>null</code>, abort these steps.</p>
        <li data-md="">
-        <p>Copy <var>quaternion</var> into <var>array</var> parameter</p>
+        <p>Copy <var>quaternion</var> into <var>targetBuffer</var></p>
       </ol>
     </ol>
    </div>
-   <h4 class="heading settled" data-level="5.1.2" id="deviceorientationsensor-populatematrix"><span class="secno">5.1.2. </span><span class="content">DeviceOrientationSensor.populateMatrix()</span><a class="self-link" href="#deviceorientationsensor-populatematrix"></a></h4>
-   <div class="algorithm" data-algorithm="to populate matrix"> The <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationsensor-populatematrix" id="ref-for-dom-deviceorientationsensor-populatematrix-1">populateMatrix()</a></code> method must run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sensors#equivalent">equivalent</a>: </div>
+   <h4 class="heading settled" data-level="5.1.2" id="orientationsensor-populatematrix"><span class="secno">5.1.2. </span><span class="content">OrientationSensor.populateMatrix()</span><a class="self-link" href="#orientationsensor-populatematrix"></a></h4>
+   <div class="algorithm" data-algorithm="to populate matrix"> The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix-1">populateMatrix()</a></code> method must run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sensors#equivalent">equivalent</a>: </div>
    <h2 class="heading settled" data-level="6" id="usecases-requirements"><span class="secno">6. </span><span class="content">Use-Cases and Requirements</span><a class="self-link" href="#usecases-requirements"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="usecases"><span class="secno">6.1. </span><span class="content">Use cases</span><a class="self-link" href="#usecases"></a></h3>
    <ol>
     <li data-md="">
-     <p>A 3D compass web application monitor’s the device’s orientation and aligns the compass heading in a three-dimensional space.</p>
+     <p>A compass monitor’s the device’s orientation relative to true north and aligns the compass heading in a three-dimensional space.</p>
     <li data-md="">
-     <p>A web-based game uses the device’s orientation relative to the Earth’s surface as user input. For example, simulation of Ball-in-a-maze puzzle.</p>
+     <p>A game uses the device’s orientation relative to the ground as user input. For example, a ball-in-a-maze puzzle.</p>
     <li data-md="">
-     <p>A WebVR API polyfill implementation tracks the headset’s (or mobile device’s for mobile VR) orientation.</p>
+     <p>A WebVR polyfill tracks the headset’s (or mobile device’s for mobile VR) orientation.</p>
     <li data-md="">
-     <p>A mapping web application orientates the 2D map with the orientation of the device.</p>
+     <p>A map application adjusts a two-dimensional map such that the device shows the map relative to the actual surroundings.</p>
    </ol>
    <h3 class="heading settled" data-level="6.2" id="functional-requirements"><span class="secno">6.2. </span><span class="content">Functional requirements</span><a class="self-link" href="#functional-requirements"></a></h3>
    <ol>
@@ -1619,7 +1628,8 @@ orientation sensor’s <a data-link-type="dfn" href="https://w3c.github.io/senso
     <li data-md="">
      <p>The API must provide data in representation that matches that of the WebGL interfaces and methods.</p>
     <li data-md="">
-     <p>The API must address the VR requirements for high performance and low motion-to-photon latency, and not introduce significant overhead over corresponding native platform APIs.</p>
+     <p>The API must address the VR requirements for high performance and low motion-to-photon latency, and not
+ introduce significant overhead over corresponding native platform APIs.</p>
     <li data-md="">
      <p>The API must extend Generic Sensor and inherit its functionality and satisfy its requirements.</p>
    </ol>
@@ -1650,13 +1660,13 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §8</span>
-   <li><a href="#construct-a-deviceorientationsensor-object">Construct a DeviceOrientationSensor Object</a><span>, in §5.1</span>
-   <li><a href="#deviceorientationsensor">DeviceOrientationSensor</a><span>, in §5.1</span>
-   <li><a href="#dom-deviceorientationsensor-deviceorientationsensor">DeviceOrientationSensor()</a><span>, in §5.1</span>
-   <li><a href="#dom-deviceorientationsensor-deviceorientationsensor">DeviceOrientationSensor(sensorOptions)</a><span>, in §5.1</span>
+   <li><a href="#construct-a-orientationsensor-object">Construct a OrientationSensor Object</a><span>, in §5.1</span>
    <li><a href="#earths-reference-coordinate-system">Earth’s reference coordinate system</a><span>, in §4</span>
-   <li><a href="#dom-deviceorientationsensor-populatematrix">populateMatrix(array)</a><span>, in §5.1</span>
-   <li><a href="#dom-deviceorientationsensor-populatequaternion">populateQuaternion(array)</a><span>, in §5.1</span>
+   <li><a href="#orientationsensor">OrientationSensor</a><span>, in §5.1</span>
+   <li><a href="#dom-orientationsensor-orientationsensor">OrientationSensor()</a><span>, in §5.1</span>
+   <li><a href="#dom-orientationsensor-orientationsensor">OrientationSensor(sensorOptions)</a><span>, in §5.1</span>
+   <li><a href="#dom-orientationsensor-populatematrix">populateMatrix(targetBuffer)</a><span>, in §5.1</span>
+   <li><a href="#dom-orientationsensor-populatequaternion">populateQuaternion(targetBuffer)</a><span>, in §5.1</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -1700,7 +1710,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
     <ul>
-     <li><a href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a>
      <li><a href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
      <li><a href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a>
@@ -1711,9 +1721,9 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-accelerometer">[ACCELEROMETER]
-   <dd>Anssi Kostiainen; Alexander Shalamov. <a href="https://w3c.github.io/accelerometer/">Accelerometer Sensor</a>. 13 September 2016. WD. URL: <a href="https://w3c.github.io/accelerometer/">https://w3c.github.io/accelerometer/</a>
+   <dd>Anssi Kostiainen; Alexander Shalamov. <a href="https://www.w3.org/TR/accelerometer/">Accelerometer Sensor</a>. URL: <a href="https://www.w3.org/TR/accelerometer/">https://www.w3.org/TR/accelerometer/</a>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
-   <dd>Tobie Langel; Rick Waldron. <a href="https://w3c.github.io/sensors/">Generic Sensor API</a>. 30 August 2016. WD. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
+   <dd>Tobie Langel; Rick Waldron. <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a>. URL: <a href="https://www.w3.org/TR/generic-sensor/">https://www.w3.org/TR/generic-sensor/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-infra">[INFRA]
@@ -1721,7 +1731,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
-   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. WD. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://www.w3.org/TR/WebIDL-1/">Web IDL</a>. URL: <a href="https://www.w3.org/TR/WebIDL-1/">https://www.w3.org/TR/WebIDL-1/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
@@ -1731,35 +1741,36 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dd><a href="http://www.bipm.org/en/publications/si-brochure/">SI Brochure: The International System of Units (SI), 8th edition</a>. 2014. URL: <a href="http://www.bipm.org/en/publications/si-brochure/">http://www.bipm.org/en/publications/si-brochure/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl def">[<a class="nv" href="#dom-deviceorientationsensor-deviceorientationsensor">Constructor</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <a class="nv" href="#dom-deviceorientationsensor-deviceorientationsensor-sensoroptions-sensoroptions">sensorOptions</a>)]
-<span class="kt">interface</span> <a class="nv" href="#deviceorientationsensor">DeviceOrientationSensor</a> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor">Sensor</a> {
-  <span class="kt">void</span> <a class="nv" href="#dom-deviceorientationsensor-populatequaternion">populateQuaternion</a>(<span class="kt">Float32Array</span> <a class="nv" href="#dom-deviceorientationsensor-populatequaternion-array-array">array</a>);
-  <span class="kt">void</span> <a class="nv" href="#dom-deviceorientationsensor-populatematrix">populateMatrix</a>(<span class="kt">Float32Array</span> <a class="nv" href="#dom-deviceorientationsensor-populatematrix-array-array">array</a>);
+<pre class="idl def">[<a class="nv" href="#dom-orientationsensor-orientationsensor">Constructor</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <a class="nv" href="#dom-orientationsensor-orientationsensor-sensoroptions-sensoroptions">sensorOptions</a>)]
+<span class="kt">interface</span> <a class="nv" href="#orientationsensor">OrientationSensor</a> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor">Sensor</a> {
+  <span class="kt">void</span> <a class="nv" href="#dom-orientationsensor-populatequaternion">populateQuaternion</a>(<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Float32Array"><span class="kt">Float32Array</span></a> <a class="nv" href="#dom-orientationsensor-populatequaternion-targetbuffer-targetbuffer">targetBuffer</a>);
+  <span class="kt">void</span> <a class="nv" href="#dom-orientationsensor-populatematrix">populateMatrix</a>(<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Float32Array"><span class="kt">Float32Array</span></a> <a class="nv" href="#dom-orientationsensor-populatematrix-targetbuffer-targetbuffer">targetBuffer</a>);
 };
 
 </pre>
   <aside class="dfn-panel" data-for="earths-reference-coordinate-system">
    <b><a href="#earths-reference-coordinate-system">#earths-reference-coordinate-system</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-earths-reference-coordinate-system-1">4. Model</a>
+    <li><a href="#ref-for-earths-reference-coordinate-system-1">1. Introduction</a>
+    <li><a href="#ref-for-earths-reference-coordinate-system-2">4. Model</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="deviceorientationsensor">
-   <b><a href="#deviceorientationsensor">#deviceorientationsensor</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="orientationsensor">
+   <b><a href="#orientationsensor">#orientationsensor</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-deviceorientationsensor-1">4. Model</a>
+    <li><a href="#ref-for-orientationsensor-1">4. Model</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-deviceorientationsensor-populatequaternion">
-   <b><a href="#dom-deviceorientationsensor-populatequaternion">#dom-deviceorientationsensor-populatequaternion</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-orientationsensor-populatequaternion">
+   <b><a href="#dom-orientationsensor-populatequaternion">#dom-orientationsensor-populatequaternion</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-deviceorientationsensor-populatequaternion-1">5.1.1. DeviceOrientationSensor.populateQuaternion()</a>
+    <li><a href="#ref-for-dom-orientationsensor-populatequaternion-1">5.1.1. OrientationSensor.populateQuaternion()</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-deviceorientationsensor-populatematrix">
-   <b><a href="#dom-deviceorientationsensor-populatematrix">#dom-deviceorientationsensor-populatematrix</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-orientationsensor-populatematrix">
+   <b><a href="#dom-orientationsensor-populatematrix">#dom-orientationsensor-populatematrix</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-deviceorientationsensor-populatematrix-1">5.1.2. DeviceOrientationSensor.populateMatrix()</a>
+    <li><a href="#ref-for-dom-orientationsensor-populatematrix-1">5.1.2. OrientationSensor.populateMatrix()</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
