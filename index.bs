@@ -1,5 +1,5 @@
 <pre class="metadata">
-Title: DeviceOrientationSensor
+Title: OrientationSensor
 Status: ED
 Level: 1
 ED: https://w3c.github.io/orientation-sensor/
@@ -70,21 +70,29 @@ spec:generic-sensor-1;
 Introduction {#intro}
 ============
 
-The DeviceOrientationSensor API extends the Generic Sensor API [[GENERIC-SENSOR]]
-to provide information that describes the device's physical orientation in a stationary
-three dimensional Cartesian coordinate system.
+The OrientationSensor API extends the Generic Sensor API [[GENERIC-SENSOR]]
+to provide information that describes the device's physical orientation.
+
+The base object describes the orientation in relation to <a>Earth's reference
+coordinate system</a>, thus in a stationary three dimensional Cartesian
+coordinate system.
+
+Inheriting objects can describe the orientation in relation to other stationary
+directions, such as true north, or even non stationary directions, like in
+relation to a devices own z-position, drifting towards its latest most stable
+z-position.
 
 Examples {#examples}
 ========
 
 <div class="example">
     <pre highlight="js">
-    let sensor = new DeviceOrientationSensor();
-    let matrix = new Float32Array(16);
+    const sensor = new OrientationSensor();
+    const mat4 = new Float32Array(16);
     sensor.start();
     
     sensor.onchange = () => {
-        sensor.populateMatrix(matrix);
+      sensor.populateMatrix(mat4);
     };
 
     sensor.onerror = event => console.log(event.error.name, event.error.message);
@@ -100,10 +108,11 @@ beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
 Model {#model}
 =====
 
-The orientation sensors's associated {{Sensor}} subclass is the {{DeviceOrientationSensor}} class.
+The orientation sensors's associated {{Sensor}} subclass is the {{OrientationSensor}} class.
 
-Orientation sensor is a [=high-level=] sensor which is created through [=sensor-fusion=]
-of [=low-level=] motion sensors (accelerometer, gyroscope, magnetometer).
+The orientation sensor is a [=high-level=] sensor which is created through [=sensor-fusion=]
+of the [=low-level=] motion sensors (accelerometer, gyroscope, magnetometer). The type of fusion
+is platform specific and can happen in software or hardware, i.e. on a sensor hub.
 
 A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
@@ -126,40 +135,40 @@ orientation sensor's [=latest reading=] would represent 0 (rad) [[SI]] rotation 
 API {#api}
 ===
 
-The DeviceOrientationSensor Interface {#deviceorientationsensor-interface}
+The OrientationSensor Interface {#orientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
   [Constructor(optional SensorOptions sensorOptions)]
-  interface DeviceOrientationSensor : Sensor {
-    void populateQuaternion(Float32Array array);
-    void populateMatrix(Float32Array array);
+  interface OrientationSensor : Sensor {
+    void populateQuaternion(Float32Array targetBuffer);
+    void populateMatrix(Float32Array targetBuffer);
   };
 </pre>
 
-To <dfn>Construct a DeviceOrientationSensor Object</dfn> the user agent must invoke the
+To <dfn>Construct a OrientationSensor Object</dfn> the user agent must invoke the
 <a>construct a Sensor object</a> abstract operation.
 
-### DeviceOrientationSensor.populateQuaternion() ### {#deviceorientationsensor-populatequaternion}
+### OrientationSensor.populateQuaternion() ### {#orientationsensor-populatequaternion}
 
 <div algorithm="to populate quaternion">
-The {{DeviceOrientationSensor/populateQuaternion()}} method must run these steps or their [=equivalent=]:
-    1.  If |array| parameter is not {{Float32Array}}, [=throw=] an
+The {{OrientationSensor/populateQuaternion()}} method must run these steps or their [=equivalent=]:
+    1.  If |targetBuffer| is not of type {{Float32Array}}, [=throw=] a
         "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
-    1.  If |array| parameter is {{Float32Array}} with size other than four, [=throw=] an
+    1.  If |targetBuffer| is of type {{Float32Array}} with a size other than four, [=throw=] a
         "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
     1.  If the value of sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
         [=throw=] an "{{InvalidStateError!!exception}}" {{DOMException}} and abort these steps.
     1.  Run these sub-steps [=in parallel=]:
         1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
-        1.  If |quaternion| is `null`, then abort these steps.
-        1.  Copy |quaternion| into |array| parameter
+        1.  If |quaternion| is `null`, abort these steps.
+        1.  Copy |quaternion| into |targetBuffer|
 </div>
 
-### DeviceOrientationSensor.populateMatrix() ### {#deviceorientationsensor-populatematrix}
+### OrientationSensor.populateMatrix() ### {#orientationsensor-populatematrix}
 
 <div algorithm="to populate matrix">
-The {{DeviceOrientationSensor/populateMatrix()}} method must run these steps or their [=equivalent=]:
+The {{OrientationSensor/populateMatrix()}} method must run these steps or their [=equivalent=]:
 
 </div>
 
@@ -169,17 +178,18 @@ Use-Cases and Requirements {#usecases-requirements}
 Use cases {#usecases}
 ---------
 
-    1. A 3D compass web application monitor's the device's orientation and aligns the compass heading in a three-dimensional space.
-    1. A web-based game uses the device's orientation relative to the Earth's surface as user input. For example, simulation of Ball-in-a-maze puzzle.
-    1. A WebVR API polyfill implementation tracks the headset's (or mobile device's for mobile VR) orientation.
-    1. A mapping web application orientates the 2D map with the orientation of the device.
+    1. A compass monitor's the device's orientation relative to true north and aligns the compass heading in a three-dimensional space.
+    1. A game uses the device's orientation relative to the ground as user input. For example, a ball-in-a-maze puzzle.
+    1. A WebVR polyfill tracks the headset's (or mobile device's for mobile VR) orientation.
+    1. A map application adjusts a two-dimensional map such that the device shows the map relative to the actual surroundings.
 
 Functional requirements {#functional-requirements}
 -----------------------
 
     1. The API must provide data that describes the device's physical orientation in a stationary 3D coordinate system.
     1. The API must provide data in representation that matches that of the WebGL interfaces and methods.
-    1. The API must address the VR requirements for high performance and low motion-to-photon latency, and not introduce significant overhead over corresponding native platform APIs.
+    1. The API must address the VR requirements for high performance and low motion-to-photon latency, and not
+       introduce significant overhead over corresponding native platform APIs.
     1. The API must extend Generic Sensor and inherit its functionality and satisfy its requirements.
 
 Non-functional requirements {#nonfunctional-requirements}
