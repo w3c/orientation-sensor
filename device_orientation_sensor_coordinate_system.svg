@@ -17,7 +17,7 @@
    viewBox="0 0 349.99999 350.00001"
    xml:space="preserve"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="device_orientation_sensor.svg"
+   sodipodi:docname="device_orientation_sensor_coordinate_system.svg"
    width="350"
    height="350"><metadata
      id="metadata397"><rdf:RDF><cc:Work
@@ -37,8 +37,8 @@
      id="namedview393"
      showgrid="false"
      inkscape:zoom="2.32"
-     inkscape:cx="192.28792"
-     inkscape:cy="141.71422"
+     inkscape:cx="457.11206"
+     inkscape:cy="10.953326"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
@@ -834,9 +834,10 @@
      style="fill:none;stroke:#f9bcc2;stroke-width:1.32788754" /><path
      id="path4361"
      class="st0"
-     d="m 182.78443,143.42492 c -1.85904,1.94757 -3.45249,3.54103 -4.33778,4.78039 -1.59346,1.94757 -1.23935,5.13451 -1.23935,5.13451 1.77052,34.34802 3.98366,67.98782 5.66564,100.29976 0.44264,4.33777 0.35411,14.78382 1.41641,17.70517 0.9738,2.65579 3.7181,3.4525 6.55092,2.83284 13.72153,-2.83284 29.0365,-6.72797 36.47265,-8.05588 2.65578,-0.53113 8.67554,-7.87878 8.67554,-7.87878"
+     d="m 190.13681,270.04039 c -2.78092,-1.12157 -5.40644,-1.69174 -6.43926,-2.57228 -1.82712,-1.30331 -1.82794,-4.61315 -1.82794,-4.61315 -2.07336,-34.85939 -3.31565,-68.73327 -5.2496,-101.68518 -0.0409,-4.48938 -1.15177,-13.16547 -0.40794,-16.49267 0.68437,-3.02798 3.51701,-5.9778 6.14098,-6.94477 13.55776,-3.39894 30.06235,-7.06071 37.71678,-8.69588 3.5021,-0.67984 9.71782,4.38632 9.71782,4.38632"
      inkscape:connector-curvature="0"
-     style="fill:#ffffff;stroke:#527a8a;stroke-width:0.88525844" /><path
+     style="fill:#ffffff;stroke:#527a8a;stroke-width:0.90638822"
+     sodipodi:nodetypes="cccccccc" /><path
      id="rect4182-6"
      class="st20"
      d="m 231.73922,137.75927 5.84271,114.90652 c 0.17706,3.89515 -2.47873,7.70176 -5.84271,8.40997 l -38.77431,9.02964 c -3.27547,0.79672 -6.28535,-1.59348 -6.55092,-5.31156 l 0,-0.26557 -5.84271,-114.90654 c -0.17704,-3.89513 2.47873,-7.70175 5.84271,-8.40996 l 38.77431,-9.02963 c 3.27547,-0.79674 6.28534,1.59347 6.55092,5.31155 -0.0885,0 -0.0885,0.0885 -0.0885,0.0885 -0.0885,0.0885 0,0.17704 0.0885,0.17704 z"
@@ -887,14 +888,7 @@
      x2="348.41623"
      y2="174.32043"
      id="line367"
-     style="fill:none" /><line
-     class="st26"
-     x1="49.287476"
-     y1="243.6362"
-     x2="342.21939"
-     y2="175.73688"
-     id="line369"
-     style="fill:none;stroke:#0c7c34;stroke-width:1.32788754" /><polygon
+     style="fill:none" /><polygon
      class="st27"
      points="381.7,199.1 378.8,195.2 390.1,197.2 380.9,203.9 "
      id="polygon371"
@@ -962,4 +956,11 @@
      y="168.15781"><tspan
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
        id="tspan3952">X</tspan></text>
-</svg>
+<line
+     class="st26"
+     x1="48.200653"
+     y1="243.92523"
+     x2="341.1326"
+     y2="176.02591"
+     id="line369-3"
+     style="fill:none;stroke:#0c7c34;stroke-width:1.32788754" /></svg>
