@@ -11,8 +11,8 @@ Editor: Kenneth Rohde Christiansen      , Intel Corporation, http://intel.com/
 Editor: Anssi Kostiainen 41974, Intel Corporation, http://intel.com/
 Group: dap
 Abstract:
-  This specification defines a concrete sensor interface to monitor
-  the rate of rotation around the device's local three primary axes.
+  This specification defines concrete sensor interfaces to monitor the device's physical
+  orientation in relation to <a>Earth's reference coordinate system</a>.
 Version History: https://github.com/w3c/orientation-sensor/commits/gh-pages/index.bs
 !Bug Reports: <a href="https://www.github.com/w3c/orientation-sensor/issues/new">via the w3c/orientation-sensor repository on GitHub</a>
 Indent: 2
