@@ -1,5 +1,5 @@
 <pre class="metadata">
-Title: OrientationSensor
+Title: Orientation Sensor
 Status: ED
 Level: 1
 ED: https://w3c.github.io/orientation-sensor/
@@ -21,6 +21,7 @@ Markup Shorthands: markdown on
 Inline Github Issues: true
 !Test Suite: <a href="https://github.com/w3c/web-platform-tests/tree/master/orientation-sensor">web-platform-tests on GitHub</a>
 Boilerplate: omit issues-index, omit conformance
+Ignored Vars: sensor_instance
 </pre>
 <pre class="anchors">
 urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
@@ -157,7 +158,7 @@ The {{OrientationSensor/populateQuaternion()}} method must run these steps or th
         "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
     1.  If |targetBuffer| is of type {{Float32Array}} with a size other than four, [=throw=] a
         "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
-    1.  If the value of sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
+    1.  If the value of |sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
         [=throw=] an "{{InvalidStateError!!exception}}" {{DOMException}} and abort these steps.
     1.  Run these sub-steps [=in parallel=]:
         1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
