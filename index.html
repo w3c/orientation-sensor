@@ -1544,11 +1544,11 @@ z-position.</p>
 <span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="p">;</span>
 sensor<span class="p">.</span>start<span class="p">(</span><span class="p">)</span><span class="p">;</span>
     
-sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">(</span><span class="p">)</span> <span class="p">=></span> <span class="p">{</span>
+sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">(</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
   sensor<span class="p">.</span>populateMatrix<span class="p">(</span>mat4<span class="p">)</span><span class="p">;</span>
 <span class="p">}</span><span class="p">;</span>
 
-sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
 </pre>
    </div>
    <h2 class="heading settled" data-level="3" id="security-and-privacy"><span class="secno">3. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy"></a></h2>
@@ -1556,8 +1556,17 @@ sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class
 beyond those described in the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-sensor">[GENERIC-SENSOR]</a>.</p>
    <h2 class="heading settled" data-level="4" id="model"><span class="secno">4. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
    <p>The orientation sensors’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-1">OrientationSensor</a></code> class.</p>
-   <p>The orientation sensor is a <a data-link-type="dfn" href="https://w3c.github.io/sensors#high-level">high-level</a> sensor which is created through <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a> of the <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors (accelerometer, gyroscope, magnetometer). The type of fusion
-is platform specific and can happen in software or hardware, i.e. on a sensor hub.</p>
+   <p>The orientation sensor is a <a data-link-type="dfn" href="https://w3c.github.io/sensors#high-level">high-level</a> sensor which is created through <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a> of the <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors:</p>
+   <ul>
+    <li data-md="">
+     <p>accelerometer that measures <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#acceleration">acceleration</a>,</p>
+    <li data-md="">
+     <p>gyroscope that measures <a data-link-type="dfn" href="https://w3c.github.io/gyroscope#current-angular-velocity">current angular velocity</a>, and</p>
+    <li data-md="">
+     <p>magnetometer that measures <a data-link-type="dfn" href="https://w3c.github.io/magnetometer#geomagnetic-field">geomagnetic field</a>.</p>
+   </ul>
+   <p class="note" role="note"><span>Note:</span> Corresponding <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> sensors are defined in <a data-link-type="biblio" href="#biblio-accelerometer">[ACCELEROMETER]</a>, <a data-link-type="biblio" href="#biblio-gyroscope">[GYROSCOPE]</a>, and <a data-link-type="biblio" href="#biblio-magnetometer">[MAGNETOMETER]</a>. Regardless, the fusion is platform specific and can happen in software or
+hardware, i.e. on a sensor hub.</p>
    <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a> per <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor">sensor</a> of orientation type includes an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">entry</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key">key</a> is "quaternion" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value">value</a> contains a four element <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>.
 The elements of the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> are equal to components of a unit quaternion <a data-link-type="biblio" href="#biblio-quaternions">[QUATERNIONS]</a> [cos(θ/2), V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2)] where V is the unit vector representing
 the axis of rotation. The quaternion represents rotation of a device hosting motion sensors in relation to a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="earths-reference-coordinate-system">Earth’s reference coordinate system</dfn> defined as a three
@@ -1671,8 +1680,9 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
-    <a data-link-type="biblio">[accelerometer]</a> defines the following terms:
+    <a data-link-type="biblio">[ACCELEROMETER]</a> defines the following terms:
     <ul>
+     <li><a href="https://w3c.github.io/accelerometer#acceleration">acceleration</a>
      <li><a href="https://w3c.github.io/accelerometer#local-coordinate-system">local coordinate system</a>
     </ul>
    <li>
@@ -1695,6 +1705,11 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://w3c.github.io/sensors/#state">[[state]]</a>
     </ul>
    <li>
+    <a data-link-type="biblio">[GYROSCOPE]</a> defines the following terms:
+    <ul>
+     <li><a href="https://w3c.github.io/gyroscope#current-angular-velocity">current angular velocity</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>
@@ -1706,6 +1721,11 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://infra.spec.whatwg.org/#map-key">key</a>
      <li><a href="https://infra.spec.whatwg.org/#list">list</a>
      <li><a href="https://infra.spec.whatwg.org/#map-value">value</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[MAGNETOMETER]</a> defines the following terms:
+    <ul>
+     <li><a href="https://w3c.github.io/magnetometer#geomagnetic-field">geomagnetic field</a>
     </ul>
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
@@ -1724,10 +1744,14 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dd>Anssi Kostiainen; Alexander Shalamov. <a href="https://www.w3.org/TR/accelerometer/">Accelerometer Sensor</a>. URL: <a href="https://www.w3.org/TR/accelerometer/">https://www.w3.org/TR/accelerometer/</a>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
    <dd>Tobie Langel; Rick Waldron. <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a>. URL: <a href="https://www.w3.org/TR/generic-sensor/">https://www.w3.org/TR/generic-sensor/</a>
+   <dt id="biblio-gyroscope">[GYROSCOPE]
+   <dd>Anssi Kostiainen; Mikhail Pozdnyakov. <a href="https://www.w3.org/TR/gyroscope/">Gyroscope Sensor</a>. URL: <a href="https://www.w3.org/TR/gyroscope/">https://www.w3.org/TR/gyroscope/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-infra">[INFRA]
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
+   <dt id="biblio-magnetometer">[MAGNETOMETER]
+   <dd>Anssi Kostiainen; Rijubrata Bhaumik. <a href="https://www.w3.org/TR/magnetometer/">Magnetometer Sensor</a>. URL: <a href="https://www.w3.org/TR/magnetometer/">https://www.w3.org/TR/magnetometer/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
