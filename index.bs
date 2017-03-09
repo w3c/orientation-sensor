@@ -6,7 +6,7 @@ ED: https://w3c.github.io/orientation-sensor/
 Shortname: orientation-sensor
 TR: http://www.w3.org/TR/orientation-sensor/
 Editor: Mikhail Pozdnyakov 78325, Intel Corporation, http://intel.com/
-Editor: Alexander Shalamov 78335, Intel Corporation, https://intel.com/
+Editor: Alexander Shalamov 78335, Intel Corporation, http://intel.com/
 Editor: Kenneth Rohde Christiansen      , Intel Corporation, http://intel.com/
 Editor: Anssi Kostiainen 41974, Intel Corporation, http://intel.com/
 Group: dap
