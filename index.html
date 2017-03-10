@@ -1430,7 +1430,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-09">9 March 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-10">10 March 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1600,12 +1600,12 @@ orientation sensor’s <a data-link-type="dfn" href="https://w3c.github.io/senso
       <p>If <var>targetBuffer</var> is not of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
   "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
-      <p>If <var>targetBuffer</var> is of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> with a size other than four, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
-  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
+      <p>If <var>targetBuffer</var> is of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> with a size less than four, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
+  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
       <p>If the value of <var>sensor_instance</var>.<a data-link-type="dfn" href="https://w3c.github.io/sensors/#state">[[state]]</a> is not <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-sensorstate-activated">"activated"</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> an "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
-      <p>Run these sub-steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:</p>
+      <p>Run these sub-steps:</p>
       <ol>
        <li data-md="">
         <p>Let <var>quaternion</var> be the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["quaternion"]</p>
@@ -1617,7 +1617,70 @@ orientation sensor’s <a data-link-type="dfn" href="https://w3c.github.io/senso
     </ol>
    </div>
    <h4 class="heading settled" data-level="5.1.2" id="orientationsensor-populatematrix"><span class="secno">5.1.2. </span><span class="content">OrientationSensor.populateMatrix()</span><a class="self-link" href="#orientationsensor-populatematrix"></a></h4>
-   <div class="algorithm" data-algorithm="to populate matrix"> The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix-1">populateMatrix()</a></code> method must run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sensors#equivalent">equivalent</a>: </div>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix-1">populateMatrix()</a></code> method  populates the given buffer with WebGL-compatible rotation matrix
+which is converted from the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["quaternion"] <a data-link-type="biblio" href="#biblio-quatconv">[QUATCONV]</a>, as shown below</p>
+   <p><img alt="Converting quaternion to rotation matrix." height="50%" src="quaternion_to_rotation_matrix.png" style="display: block;margin: auto;" width="50%"></p>
+   <p>where:</p>
+   <ul>
+    <li data-md="">
+     <p>W = cos(θ/2).</p>
+    <li data-md="">
+     <p>X = V<sub>x</sub> * sin(θ/2).</p>
+    <li data-md="">
+     <p>Y = V<sub>y</sub> * sin(θ/2).</p>
+    <li data-md="">
+     <p>Z = V<sub>z</sub> * sin(θ/2).</p>
+   </ul>
+   <p>The rotation matrix is flattened in <var>targetBuffer</var> according to the column-major order.</p>
+   <div class="algorithm" data-algorithm="to populate WebGL-compatible matrix">
+     The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix-2">populateMatrix()</a></code> method must run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sensors#equivalent">equivalent</a>: 
+    <ol>
+     <li data-md="">
+      <p>If <var>targetBuffer</var> is not of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
+  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
+     <li data-md="">
+      <p>If <var>targetBuffer</var> is of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> with a size less than sixteen, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
+  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
+     <li data-md="">
+      <p>If the value of <var>sensor_instance</var>.<a data-link-type="dfn" href="https://w3c.github.io/sensors/#state">[[state]]</a> is not <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-sensorstate-activated">"activated"</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> an "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
+     <li data-md="">
+      <p>Run these sub-steps:</p>
+      <ol>
+       <li data-md="">
+        <p>Let <var>quaternion</var> be the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["quaternion"]</p>
+       <li data-md="">
+        <p>If <var>quaternion</var> is <code>null</code>, abort these steps.</p>
+       <li data-md="">
+        <p>Let <var>w</var> be the value of <var>quaternion</var>[0].</p>
+       <li data-md="">
+        <p>Let <var>x</var> be the value of <var>quaternion</var>[1].</p>
+       <li data-md="">
+        <p>Let <var>y</var> be the value of <var>quaternion</var>[2].</p>
+       <li data-md="">
+        <p>Let <var>z</var> be the value of <var>quaternion</var>[3].</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[0] = 1 - 2 * y * y - 2 * z * z.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[1] = 2 * x * y - 2 * z * w.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[2] = 2 * x * z + 2 * y * w.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[4] = 2 * x * y + 2 * z * w.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[5] = 1 - 2 * x * x - 2 * z * z.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[6] = 2 * y * z - 2 * x * w.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[8] = 2 * x * z - 2 * y * w.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[9] = 2 * y * z + 2 * x * w.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[10] = 1 - 2 * x * x - 2 * y * y.</p>
+       <li data-md="">
+        <p>Set <var>targetBuffer</var>[15] = 1.</p>
+      </ol>
+    </ol>
+   </div>
    <h2 class="heading settled" data-level="6" id="usecases-requirements"><span class="secno">6. </span><span class="content">Use-Cases and Requirements</span><a class="self-link" href="#usecases-requirements"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="usecases"><span class="secno">6.1. </span><span class="content">Use cases</span><a class="self-link" href="#usecases"></a></h3>
    <ol>
@@ -1710,11 +1773,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://w3c.github.io/gyroscope#current-angular-velocity">current angular velocity</a>
     </ul>
    <li>
-    <a data-link-type="biblio">[HTML]</a> defines the following terms:
-    <ul>
-     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>
-    </ul>
-   <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
     <ul>
      <li><a href="https://infra.spec.whatwg.org/#map-entry">entry</a>
@@ -1734,6 +1792,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
      <li><a href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a>
+     <li><a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-throw">throw</a>
     </ul>
   </ul>
@@ -1746,8 +1805,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dd>Tobie Langel; Rick Waldron. <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a>. URL: <a href="https://www.w3.org/TR/generic-sensor/">https://www.w3.org/TR/generic-sensor/</a>
    <dt id="biblio-gyroscope">[GYROSCOPE]
    <dd>Anssi Kostiainen; Mikhail Pozdnyakov. <a href="https://www.w3.org/TR/gyroscope/">Gyroscope Sensor</a>. URL: <a href="https://www.w3.org/TR/gyroscope/">https://www.w3.org/TR/gyroscope/</a>
-   <dt id="biblio-html">[HTML]
-   <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-infra">[INFRA]
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-magnetometer">[MAGNETOMETER]
@@ -1759,6 +1816,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
+   <dt id="biblio-quatconv">[QUATCONV]
+   <dd>Watt, Alan H., and Mark Watt.. <a href="http://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf">Advanced animation and rendering techniques., page 362</a>. 1992. Informational. URL: <a href="http://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf">http://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf</a>
    <dt id="biblio-quaternions">[QUATERNIONS]
    <dd>Kuipers, Jack B. <a href="http://www.emis.ams.org/proceedings/Varna/vol1/GEOM09.pdf">Quaternions and rotation sequences. Vol. 66.</a>. 1999. Informational. URL: <a href="http://www.emis.ams.org/proceedings/Varna/vol1/GEOM09.pdf">http://www.emis.ams.org/proceedings/Varna/vol1/GEOM09.pdf</a>
    <dt id="biblio-si">[SI]
@@ -1794,7 +1853,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <aside class="dfn-panel" data-for="dom-orientationsensor-populatematrix">
    <b><a href="#dom-orientationsensor-populatematrix">#dom-orientationsensor-populatematrix</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-orientationsensor-populatematrix-1">5.1.2. OrientationSensor.populateMatrix()</a>
+    <li><a href="#ref-for-dom-orientationsensor-populatematrix-1">5.1.2. OrientationSensor.populateMatrix()</a> <a href="#ref-for-dom-orientationsensor-populatematrix-2">(2)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

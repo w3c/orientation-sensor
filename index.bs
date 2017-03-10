@@ -83,6 +83,17 @@ spec:generic-sensor-1;
         "date": "1999",
         "status": "Informational",
         "publisher": "Princeton university press"
+    },
+    "QUATCONV": {
+        "authors": [
+            "Watt, Alan H., and Mark Watt."
+        ],
+        "id": "QUATCONV",
+        "href": "http://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf",
+        "title": "Advanced animation and rendering techniques., page 362",
+        "date": "1992",
+        "status": "Informational",
+        "publisher": "New York, NY, USA:: ACM press"
     }
 }
 </pre>
@@ -182,11 +193,11 @@ To <dfn>Construct a OrientationSensor Object</dfn> the user agent must invoke th
 The {{OrientationSensor/populateQuaternion()}} method must run these steps or their [=equivalent=]:
     1.  If |targetBuffer| is not of type {{Float32Array}}, [=throw=] a
         "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
-    1.  If |targetBuffer| is of type {{Float32Array}} with a size other than four, [=throw=] a
-        "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
+    1.  If |targetBuffer| is of type {{Float32Array}} with a size less than four, [=throw=] a
+        "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
     1.  If the value of |sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
         [=throw=] an "{{InvalidStateError!!exception}}" {{DOMException}} and abort these steps.
-    1.  Run these sub-steps [=in parallel=]:
+    1.  Run these sub-steps:
         1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
         1.  If |quaternion| is `null`, abort these steps.
         1.  Copy |quaternion| into |targetBuffer|
@@ -194,9 +205,45 @@ The {{OrientationSensor/populateQuaternion()}} method must run these steps or th
 
 ### OrientationSensor.populateMatrix() ### {#orientationsensor-populatematrix}
 
-<div algorithm="to populate matrix">
-The {{OrientationSensor/populateMatrix()}} method must run these steps or their [=equivalent=]:
+The {{OrientationSensor/populateMatrix()}} method  populates the given buffer with WebGL-compatible rotation matrix
+which is converted from the value of [=latest reading=]["quaternion"] [[QUATCONV]], as shown below
 
+<img src="quaternion_to_rotation_matrix.png" style="display: block;margin: auto;" alt="Converting quaternion to rotation matrix." width="50%" height="50%">
+
+where:
+
+ - W = cos(θ/2).
+ - X = V<sub>x</sub> * sin(θ/2).
+ - Y = V<sub>y</sub> * sin(θ/2).
+ - Z = V<sub>z</sub> * sin(θ/2).
+
+The rotation matrix is flattened in |targetBuffer| according to the column-major order.
+
+<div algorithm="to populate WebGL-compatible matrix">
+The {{OrientationSensor/populateMatrix()}} method must run these steps or their [=equivalent=]:
+    1.  If |targetBuffer| is not of type {{Float32Array}}, [=throw=] a
+        "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
+    1.  If |targetBuffer| is of type {{Float32Array}} with a size less than sixteen, [=throw=] a
+        "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
+    1.  If the value of |sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
+        [=throw=] an "{{InvalidStateError!!exception}}" {{DOMException}} and abort these steps.
+    1.  Run these sub-steps:
+        1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
+        1.  If |quaternion| is `null`, abort these steps.
+        1.  Let |w| be the value of |quaternion|[0].
+        1.  Let |x| be the value of |quaternion|[1].
+        1.  Let |y| be the value of |quaternion|[2].
+        1.  Let |z| be the value of |quaternion|[3].
+        1.  Set |targetBuffer|[0] = 1 - 2 * y * y - 2 * z * z.
+        1.  Set |targetBuffer|[1] = 2 * x * y - 2 * z * w.
+        1.  Set |targetBuffer|[2] = 2 * x * z + 2 * y * w.
+        1.  Set |targetBuffer|[4] = 2 * x * y + 2 * z * w.
+        1.  Set |targetBuffer|[5] = 1 - 2 * x * x - 2 * z * z.
+        1.  Set |targetBuffer|[6] = 2 * y * z - 2 * x * w.
+        1.  Set |targetBuffer|[8] = 2 * x * z - 2 * y * w.
+        1.  Set |targetBuffer|[9] = 2 * y * z + 2 * x * w.
+        1.  Set |targetBuffer|[10] = 1 - 2 * x * x - 2 * y * y.
+        1.  Set |targetBuffer|[15] = 1.
 </div>
 
 Use-Cases and Requirements {#usecases-requirements}
