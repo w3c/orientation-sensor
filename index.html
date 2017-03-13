@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 9a16729f5dbf458a556c2e0e347b203ca14e2c7d" name="generator">
+  <meta content="Bikeshed version 9260eac3642631ba07cbb9e9b2936efe928153e3" name="generator">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1430,7 +1430,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-10">10 March 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-14">14 March 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1537,6 +1537,19 @@ coordinate system.</p>
 directions, such as true north, or even non stationary directions, like in
 relation to a devices own z-position, drifting towards its latest most stable
 z-position.</p>
+   <p>The data provided by the OrientationSensor API are similar to data from <a data-link-type="dfn" href="https://www.w3.org/TR/orientation-event#deviceorientation">deviceorientation Event</a>, but the OrientationSensor
+API has some significant differences:</p>
+   <ol>
+    <li data-md="">
+     <p>The OrientationSensor API represents orientation data in WebGL-compatible formats (quaternion, rotation matrix).</p>
+    <li data-md="">
+     <p>The OrientationSensor API satisfies stricter latency requirements.</p>
+    <li data-md="">
+     <p>Unlike <a data-link-type="dfn" href="https://www.w3.org/TR/orientation-event#deviceorientation">deviceorientation Event</a> the OrientationSensor API explicitly defines which <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors are used
+ to obtain the orientation data, thus obviating possible interoperability issues.</p>
+    <li data-md="">
+     <p>An <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-1">OrientationSensor</a></code> instance is configurable via <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a></code> constructor parameter.</p>
+   </ol>
    <h2 class="heading settled" data-level="2" id="examples"><span class="secno">2. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="example" id="example-331cef3d">
     <a class="self-link" href="#example-331cef3d"></a> 
@@ -1555,7 +1568,7 @@ sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class
    <p>There are no specific security and privacy considerations
 beyond those described in the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-sensor">[GENERIC-SENSOR]</a>.</p>
    <h2 class="heading settled" data-level="4" id="model"><span class="secno">4. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
-   <p>The orientation sensors’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-1">OrientationSensor</a></code> class.</p>
+   <p>The orientation sensors’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-2">OrientationSensor</a></code> class.</p>
    <p>The orientation sensor is a <a data-link-type="dfn" href="https://w3c.github.io/sensors#high-level">high-level</a> sensor which is created through <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a> of the <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors:</p>
    <ul>
     <li data-md="">
@@ -1749,6 +1762,11 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://w3c.github.io/accelerometer#local-coordinate-system">local coordinate system</a>
     </ul>
    <li>
+    <a data-link-type="biblio">[deviceorientation]</a> defines the following terms:
+    <ul>
+     <li><a href="https://www.w3.org/TR/orientation-event#deviceorientation">deviceorientation event</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
      <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
@@ -1841,7 +1859,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <aside class="dfn-panel" data-for="orientationsensor">
    <b><a href="#orientationsensor">#orientationsensor</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-orientationsensor-1">4. Model</a>
+    <li><a href="#ref-for-orientationsensor-1">1. Introduction</a>
+    <li><a href="#ref-for-orientationsensor-2">4. Model</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-orientationsensor-populatequaternion">

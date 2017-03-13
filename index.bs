@@ -62,6 +62,12 @@ urlPrefix: https://w3c.github.io/magnetometer; spec: MAGNETOMETER
     text: Magnetometer; url: magnetometer
 </pre>
 
+<pre class="anchors">
+urlPrefix: https://www.w3.org/TR/orientation-event; spec: DEVICEORIENTATION
+  type: dfn
+    text: deviceorientation Event; url: deviceorientation
+</pre>
+
 <pre class="link-defaults">
 spec:infra;
   type:dfn;
@@ -112,6 +118,14 @@ Inheriting objects can describe the orientation in relation to other stationary
 directions, such as true north, or even non stationary directions, like in
 relation to a devices own z-position, drifting towards its latest most stable
 z-position.
+
+The data provided by the OrientationSensor API are similar to data from [=deviceorientation Event=], but the OrientationSensor
+API has some significant differences:
+1. The OrientationSensor API represents orientation data in WebGL-compatible formats (quaternion, rotation matrix).
+1. The OrientationSensor API satisfies stricter latency requirements.
+1. Unlike [=deviceorientation Event=] the OrientationSensor API explicitly defines which [=low-level=] motion sensors are used
+   to obtain the orientation data, thus obviating possible interoperability issues.
+1. An {{OrientationSensor}} instance is configurable via {{SensorOptions}} constructor parameter.
 
 Examples {#examples}
 ========
