@@ -11,8 +11,8 @@ Editor: Kenneth Rohde Christiansen 57705, Intel Corporation, http://intel.com/
 Editor: Anssi Kostiainen 41974, Intel Corporation, http://intel.com/
 Group: dap
 Abstract:
-  This specification defines concrete sensor interfaces to monitor the device's physical
-  orientation in relation to <a>Earth's reference coordinate system</a>.
+  This specification defines a base orientation sensor interface and concrete sensor subclasses to monitor the device's
+  physical orientation in relation to a stationary three dimensional Cartesian coordinate system.
 Version History: https://github.com/w3c/orientation-sensor/commits/gh-pages/index.bs
 !Bug Reports: <a href="https://www.github.com/w3c/orientation-sensor/issues/new">via the w3c/orientation-sensor repository on GitHub</a>
 Indent: 2
@@ -105,31 +105,31 @@ Introduction {#intro}
 ============
 
 The OrientationSensor API extends the Generic Sensor API [[GENERIC-SENSOR]]
-to provide information that describes the device's physical orientation.
+to provide generic information describing the device's physical orientation
+in relation to a three dimensional Cartesian coordinate system.
 
-The base object describes the orientation in relation to <a>Earth's reference
-coordinate system</a>, thus in a stationary three dimensional Cartesian
-coordinate system.
+The {{AbsoluteOrientationSensor}} class inherits from the {{OrientationSensor}} interface and
+describes the device's physical orientation in relation to <a>Earth's reference coordinate system</a>.
 
-Inheriting objects can describe the orientation in relation to other stationary
-directions, such as true north, or even non stationary directions, like in
+Other subclasses describe the orientation in relation to other stationary
+directions, such as true north, or non stationary directions, like in
 relation to a devices own z-position, drifting towards its latest most stable
 z-position.
 
-The data provided by the OrientationSensor API are similar to data from [=deviceorientation Event=], but the OrientationSensor
-API has some significant differences:
+The data provided by the {{OrientationSensor}} subclasses are similar to data from
+[=deviceorientation Event=], but the OrientationSensor API has some significant differences:
 1. The OrientationSensor API represents orientation data in WebGL-compatible formats (quaternion, rotation matrix).
 1. The OrientationSensor API satisfies stricter latency requirements.
-1. Unlike [=deviceorientation Event=] the OrientationSensor API explicitly defines which [=low-level=] motion sensors are used
-   to obtain the orientation data, thus obviating possible interoperability issues.
-1. An {{OrientationSensor}} instance is configurable via {{SensorOptions}} constructor parameter.
+1. Unlike [=deviceorientation Event=] the {{OrientationSensor}} subclasses explicitly define which [=low-level=]
+   motion sensors are used to obtain the orientation data, thus obviating possible interoperability issues.
+1. Instances of {{OrientationSensor}} subclasses are configurable via {{SensorOptions}} constructor parameter.
 
 Examples {#examples}
 ========
 
 <div class="example">
     <pre highlight="js">
-    const sensor = new OrientationSensor();
+    const sensor = new AbsoluteOrientationSensor();
     const mat4 = new Float32Array(16);
     sensor.start();
     
@@ -150,9 +150,19 @@ beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
 Model {#model}
 =====
 
-The orientation sensors's associated {{Sensor}} subclass is the {{OrientationSensor}} class.
+The {{OrientationSensor}} class extends the {{Sensor}} class and provides generic interface
+representing device orientation data.
 
-The orientation sensor is a [=high-level=] sensor which is created through [=sensor-fusion=]
+A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
+whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
+The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
+[cos(θ/2), V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2)] where V is
+the unit vector representing the axis of rotation.
+
+The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} and it represents the absolute
+orientation sensor.
+
+The absolute orientation sensor is a [=high-level=] sensor which is created through [=sensor-fusion=]
 of the [=low-level=] motion sensors:
 
  - accelerometer that measures [=acceleration=],
@@ -163,12 +173,9 @@ Note: Corresponding [=low-level=] sensors are defined in [[ACCELEROMETER]], [[GY
 [[MAGNETOMETER]]. Regardless, the fusion is platform specific and can happen in software or
 hardware, i.e. on a sensor hub.
 
-A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
-whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
-The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
-[cos(θ/2), V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2)] where V is the unit vector representing
-the axis of rotation. The quaternion represents rotation of a device hosting motion sensors in relation to a <dfn>Earth's reference coordinate system</dfn> defined as a three
-dimensional Cartesian coordinate system (x, y, z), where:
+For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents rotation of a
+device hosting motion sensors in relation to a <dfn>Earth's reference coordinate system</dfn> defined as a
+three dimensional Cartesian coordinate system (x, y, z), where:
 
  - x-axis is a vector product of y.z that is tangential to the ground and points east.
  - y-axis is tangential to the ground and points towards magnetic north.
@@ -188,15 +195,11 @@ The OrientationSensor Interface {#orientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions sensorOptions)]
   interface OrientationSensor : Sensor {
     void populateQuaternion(Float32Array targetBuffer);
     void populateMatrix(Float32Array targetBuffer);
   };
 </pre>
-
-To <dfn>Construct a OrientationSensor Object</dfn> the user agent must invoke the
-<a>construct a Sensor object</a> abstract operation.
 
 ### OrientationSensor.populateQuaternion() ### {#orientationsensor-populatequaternion}
 
@@ -257,7 +260,20 @@ The {{OrientationSensor/populateMatrix()}} method must run these steps or their 
         1.  Set |targetBuffer|[15] = 1.
 </div>
 
-Use-Cases and Requirements {#usecases-requirements}
+
+The AbsoluteOrientationSensor Interface {#absoluteorientationsensor-interface}
+-------------------------------------
+
+<pre class="idl">
+  [Constructor(optional SensorOptions sensorOptions)]
+  interface AbsoluteOrientationSensor : OrientationSensor {
+  };
+</pre>
+
+To <dfn>Construct a AbsoluteOrientationSensor Object</dfn> the user agent must invoke the
+<a>construct a Sensor object</a> abstract operation.
+
+The Absolute Orientation Sensor Use-Cases and Requirements {#usecases-requirements-absolute-orientation}
 ==========================
 
 Use cases {#usecases}
