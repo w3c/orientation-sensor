@@ -65,6 +65,12 @@ urlPrefix: https://www.w3.org/TR/orientation-event; spec: DEVICEORIENTATION
     text: deviceorientation Event; url: deviceorientation
 </pre>
 
+<pre class="anchors">
+urlPrefix: https://w3c.github.io/motion-sensors; spec: MOTIONSENSORS
+  type: dfn
+    text: Absolute Orientation Sensor; url: absolute-orientation
+</pre>
+
 <pre class="link-defaults">
 spec:infra;
   type:dfn;
@@ -159,8 +165,8 @@ The elements of the [=list=] are equal to components of a unit quaternion [[QUAT
 [cos(θ/2), V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2)] where V is
 the unit vector representing the axis of rotation.
 
-The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} and it represents the absolute
-orientation sensor.
+The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents the [=Absolute
+Orientation Sensor=].
 
 The absolute orientation sensor is a [=high-level=] sensor which is created through [=sensor-fusion=]
 of the [=low-level=] motion sensors:
