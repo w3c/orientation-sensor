@@ -202,15 +202,26 @@ The OrientationSensor Interface {#orientationsensor-interface}
 
 <pre class="idl">
   interface OrientationSensor : Sensor {
-    readonly attribute Float32Array? quaternion;
+    void populateQuaternion(Float32Array targetBuffer);
     void populateMatrix(Float32Array targetBuffer);
   };
 </pre>
 
-### OrientationSensor.quaternion ### {#orientationsensor-quaternion}
+### OrientationSensor.populateQuaternion() ### {#orientationsensor-populatequaternion}
 
-Returns a four-element array the elements of which contain the components of the unit quaternion representing the device orientation.
-In other words, this attribute returns [=latest reading=]["quaternion"].
+<div algorithm="to populate quaternion">
+The {{OrientationSensor/populateQuaternion()}} method must run these steps or their [=equivalent=]:
+    1.  If |targetBuffer| is not of type {{Float32Array}}, [=throw=] a
+        "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
+    1.  If |targetBuffer| is of type {{Float32Array}} with a size less than four, [=throw=] a
+        "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
+    1.  If the value of |sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
+        [=throw=] an "{{InvalidStateError!!exception}}" {{DOMException}} and abort these steps.
+    1.  Run these sub-steps:
+        1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
+        1.  If |quaternion| is `null`, abort these steps.
+        1.  Copy |quaternion| into |targetBuffer|
+</div>
 
 ### OrientationSensor.populateMatrix() ### {#orientationsensor-populatematrix}
 
