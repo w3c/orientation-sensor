@@ -21,7 +21,7 @@ Markup Shorthands: markdown on
 Inline Github Issues: true
 !Test Suite: <a href="https://github.com/w3c/web-platform-tests/tree/master/orientation-sensor">web-platform-tests on GitHub</a>
 Boilerplate: omit issues-index, omit conformance
-Ignored Vars: sensor_instance, targetBuffer, x, y, z, w
+Ignored Vars: sensor_instance, targetMatrix, x, y, z, w
 </pre>
 <pre class="anchors">
 urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
@@ -201,9 +201,10 @@ The OrientationSensor Interface {#orientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
+  typedef (Float32Array or Float64Array or DOMMatrix) RotationMatrixType;
   interface OrientationSensor : Sensor {
     readonly attribute FrozenArray&lt;double>? quaternion;
-    void populateMatrix(Float32Array targetBuffer);
+    void populateMatrix(RotationMatrixType targetMatrix);
   };
 </pre>
 
@@ -214,45 +215,70 @@ In other words, this attribute returns [=latest reading=]["quaternion"].
 
 ### OrientationSensor.populateMatrix() ### {#orientationsensor-populatematrix}
 
-The {{OrientationSensor/populateMatrix()}} method  populates the given buffer with WebGL-compatible rotation matrix
+The {{OrientationSensor/populateMatrix()}} method  populates the given object with rotation matrix
 which is converted from the value of [=latest reading=]["quaternion"] [[QUATCONV]], as shown below
 
 <img src="quaternion_to_rotation_matrix.png" style="display: block;margin: auto;" alt="Converting quaternion to rotation matrix." width="50%" height="50%">
 
 where:
 
- - W = cos(θ/2).
- - X = V<sub>x</sub> * sin(θ/2).
- - Y = V<sub>y</sub> * sin(θ/2).
- - Z = V<sub>z</sub> * sin(θ/2).
+ - W = cos(θ/2)
+ - X = V<sub>x</sub> * sin(θ/2)
+ - Y = V<sub>y</sub> * sin(θ/2)
+ - Z = V<sub>z</sub> * sin(θ/2)
 
-The rotation matrix is flattened in |targetBuffer| according to the column-major order.
+The rotation matrix is flattened in |targetMatrix| object according to the column-major order, as described in
+[=populate rotation matrix=] algorighm.
 
-<div algorithm="to populate WebGL-compatible matrix">
-The {{OrientationSensor/populateMatrix()}} method must run these steps or their [=equivalent=]:
-    1.  If |targetBuffer| is not of type {{Float32Array}}, [=throw=] a
+<div algorithm="populate rotation matrix">
+To <dfn>populate rotation matrix</dfn>, the {{OrientationSensor/populateMatrix()}} method must
+run these steps or their [=equivalent=]:
+    1.  If |targetMatrix| is not of type defined by {{RotationMatrixType}} union, [=throw=] a
         "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
-    1.  If |targetBuffer| is of type {{Float32Array}} with a size less than sixteen, [=throw=] a
+    1.  If |targetMatrix| is of type {{Float32Array}} or {{Float64Array}} with a size less than sixteen, [=throw=] a
         "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
     1.  If the value of |sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
         [=throw=] an "{{InvalidStateError!!exception}}" {{DOMException}} and abort these steps.
-    1.  Run these sub-steps:
-        1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
+    1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
         1.  If |quaternion| is `null`, abort these steps.
-        1.  Let |w| be the value of |quaternion|[0].
-        1.  Let |x| be the value of |quaternion|[1].
-        1.  Let |y| be the value of |quaternion|[2].
-        1.  Let |z| be the value of |quaternion|[3].
-        1.  Set |targetBuffer|[0] = 1 - 2 * y * y - 2 * z * z.
-        1.  Set |targetBuffer|[1] = 2 * x * y - 2 * z * w.
-        1.  Set |targetBuffer|[2] = 2 * x * z + 2 * y * w.
-        1.  Set |targetBuffer|[4] = 2 * x * y + 2 * z * w.
-        1.  Set |targetBuffer|[5] = 1 - 2 * x * x - 2 * z * z.
-        1.  Set |targetBuffer|[6] = 2 * y * z - 2 * x * w.
-        1.  Set |targetBuffer|[8] = 2 * x * z - 2 * y * w.
-        1.  Set |targetBuffer|[9] = 2 * y * z + 2 * x * w.
-        1.  Set |targetBuffer|[10] = 1 - 2 * x * x - 2 * y * y.
-        1.  Set |targetBuffer|[15] = 1.
+        1.  Let |w| be the value of |quaternion|[0]
+        1.  Let |x| be the value of |quaternion|[1]
+        1.  Let |y| be the value of |quaternion|[2]
+        1.  Let |z| be the value of |quaternion|[3]
+        1.  If |targetMatrix| is of  {{Float32Array}} or {{Float64Array}} type, run these sub-steps:
+            1.  Set |targetMatrix|[0] = 1 - 2 * y * y - 2 * z * z
+            1.  Set |targetMatrix|[1] = 2 * x * y - 2 * z * w
+            1.  Set |targetMatrix|[2] = 2 * x * z + 2 * y * w
+            1.  Set |targetMatrix|[3] = 0
+            1.  Set |targetMatrix|[4] = 2 * x * y + 2 * z * w
+            1.  Set |targetMatrix|[5] = 1 - 2 * x * x - 2 * z * z
+            1.  Set |targetMatrix|[6] = 2 * y * z - 2 * x * w
+            1.  Set |targetMatrix|[7] = 0
+            1.  Set |targetMatrix|[8] = 2 * x * z - 2 * y * w
+            1.  Set |targetMatrix|[9] = 2 * y * z + 2 * x * w
+            1.  Set |targetMatrix|[10] = 1 - 2 * x * x - 2 * y * y
+            1.  Set |targetMatrix|[11] = 0
+            1.  Set |targetMatrix|[12] = 0
+            1.  Set |targetMatrix|[13] = 0
+            1.  Set |targetMatrix|[14] = 0
+            1.  Set |targetMatrix|[15] = 1
+        1.  If |targetMatrix| is of  {{DOMMatrix}} type, run these sub-steps:
+            1.  Set |targetMatrix|.m11 = 1 - 2 * y * y - 2 * z * z
+            1.  Set |targetMatrix|.m12 = 2 * x * y - 2 * z * w
+            1.  Set |targetMatrix|.m13 = 2 * x * z + 2 * y * w
+            1.  Set |targetMatrix|.m14 = 0
+            1.  Set |targetMatrix|.m21 = 2 * x * y + 2 * z * w
+            1.  Set |targetMatrix|.m22 = 1 - 2 * x * x - 2 * z * z
+            1.  Set |targetMatrix|.m23 = 2 * y * z - 2 * x * w
+            1.  Set |targetMatrix|.m24 = 0
+            1.  Set |targetMatrix|.m31 = 2 * x * z - 2 * y * w
+            1.  Set |targetMatrix|.m32 = 2 * y * z + 2 * x * w
+            1.  Set |targetMatrix|.m33 = 1 - 2 * x * x - 2 * y * y
+            1.  Set |targetMatrix|.m34 = 0
+            1.  Set |targetMatrix|.m41 = 0
+            1.  Set |targetMatrix|.m42 = 0
+            1.  Set |targetMatrix|.m43 = 0
+            1.  Set |targetMatrix|.m44 = 1
 </div>
 
 
