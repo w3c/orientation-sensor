@@ -130,6 +130,12 @@ The data provided by the {{OrientationSensor}} subclasses are similar to data fr
    motion sensors are used to obtain the orientation data, thus obviating possible interoperability issues.
 1. Instances of {{OrientationSensor}} subclasses are configurable via {{SensorOptions}} constructor parameter.
 
+Use Cases and Requirements {#usecases-requirements}
+==============================
+
+The use cases and requirements are addressed in the <cite><a href="https://w3c.github.io/motion-sensors/#usecases-and-requirements">
+Motion Sensors Explainer</a></cite> document.
+
 Examples {#examples}
 ========
 
@@ -295,32 +301,6 @@ The AbsoluteOrientationSensor Interface {#absoluteorientationsensor-interface}
 
 To <dfn>Construct a AbsoluteOrientationSensor Object</dfn> the user agent must invoke the
 <a>construct a Sensor object</a> abstract operation.
-
-The Absolute Orientation Sensor Use-Cases and Requirements {#usecases-requirements-absolute-orientation}
-==========================
-
-Use cases {#usecases}
----------
-
-    1. A compass monitor's the device's orientation relative to true north and aligns the compass heading in a three-dimensional space.
-    1. A game uses the device's orientation relative to the ground as user input. For example, a ball-in-a-maze puzzle.
-    1. A WebVR polyfill tracks the headset's (or mobile device's for mobile VR) orientation.
-    1. A map application adjusts a two-dimensional map such that the device shows the map relative to the actual surroundings.
-
-Functional requirements {#functional-requirements}
------------------------
-
-    1. The API must provide data that describes the device's physical orientation in a stationary 3D coordinate system.
-    1. The API must provide data in representation that matches that of the WebGL interfaces and methods.
-    1. The API must address the VR requirements for high performance and low motion-to-photon latency, and not
-       introduce significant overhead over corresponding native platform APIs.
-    1. The API must extend Generic Sensor and inherit its functionality and satisfy its requirements.
-
-Non-functional requirements {#nonfunctional-requirements}
----------------------------
-
-    1. The API must provide developer friendly and consistent higher level abstractions optimised for the common use cases.
-
 
 Acknowledgements {#acknowledgements}
 ================
