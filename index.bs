@@ -159,6 +159,8 @@ Model {#model}
 The {{OrientationSensor}} class extends the {{Sensor}} class and provides generic interface
 representing device orientation data.
 
+The OrientationSensor has an associated {{PermissionName}} which is <a for="PermissionName" enum-value>"orientation-sensor"</a>.
+
 A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
 The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
