@@ -144,12 +144,32 @@ Examples {#examples}
     const sensor = new AbsoluteOrientationSensor();
     const mat4 = new Float32Array(16);
     sensor.start();
-    
+    sensor.onerror = event => console.log(event.error.name, event.error.message);
+
     sensor.onchange = () => {
       sensor.populateMatrix(mat4);
-    };
+    }
+    </pre>
+</div>
 
+<div class="example">
+    <pre highlight="js">
+    const sensor = new AbsoluteOrientationSensor({ frequency: 60 });
+    const mat4 = new Float32Array(16);
+    sensor.start();
     sensor.onerror = event => console.log(event.error.name, event.error.message);
+
+    function draw(timestamp) {
+      window.requestAnimationFrame(draw);
+      try {
+        sensor.populateMatrix(mat4);
+      } catch(e) {
+        // mat4 has not been updated.
+      }
+      // Drawing...
+    }
+
+    window.requestAnimationFrame(draw);
     </pre>
 </div>
 
@@ -245,48 +265,46 @@ run these steps or their [=equivalent=]:
         "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
     1.  If |targetMatrix| is of type {{Float32Array}} or {{Float64Array}} with a size less than sixteen, [=throw=] a
         "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
-    1.  If the value of |sensor_instance|.[=[[state]]=] is not <a enum-value>"activated"</a>,
-        [=throw=] an "{{InvalidStateError!!exception}}" {{DOMException}} and abort these steps.
     1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
-        1.  If |quaternion| is `null`, abort these steps.
-        1.  Let |w| be the value of |quaternion|[0]
-        1.  Let |x| be the value of |quaternion|[1]
-        1.  Let |y| be the value of |quaternion|[2]
-        1.  Let |z| be the value of |quaternion|[3]
-        1.  If |targetMatrix| is of  {{Float32Array}} or {{Float64Array}} type, run these sub-steps:
-            1.  Set |targetMatrix|[0] = 1 - 2 * y * y - 2 * z * z
-            1.  Set |targetMatrix|[1] = 2 * x * y - 2 * z * w
-            1.  Set |targetMatrix|[2] = 2 * x * z + 2 * y * w
-            1.  Set |targetMatrix|[3] = 0
-            1.  Set |targetMatrix|[4] = 2 * x * y + 2 * z * w
-            1.  Set |targetMatrix|[5] = 1 - 2 * x * x - 2 * z * z
-            1.  Set |targetMatrix|[6] = 2 * y * z - 2 * x * w
-            1.  Set |targetMatrix|[7] = 0
-            1.  Set |targetMatrix|[8] = 2 * x * z - 2 * y * w
-            1.  Set |targetMatrix|[9] = 2 * y * z + 2 * x * w
-            1.  Set |targetMatrix|[10] = 1 - 2 * x * x - 2 * y * y
-            1.  Set |targetMatrix|[11] = 0
-            1.  Set |targetMatrix|[12] = 0
-            1.  Set |targetMatrix|[13] = 0
-            1.  Set |targetMatrix|[14] = 0
-            1.  Set |targetMatrix|[15] = 1
-        1.  If |targetMatrix| is of  {{DOMMatrix}} type, run these sub-steps:
-            1.  Set |targetMatrix|.m11 = 1 - 2 * y * y - 2 * z * z
-            1.  Set |targetMatrix|.m12 = 2 * x * y - 2 * z * w
-            1.  Set |targetMatrix|.m13 = 2 * x * z + 2 * y * w
-            1.  Set |targetMatrix|.m14 = 0
-            1.  Set |targetMatrix|.m21 = 2 * x * y + 2 * z * w
-            1.  Set |targetMatrix|.m22 = 1 - 2 * x * x - 2 * z * z
-            1.  Set |targetMatrix|.m23 = 2 * y * z - 2 * x * w
-            1.  Set |targetMatrix|.m24 = 0
-            1.  Set |targetMatrix|.m31 = 2 * x * z - 2 * y * w
-            1.  Set |targetMatrix|.m32 = 2 * y * z + 2 * x * w
-            1.  Set |targetMatrix|.m33 = 1 - 2 * x * x - 2 * y * y
-            1.  Set |targetMatrix|.m34 = 0
-            1.  Set |targetMatrix|.m41 = 0
-            1.  Set |targetMatrix|.m42 = 0
-            1.  Set |targetMatrix|.m43 = 0
-            1.  Set |targetMatrix|.m44 = 1
+    1.  If |quaternion| is `null`, [=throw=] a "{{NotReadableError!!exception}}" {{DOMException}} and abort these steps.
+    1.  Let |w| be the value of |quaternion|[0]
+    1.  Let |x| be the value of |quaternion|[1]
+    1.  Let |y| be the value of |quaternion|[2]
+    1.  Let |z| be the value of |quaternion|[3]
+    1.  If |targetMatrix| is of  {{Float32Array}} or {{Float64Array}} type, run these sub-steps:
+        1.  Set |targetMatrix|[0] = 1 - 2 * y * y - 2 * z * z
+        1.  Set |targetMatrix|[1] = 2 * x * y - 2 * z * w
+        1.  Set |targetMatrix|[2] = 2 * x * z + 2 * y * w
+        1.  Set |targetMatrix|[3] = 0
+        1.  Set |targetMatrix|[4] = 2 * x * y + 2 * z * w
+        1.  Set |targetMatrix|[5] = 1 - 2 * x * x - 2 * z * z
+        1.  Set |targetMatrix|[6] = 2 * y * z - 2 * x * w
+        1.  Set |targetMatrix|[7] = 0
+        1.  Set |targetMatrix|[8] = 2 * x * z - 2 * y * w
+        1.  Set |targetMatrix|[9] = 2 * y * z + 2 * x * w
+        1.  Set |targetMatrix|[10] = 1 - 2 * x * x - 2 * y * y
+        1.  Set |targetMatrix|[11] = 0
+        1.  Set |targetMatrix|[12] = 0
+        1.  Set |targetMatrix|[13] = 0
+        1.  Set |targetMatrix|[14] = 0
+        1.  Set |targetMatrix|[15] = 1
+    1.  If |targetMatrix| is of  {{DOMMatrix}} type, run these sub-steps:
+        1.  Set |targetMatrix|.m11 = 1 - 2 * y * y - 2 * z * z
+        1.  Set |targetMatrix|.m12 = 2 * x * y - 2 * z * w
+        1.  Set |targetMatrix|.m13 = 2 * x * z + 2 * y * w
+        1.  Set |targetMatrix|.m14 = 0
+        1.  Set |targetMatrix|.m21 = 2 * x * y + 2 * z * w
+        1.  Set |targetMatrix|.m22 = 1 - 2 * x * x - 2 * z * z
+        1.  Set |targetMatrix|.m23 = 2 * y * z - 2 * x * w
+        1.  Set |targetMatrix|.m24 = 0
+        1.  Set |targetMatrix|.m31 = 2 * x * z - 2 * y * w
+        1.  Set |targetMatrix|.m32 = 2 * y * z + 2 * x * w
+        1.  Set |targetMatrix|.m33 = 1 - 2 * x * x - 2 * y * y
+        1.  Set |targetMatrix|.m34 = 0
+        1.  Set |targetMatrix|.m41 = 0
+        1.  Set |targetMatrix|.m42 = 0
+        1.  Set |targetMatrix|.m43 = 0
+        1.  Set |targetMatrix|.m44 = 1
 </div>
 
 
