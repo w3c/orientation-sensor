@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version b734e371910e25ac23b774dca3dea5cfc7b7fc0b" name="generator">
+  <meta content="Bikeshed version 588c13f032a881310dc4886e2269c4ffd3b6784b" name="generator">
   <link href="http://www.w3.org/TR/orientation-sensor/" rel="canonical">
 <style>/* style-md-lists */
 
@@ -1431,7 +1431,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-04-04">4 April 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-04-05">5 April 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1547,17 +1547,36 @@ z-position.</p>
    <h2 class="heading settled" data-level="2" id="usecases-requirements"><span class="secno">2. </span><span class="content">Use Cases and Requirements</span><a class="self-link" href="#usecases-requirements"></a></h2>
    <p>The use cases and requirements are addressed in the <cite><a href="https://w3c.github.io/motion-sensors/#usecases-and-requirements"> Motion Sensors Explainer</a></cite> document.</p>
    <h2 class="heading settled" data-level="3" id="examples"><span class="secno">3. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
-   <div class="example" id="example-468719ca">
-    <a class="self-link" href="#example-468719ca"></a> 
+   <div class="example" id="example-0d47ae5d">
+    <a class="self-link" href="#example-0d47ae5d"></a> 
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">(</span><span class="p">)</span><span class="p">;</span>
 <span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="p">;</span>
 sensor<span class="p">.</span>start<span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
+
 sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">(</span><span class="p">)</span> <span class="p">=></span> <span class="p">{</span>
   sensor<span class="p">.</span>populateMatrix<span class="p">(</span>mat4<span class="p">)</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
-
+<span class="p">}</span>
+</pre>
+   </div>
+   <div class="example" id="example-adf07285">
+    <a class="self-link" href="#example-adf07285"></a> 
+<pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">(</span><span class="p">{</span> frequency<span class="o">:</span> <span class="mi">60</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="p">;</span>
+sensor<span class="p">.</span>start<span class="p">(</span><span class="p">)</span><span class="p">;</span>
 sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
+
+<span class="kd">function</span> draw<span class="p">(</span>timestamp<span class="p">)</span> <span class="p">{</span>
+  window<span class="p">.</span>requestAnimationFrame<span class="p">(</span>draw<span class="p">)</span><span class="p">;</span>
+  <span class="k">try</span> <span class="p">{</span>
+    sensor<span class="p">.</span>populateMatrix<span class="p">(</span>mat4<span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span><span class="p">(</span>e<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// mat4 has not been updated.
+</span>  <span class="p">}</span>
+  <span class="c1">// Drawing...
+</span><span class="p">}</span>
+
+window<span class="p">.</span>requestAnimationFrame<span class="p">(</span>draw<span class="p">)</span><span class="p">;</span>
 </pre>
    </div>
    <h2 class="heading settled" data-level="4" id="security-and-privacy"><span class="secno">4. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy"></a></h2>
@@ -1636,92 +1655,88 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
       <p>If <var>targetMatrix</var> is of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> or <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float64Array">Float64Array</a></code> with a size less than sixteen, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
   "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
-      <p>If the value of <var>sensor_instance</var>.<a data-link-type="dfn" href="https://w3c.github.io/sensors/#state">[[state]]</a> is not <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-sensorstate-activated">"activated"</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> an "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
-     <li data-md="">
       <p>Let <var>quaternion</var> be the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["quaternion"]</p>
+     <li data-md="">
+      <p>If <var>quaternion</var> is <code>null</code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
+     <li data-md="">
+      <p>Let <var>w</var> be the value of <var>quaternion</var>[0]</p>
+     <li data-md="">
+      <p>Let <var>x</var> be the value of <var>quaternion</var>[1]</p>
+     <li data-md="">
+      <p>Let <var>y</var> be the value of <var>quaternion</var>[2]</p>
+     <li data-md="">
+      <p>Let <var>z</var> be the value of <var>quaternion</var>[3]</p>
+     <li data-md="">
+      <p>If <var>targetMatrix</var> is of <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> or <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float64Array">Float64Array</a></code> type, run these sub-steps:</p>
       <ol>
        <li data-md="">
-        <p>If <var>quaternion</var> is <code>null</code>, abort these steps.</p>
+        <p>Set <var>targetMatrix</var>[0] = 1 - 2 * y * y - 2 * z * z</p>
        <li data-md="">
-        <p>Let <var>w</var> be the value of <var>quaternion</var>[0]</p>
+        <p>Set <var>targetMatrix</var>[1] = 2 * x * y - 2 * z * w</p>
        <li data-md="">
-        <p>Let <var>x</var> be the value of <var>quaternion</var>[1]</p>
+        <p>Set <var>targetMatrix</var>[2] = 2 * x * z + 2 * y * w</p>
        <li data-md="">
-        <p>Let <var>y</var> be the value of <var>quaternion</var>[2]</p>
+        <p>Set <var>targetMatrix</var>[3] = 0</p>
        <li data-md="">
-        <p>Let <var>z</var> be the value of <var>quaternion</var>[3]</p>
+        <p>Set <var>targetMatrix</var>[4] = 2 * x * y + 2 * z * w</p>
        <li data-md="">
-        <p>If <var>targetMatrix</var> is of <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> or <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float64Array">Float64Array</a></code> type, run these sub-steps:</p>
-        <ol>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[0] = 1 - 2 * y * y - 2 * z * z</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[1] = 2 * x * y - 2 * z * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[2] = 2 * x * z + 2 * y * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[3] = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[4] = 2 * x * y + 2 * z * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[5] = 1 - 2 * x * x - 2 * z * z</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[6] = 2 * y * z - 2 * x * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[7] = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[8] = 2 * x * z - 2 * y * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[9] = 2 * y * z + 2 * x * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[10] = 1 - 2 * x * x - 2 * y * y</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[11] = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[12] = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[13] = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[14] = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>[15] = 1</p>
-        </ol>
+        <p>Set <var>targetMatrix</var>[5] = 1 - 2 * x * x - 2 * z * z</p>
        <li data-md="">
-        <p>If <var>targetMatrix</var> is of <code class="idl"><a data-link-type="idl" href="https://drafts.fxtf.org/geometry-1/#dommatrix">DOMMatrix</a></code> type, run these sub-steps:</p>
-        <ol>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m11 = 1 - 2 * y * y - 2 * z * z</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m12 = 2 * x * y - 2 * z * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m13 = 2 * x * z + 2 * y * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m14 = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m21 = 2 * x * y + 2 * z * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m22 = 1 - 2 * x * x - 2 * z * z</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m23 = 2 * y * z - 2 * x * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m24 = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m31 = 2 * x * z - 2 * y * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m32 = 2 * y * z + 2 * x * w</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m33 = 1 - 2 * x * x - 2 * y * y</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m34 = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m41 = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m42 = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m43 = 0</p>
-         <li data-md="">
-          <p>Set <var>targetMatrix</var>.m44 = 1</p>
-        </ol>
+        <p>Set <var>targetMatrix</var>[6] = 2 * y * z - 2 * x * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[7] = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[8] = 2 * x * z - 2 * y * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[9] = 2 * y * z + 2 * x * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[10] = 1 - 2 * x * x - 2 * y * y</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[11] = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[12] = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[13] = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[14] = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>[15] = 1</p>
+      </ol>
+     <li data-md="">
+      <p>If <var>targetMatrix</var> is of <code class="idl"><a data-link-type="idl" href="https://drafts.fxtf.org/geometry-1/#dommatrix">DOMMatrix</a></code> type, run these sub-steps:</p>
+      <ol>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m11 = 1 - 2 * y * y - 2 * z * z</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m12 = 2 * x * y - 2 * z * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m13 = 2 * x * z + 2 * y * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m14 = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m21 = 2 * x * y + 2 * z * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m22 = 1 - 2 * x * x - 2 * z * z</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m23 = 2 * y * z - 2 * x * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m24 = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m31 = 2 * x * z - 2 * y * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m32 = 2 * y * z + 2 * x * w</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m33 = 1 - 2 * x * x - 2 * y * y</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m34 = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m41 = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m42 = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m43 = 0</p>
+       <li data-md="">
+        <p>Set <var>targetMatrix</var>.m44 = 1</p>
       </ol>
     </ol>
    </div>
@@ -1791,10 +1806,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/sensors/#dom-sensorstate-activated">"activated"</a>
      <li><a href="https://w3c.github.io/sensors/#sensor">Sensor</a>
      <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
-     <li><a href="https://w3c.github.io/sensors/#state">[[state]]</a>
     </ul>
    <li>
     <a data-link-type="biblio">[geometry-1]</a> defines the following terms:
@@ -1836,7 +1849,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a>
      <li><a href="https://heycam.github.io/webidl/#idl-Float64Array">Float64Array</a>
      <li><a href="https://heycam.github.io/webidl/#idl-frozen-array">FrozenArray</a>
-     <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
+     <li><a href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a>
      <li><a href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a>
      <li><a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a>
      <li><a href="https://heycam.github.io/webidl/#idl-double">double</a>
