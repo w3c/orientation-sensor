@@ -190,7 +190,7 @@ The OrientationSensor has an associated {{PermissionName}} which is <a for="Perm
 A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
 The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
-[cos(θ/2), V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2)] where V is
+[V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2), cos(θ/2)] where V is
 the unit vector representing the axis of rotation.
 
 The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents the [=Absolute
@@ -267,10 +267,10 @@ run these steps or their [=equivalent=]:
         "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
     1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
     1.  If |quaternion| is `null`, [=throw=] a "{{NotReadableError!!exception}}" {{DOMException}} and abort these steps.
-    1.  Let |w| be the value of |quaternion|[0]
-    1.  Let |x| be the value of |quaternion|[1]
-    1.  Let |y| be the value of |quaternion|[2]
-    1.  Let |z| be the value of |quaternion|[3]
+    1.  Let |x| be the value of |quaternion|[0]
+    1.  Let |y| be the value of |quaternion|[1]
+    1.  Let |z| be the value of |quaternion|[2]
+    1.  Let |w| be the value of |quaternion|[3]
     1.  If |targetMatrix| is of  {{Float32Array}} or {{Float64Array}} type, run these sub-steps:
         1.  Set |targetMatrix|[0] = 1 - 2 * y * y - 2 * z * z
         1.  Set |targetMatrix|[1] = 2 * x * y - 2 * z * w
