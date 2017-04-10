@@ -1431,7 +1431,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-04-07">7 April 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-04-10">10 April 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1650,7 +1650,7 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
     <ol>
      <li data-md="">
       <p>If <var>targetMatrix</var> is not of type defined by <code class="idl"><a data-link-type="idl" href="#typedefdef-rotationmatrixtype" id="ref-for-typedefdef-rotationmatrixtype-2">RotationMatrixType</a></code> union, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
-  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
+  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
       <p>If <var>targetMatrix</var> is of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array">Float32Array</a></code> or <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float64Array">Float64Array</a></code> with a size less than sixteen, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw">throw</a> a
   "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> and abort these steps.</p>
@@ -1850,7 +1850,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://heycam.github.io/webidl/#idl-Float64Array">Float64Array</a>
      <li><a href="https://heycam.github.io/webidl/#idl-frozen-array">FrozenArray</a>
      <li><a href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a>
-     <li><a href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a>
      <li><a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a>
      <li><a href="https://heycam.github.io/webidl/#idl-double">double</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-throw">throw</a>
