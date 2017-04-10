@@ -262,7 +262,7 @@ The rotation matrix is flattened in |targetMatrix| object according to the colum
 To <dfn>populate rotation matrix</dfn>, the {{OrientationSensor/populateMatrix()}} method must
 run these steps or their [=equivalent=]:
     1.  If |targetMatrix| is not of type defined by {{RotationMatrixType}} union, [=throw=] a
-        "{{SyntaxError!!exception}}" {{DOMException}} and abort these steps.
+        "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
     1.  If |targetMatrix| is of type {{Float32Array}} or {{Float64Array}} with a size less than sixteen, [=throw=] a
         "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
     1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
