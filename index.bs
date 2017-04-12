@@ -193,6 +193,12 @@ The elements of the [=list=] are equal to components of a unit quaternion [[QUAT
 [V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2), cos(θ/2)] where V is
 the unit vector representing the axis of rotation.
 
+Note: The quaternion components are arranged in the [=list=] as [q<sub>1</sub>, q<sub>2</sub>, q<sub>3</sub>, q<sub>0</sub>]
+[[QUATERNIONS]], i.e. the components representing the vector part of the quaternion go first and the scalar part component which
+is equal to cos(θ/2) goes after. This order is used for better compatibility with the most of the existing WebGL frameworks,
+however other libraries could use a different order when exposing quaternion as an array, e.g. [q<sub>0</sub>, q<sub>1</sub>,
+q<sub>2</sub>, q<sub>3</sub>].
+
 The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents the [=Absolute
 Orientation Sensor=].
 
