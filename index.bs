@@ -185,7 +185,21 @@ Model {#model}
 The {{OrientationSensor}} class extends the {{Sensor}} class and provides generic interface
 representing device orientation data.
 
-The OrientationSensor has an associated {{PermissionName}} which is <a for="PermissionName" enum-value>"orientation-sensor"</a>.
+To access orientation sensor's [=latest reading=], user agent must invoke [=request sensor access=] abstract operation for each of the [=low-level=] sensors used by the concrete orientation sensor. The table below
+describes mapping between concrete orientation sensors and permission tokens defined by [=low-level=] sensors.
+
+<table class="def">
+  <thead>
+    <th>OrientationSensor sublass</th>
+    <th>Permission tokens</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{AbsoluteOrientationSensor}}</td>
+      <td>"accelerometer", "gyroscope", "magnetometer"</td>
+    </tr>
+  </tbody>
+</table>
 
 A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
