@@ -240,7 +240,7 @@ The device's <a>local coordinate system</a> is the same as defined by [=low-leve
 Note: Figure below represents the case where device's <a>local coordinate system</a> and <a>Earth's reference coordinate system</a> are aligned, therefore,
 orientation sensor's [=latest reading=] would represent 0 (rad) [[SI]] rotation about each axis.
 
-<img src="device_orientation_sensor_coordinate_system.png" srcset="device_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;" alt="DeviceOrientationSensor coordinate system.">
+<img src="images/absolute_orientation_sensor_coordinate_system.png" srcset="images/absolute_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;" alt="AbsoluteOrientationSensor coordinate system.">
 
 API {#api}
 ===
@@ -266,7 +266,7 @@ In other words, this attribute returns [=latest reading=]["quaternion"].
 The {{OrientationSensor/populateMatrix()}} method  populates the given object with rotation matrix
 which is converted from the value of [=latest reading=]["quaternion"] [[QUATCONV]], as shown below
 
-<img src="quaternion_to_rotation_matrix.png" style="display: block;margin: auto;" alt="Converting quaternion to rotation matrix." width="50%" height="50%">
+<img src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto;" alt="Converting quaternion to rotation matrix." width="50%" height="50%">
 
 where:
 
