@@ -4,10 +4,9 @@
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>Orientation Sensor</title>
   <meta content="WD" name="w3c-status">
-  <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD" rel="stylesheet">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version 5bd73bb15eb04ad9f7d1a57f012e9ee6eca5a765" name="generator">
-  <link href="http://www.w3.org/TR/orientation-sensor/" rel="canonical">
+  <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -161,7 +160,6 @@
             position: absolute;
             z-index: 35;
             height: auto;
-            width: -webkit-fit-content;
             width: fit-content;
             max-width: 300px;
             max-height: 500px;
@@ -250,6 +248,7 @@ pre.idl.highlight { color: #708090; }
         .highlight .vi { color: #0077aa } /* Name.Variable.Instance */
         .highlight .il { color: #000000 } /* Literal.Number.Integer.Long */
         </style>
+        <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD" rel="stylesheet">
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
@@ -260,7 +259,7 @@ pre.idl.highlight { color: #708090; }
      <dt>This version:
      <dd><a class="u-url" href="https://www.w3.org/TR/2017/WD-orientation-sensor-20170511/">https://www.w3.org/TR/2017/WD-orientation-sensor-20170511/</a>
      <dt>Latest published version:
-     <dd><a href="http://www.w3.org/TR/orientation-sensor/">http://www.w3.org/TR/orientation-sensor/</a>
+     <dd><a href="https://www.w3.org/TR/orientation-sensor/">https://www.w3.org/TR/orientation-sensor/</a>
      <dt>Editor's Draft:
      <dd><a href="https://w3c.github.io/orientation-sensor/">https://w3c.github.io/orientation-sensor/</a>
      <dt>Version History:
@@ -310,10 +309,10 @@ physical orientation in relation to a stationary three dimensional Cartesian coo
   obsoleted by other documents at any time. It is inappropriate to cite this
   document as other than work in progress. </p>
    <p> This document was produced by a group operating under
-	the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
+	the <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
 	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
-	An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
+	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
    <p> This document is governed by the <a href="https://www.w3.org/2017/Process-20170301/" id="w3c_process_revision">1 March 2017 W3C Process Document</a>. </p>
    <p></p>
   </div>
@@ -477,7 +476,7 @@ In other words, this attribute returns <a data-link-type="dfn" href="https://w3c
    <h4 class="heading settled" data-level="6.1.2" id="orientationsensor-populatematrix"><span class="secno">6.1.2. </span><span class="content">OrientationSensor.populateMatrix()</span><a class="self-link" href="#orientationsensor-populatematrix"></a></h4>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix-1">populateMatrix()</a></code> method  populates the given object with rotation matrix
 which is converted from the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["quaternion"] <a data-link-type="biblio" href="#biblio-quatconv">[QUATCONV]</a>, as shown below:</p>
-   <p><img alt="Converting quaternion to rotation matrix." height="50%" src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto;" width="50%"></p>
+   <p><img alt="Converting quaternion to rotation matrix." src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;"></p>
    <p>where:</p>
    <ul>
     <li data-md="">
