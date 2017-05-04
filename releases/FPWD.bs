@@ -1,7 +1,8 @@
 <pre class="metadata">
 Title: Orientation Sensor
-Status: ED
-Level: 1
+Status: FPWD
+Date: 2017-05-11
+#Level: 1
 ED: https://w3c.github.io/orientation-sensor/
 Shortname: orientation-sensor
 TR: http://www.w3.org/TR/orientation-sensor/
