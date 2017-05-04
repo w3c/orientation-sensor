@@ -61,8 +61,8 @@ urlPrefix: https://w3c.github.io/magnetometer; spec: MAGNETOMETER
 
 <pre class="anchors">
 urlPrefix: https://www.w3.org/TR/orientation-event; spec: DEVICEORIENTATION
-  type: dfn
-    text: deviceorientation Event; url: deviceorientation
+  type: interface
+    text: DeviceOrientationEvent; url: deviceorientation_event
 </pre>
 
 <pre class="anchors">
@@ -110,12 +110,12 @@ spec:generic-sensor-1;
 Introduction {#intro}
 ============
 
-The OrientationSensor API extends the Generic Sensor API [[GENERIC-SENSOR]]
+The Orientation Sensor API extends the Generic Sensor API [[GENERIC-SENSOR]]
 to provide generic information describing the device's physical orientation
 in relation to a three dimensional Cartesian coordinate system.
 
 The {{AbsoluteOrientationSensor}} class inherits from the {{OrientationSensor}} interface and
-describes the device's physical orientation in relation to <a>Earth's reference coordinate system</a>.
+describes the device's physical orientation in relation to the <a>Earth's reference coordinate system</a>.
 
 Other subclasses describe the orientation in relation to other stationary
 directions, such as true north, or non stationary directions, like in
@@ -123,17 +123,17 @@ relation to a devices own z-position, drifting towards its latest most stable
 z-position.
 
 The data provided by the {{OrientationSensor}} subclasses are similar to data from
-[=deviceorientation Event=], but the OrientationSensor API has some significant differences:
-1. The OrientationSensor API represents orientation data in WebGL-compatible formats (quaternion, rotation matrix).
-1. The OrientationSensor API satisfies stricter latency requirements.
-1. Unlike [=deviceorientation Event=] the {{OrientationSensor}} subclasses explicitly define which [=low-level=]
+{{DeviceOrientationEvent}}, but the Orientation Sensor API has the following significant differences:
+1. The Orientation Sensor API represents orientation data in WebGL-compatible formats (quaternion, rotation matrix).
+1. The Orientation Sensor API satisfies stricter latency requirements.
+1. Unlike {{DeviceOrientationEvent}}, the {{OrientationSensor}} subclasses explicitly define which [=low-level=]
    motion sensors are used to obtain the orientation data, thus obviating possible interoperability issues.
 1. Instances of {{OrientationSensor}} subclasses are configurable via {{SensorOptions}} constructor parameter.
 
 Use Cases and Requirements {#usecases-requirements}
 ==============================
 
-The use cases and requirements are addressed in the <cite><a href="https://w3c.github.io/motion-sensors/#usecases-and-requirements">
+The use cases and requirements are discussed in the <cite><a href="https://w3c.github.io/motion-sensors/#usecases-and-requirements">
 Motion Sensors Explainer</a></cite> document.
 
 Examples {#examples}
@@ -148,7 +148,7 @@ Examples {#examples}
 
     sensor.onchange = () => {
       sensor.populateMatrix(mat4);
-    }
+    };
     </pre>
 </div>
 
@@ -185,7 +185,7 @@ Model {#model}
 The {{OrientationSensor}} class extends the {{Sensor}} class and provides generic interface
 representing device orientation data.
 
-To access orientation sensor's [=latest reading=], user agent must invoke [=request sensor access=] abstract operation for each of the [=low-level=] sensors used by the concrete orientation sensor. The table below
+To access the orientation sensor's [=latest reading=], the user agent must invoke [=request sensor access=] abstract operation for each of the [=low-level=] sensors used by the concrete orientation sensor. The table below
 describes mapping between concrete orientation sensors and permission tokens defined by [=low-level=] sensors.
 
 <table class="def">
@@ -196,7 +196,7 @@ describes mapping between concrete orientation sensors and permission tokens def
   <tbody>
     <tr>
       <td>{{AbsoluteOrientationSensor}}</td>
-      <td>"accelerometer", "gyroscope", "magnetometer"</td>
+      <td>"<code>accelerometer</code>", "<code>gyroscope</code>", "<code>magnetometer</code>"</td>
     </tr>
   </tbody>
 </table>
@@ -205,7 +205,7 @@ A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
 The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
 [V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2), cos(θ/2)] where V is
-the unit vector representing the axis of rotation.
+the unit vector (whole elements are V<sub>x</sub>, V<sub>y</sub>, and V<sub>z</sub>) representing the axis of rotation, and θ is the rotation angle about the axis defined by the unit vector V.
 
 Note: The quaternion components are arranged in the [=list=] as [q<sub>1</sub>, q<sub>2</sub>, q<sub>3</sub>, q<sub>0</sub>]
 [[QUATERNIONS]], i.e. the components representing the vector part of the quaternion go first and the scalar part component which
@@ -227,17 +227,17 @@ Note: Corresponding [=low-level=] sensors are defined in [[ACCELEROMETER]], [[GY
 [[MAGNETOMETER]]. Regardless, the fusion is platform specific and can happen in software or
 hardware, i.e. on a sensor hub.
 
-For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents rotation of a
-device hosting motion sensors in relation to a <dfn>Earth's reference coordinate system</dfn> defined as a
+For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents the rotation of a
+device hosting motion sensors in relation to the <dfn>Earth's reference coordinate system</dfn> defined as a
 three dimensional Cartesian coordinate system (x, y, z), where:
 
- - x-axis is a vector product of y.z that is tangential to the ground and points east.
- - y-axis is tangential to the ground and points towards magnetic north.
+ - x-axis is a vector product of y.z that is tangential to the ground and points east,
+ - y-axis is tangential to the ground and points towards magnetic north, and
  - z-axis points towards the sky and is perpendicular to the plane made up of x and y axes.
 
 The device's <a>local coordinate system</a> is the same as defined by [=low-level=] motion sensors.
 
-Note: Figure below represents the case where device's <a>local coordinate system</a> and <a>Earth's reference coordinate system</a> are aligned, therefore,
+Note: Figure below represents the case where device's <a>local coordinate system</a> and the <a>Earth's reference coordinate system</a> are aligned, therefore,
 orientation sensor's [=latest reading=] would represent 0 (rad) [[SI]] rotation about each axis.
 
 <img src="images/absolute_orientation_sensor_coordinate_system.png" srcset="images/absolute_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;" alt="AbsoluteOrientationSensor coordinate system.">
@@ -258,13 +258,13 @@ The OrientationSensor Interface {#orientationsensor-interface}
 
 ### OrientationSensor.quaternion ### {#orientationsensor-quaternion}
 
-Returns a four-element {{FrozenArray}} the elements of which contain the components of the unit quaternion representing the device orientation.
+Returns a four-element {{FrozenArray}} whose elements contain the components of the unit quaternion representing the device orientation.
 In other words, this attribute returns [=latest reading=]["quaternion"].
 
 ### OrientationSensor.populateMatrix() ### {#orientationsensor-populatematrix}
 
 The {{OrientationSensor/populateMatrix()}} method  populates the given object with rotation matrix
-which is converted from the value of [=latest reading=]["quaternion"] [[QUATCONV]], as shown below
+which is converted from the value of [=latest reading=]["quaternion"] [[QUATCONV]], as shown below:
 
 <img src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto;" alt="Converting quaternion to rotation matrix." width="50%" height="50%">
 
@@ -337,7 +337,7 @@ The AbsoluteOrientationSensor Interface {#absoluteorientationsensor-interface}
   };
 </pre>
 
-To <dfn>Construct a AbsoluteOrientationSensor Object</dfn> the user agent must invoke the
+To <dfn>Construct an AbsoluteOrientationSensor Object</dfn> the user agent must invoke the
 <a>construct a Sensor object</a> abstract operation.
 
 Acknowledgements {#acknowledgements}
