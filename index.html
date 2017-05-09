@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 5bd73bb15eb04ad9f7d1a57f012e9ee6eca5a765" name="generator">
+  <meta content="Bikeshed version 3e4ecbe0ef0589381cdca6fa15e8ab0ea3856450" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
 <style>/* style-md-lists */
 
@@ -1431,7 +1431,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-05-04">4 May 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-05-10">10 May 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1494,7 +1494,12 @@ physical orientation in relation to a stationary three dimensional Cartesian coo
     <li><a href="#usecases-requirements"><span class="secno">2</span> <span class="content">Use Cases and Requirements</span></a>
     <li><a href="#examples"><span class="secno">3</span> <span class="content">Examples</span></a>
     <li><a href="#security-and-privacy"><span class="secno">4</span> <span class="content">Security and Privacy Considerations</span></a>
-    <li><a href="#model"><span class="secno">5</span> <span class="content">Model</span></a>
+    <li>
+     <a href="#model"><span class="secno">5</span> <span class="content">Model</span></a>
+     <ol class="toc">
+      <li><a href="#absoluteorientationsensor-model"><span class="secno">5.1</span> <span class="content">The AbsoluteOrientationSensor Model</span></a>
+      <li><a href="#relativeorientationsensor-model"><span class="secno">5.2</span> <span class="content">The RelativeOrientationSensor Model</span></a>
+     </ol>
     <li>
      <a href="#api"><span class="secno">6</span> <span class="content">API</span></a>
      <ol class="toc">
@@ -1505,6 +1510,7 @@ physical orientation in relation to a stationary three dimensional Cartesian coo
         <li><a href="#orientationsensor-populatematrix"><span class="secno">6.1.2</span> <span class="content">OrientationSensor.populateMatrix()</span></a>
        </ol>
       <li><a href="#absoluteorientationsensor-interface"><span class="secno">6.2</span> <span class="content">The AbsoluteOrientationSensor Interface</span></a>
+      <li><a href="#relativeorientationsensor-interface"><span class="secno">6.3</span> <span class="content">The RelativeOrientationSensor Interface</span></a>
      </ol>
     <li><a href="#acknowledgements"><span class="secno">7</span> <span class="content">Acknowledgements</span></a>
     <li><a href="#conformance"><span class="secno">8</span> <span class="content">Conformance</span></a>
@@ -1552,9 +1558,9 @@ z-position.</p>
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">(</span><span class="p">)</span><span class="p">;</span>
 <span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="p">;</span>
 sensor<span class="p">.</span>start<span class="p">(</span><span class="p">)</span><span class="p">;</span>
-sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
 
-sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">(</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
+sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">(</span><span class="p">)</span> <span class="p">=></span> <span class="p">{</span>
   sensor<span class="p">.</span>populateMatrix<span class="p">(</span>mat4<span class="p">)</span><span class="p">;</span>
 <span class="p">}</span><span class="p">;</span>
 </pre>
@@ -1564,7 +1570,7 @@ sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">(</span><span class="p">{</span> frequency<span class="o">:</span> <span class="mi">60</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
 <span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="p">;</span>
 sensor<span class="p">.</span>start<span class="p">(</span><span class="p">)</span><span class="p">;</span>
-sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">)</span><span class="p">;</span>
 
 <span class="kd">function</span> draw<span class="p">(</span>timestamp<span class="p">)</span> <span class="p">{</span>
   window<span class="p">.</span>requestAnimationFrame<span class="p">(</span>draw<span class="p">)</span><span class="p">;</span>
@@ -1596,6 +1602,10 @@ describes mapping between concrete orientation sensors and permission tokens def
      <tr>
       <td><code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor-2">AbsoluteOrientationSensor</a></code>
       <td>"<code>accelerometer</code>", "<code>gyroscope</code>", "<code>magnetometer</code>"
+    <tbody>
+     <tr>
+      <td><code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor-1">RelativeOrientationSensor</a></code>
+      <td>"<code>accelerometer</code>", "<code>gyroscope</code>"
    </table>
    <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a> per <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor">sensor</a> of orientation type includes an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">entry</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key">key</a> is "quaternion" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value">value</a> contains a four element <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>.
 The elements of the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> are equal to components of a unit quaternion <a data-link-type="biblio" href="#biblio-quaternions">[QUATERNIONS]</a> [V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2), cos(θ/2)] where V is
@@ -1604,19 +1614,26 @@ the unit vector (whole elements are V<sub>x</sub>, V<sub>y</sub>, and V<sub>z</s
 is equal to cos(θ/2) goes after. This order is used for better compatibility with the most of the existing WebGL frameworks,
 however other libraries could use a different order when exposing quaternion as an array, e.g. [q<sub>0</sub>, q<sub>1</sub>,
 q<sub>2</sub>, q<sub>3</sub>].</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor-3">AbsoluteOrientationSensor</a></code> class is a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-6">OrientationSensor</a></code> which represents the <a data-link-type="dfn" href="https://w3c.github.io/motion-sensors#absolute-orientation">Absolute
-Orientation Sensor</a>.</p>
-   <p>The absolute orientation sensor is a <a data-link-type="dfn" href="https://w3c.github.io/sensors#high-level">high-level</a> sensor which is created through <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a> of the <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors:</p>
-   <ul>
-    <li data-md="">
-     <p>accelerometer that measures <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#acceleration">acceleration</a>,</p>
-    <li data-md="">
-     <p>gyroscope that measures <a data-link-type="dfn" href="https://w3c.github.io/gyroscope#angular-velocity">angular velocity</a>, and</p>
-    <li data-md="">
-     <p>magnetometer that measures <a data-link-type="dfn" href="https://w3c.github.io/magnetometer#magnetic-field">magnetic field</a>.</p>
-   </ul>
-   <p class="note" role="note"><span>Note:</span> Corresponding <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> sensors are defined in <a data-link-type="biblio" href="#biblio-accelerometer">[ACCELEROMETER]</a>, <a data-link-type="biblio" href="#biblio-gyroscope">[GYROSCOPE]</a>, and <a data-link-type="biblio" href="#biblio-magnetometer">[MAGNETOMETER]</a>. Regardless, the fusion is platform specific and can happen in software or
-hardware, i.e. on a sensor hub.</p>
+   <p>The concrete <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-6">OrientationSensor</a></code> subclasses that are created through <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a> of the <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> motion sensors are presented in the table below:</p>
+   <table class="def">
+    <thead>
+     <tr>
+      <th>OrientationSensor sublass
+      <th><a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">Low-level</a> motion sensors
+    <tbody>
+     <tr>
+      <td><code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor-3">AbsoluteOrientationSensor</a></code>
+      <td><code class="idl"><a data-link-type="idl" href="https://w3c.github.io/accelerometer#accelerometer">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/gyroscope#gyroscope">Gyroscope</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/magnetometer#magnetometer">Magnetometer</a></code>
+    <tbody>
+     <tr>
+      <td><code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor-2">RelativeOrientationSensor</a></code>
+      <td><code class="idl"><a data-link-type="idl" href="https://w3c.github.io/accelerometer#accelerometer">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/gyroscope#gyroscope">Gyroscope</a></code>
+   </table>
+   <p class="note" role="note"><span>Note:</span> <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/accelerometer#accelerometer">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/gyroscope#gyroscope">Gyroscope</a></code> and <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/magnetometer#magnetometer">Magnetometer</a></code> <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level">low-level</a> sensors are defined in <a data-link-type="biblio" href="#biblio-accelerometer">[ACCELEROMETER]</a>, <a data-link-type="biblio" href="#biblio-gyroscope">[GYROSCOPE]</a>, and <a data-link-type="biblio" href="#biblio-magnetometer">[MAGNETOMETER]</a> specifications respectively. The <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion">sensor fusion</a> is platform specific and can happen in software or hardware, i.e.
+on a sensor hub.</p>
+   <h3 class="heading settled" data-level="5.1" id="absoluteorientationsensor-model"><span class="secno">5.1. </span><span class="content">The AbsoluteOrientationSensor Model</span><a class="self-link" href="#absoluteorientationsensor-model"></a></h3>
+   <p>The <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor-4">AbsoluteOrientationSensor</a></code> class is a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-7">OrientationSensor</a></code> which represents
+the <a data-link-type="dfn" href="https://w3c.github.io/motion-sensors#absolute-orientation">Absolute Orientation Sensor</a>.</p>
    <p>For the absolute orientation sensor the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["quaternion"] represents the rotation of a
 device hosting motion sensors in relation to the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="earths-reference-coordinate-system">Earth’s reference coordinate system</dfn> defined as a
 three dimensional Cartesian coordinate system (x, y, z), where:</p>
@@ -1632,6 +1649,17 @@ three dimensional Cartesian coordinate system (x, y, z), where:</p>
    <p class="note" role="note"><span>Note:</span> Figure below represents the case where device’s <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#local-coordinate-system">local coordinate system</a> and the <a data-link-type="dfn" href="#earths-reference-coordinate-system" id="ref-for-earths-reference-coordinate-system-2">Earth’s reference coordinate system</a> are aligned, therefore,
 orientation sensor’s <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a> would represent 0 (rad) <a data-link-type="biblio" href="#biblio-si">[SI]</a> rotation about each axis.</p>
    <p><img alt="AbsoluteOrientationSensor coordinate system." src="images/absolute_orientation_sensor_coordinate_system.png" srcset="images/absolute_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;"></p>
+   <h3 class="heading settled" data-level="5.2" id="relativeorientationsensor-model"><span class="secno">5.2. </span><span class="content">The RelativeOrientationSensor Model</span><a class="self-link" href="#relativeorientationsensor-model"></a></h3>
+   <p>The <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor-3">RelativeOrientationSensor</a></code> class is a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor-8">OrientationSensor</a></code> which represents the <a data-link-type="dfn" href="https://w3c.github.io/motion-sensors#relative-orientation">Relative Orientation Sensor</a>.</p>
+   <p>For the relative orientation sensor the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["quaternion"] represents the
+rotation of a device hosting motion sensors in relation to a <a data-link-type="dfn" href="#stationary-reference-coordinate-system" id="ref-for-stationary-reference-coordinate-system-1">stationary reference coordinate
+system</a>. The <a data-link-type="dfn" href="#stationary-reference-coordinate-system" id="ref-for-stationary-reference-coordinate-system-2">stationary reference coordinate system</a> may drift due to the bias introduced by
+the gyroscope sensor, thus, the rotation value provided by the sensor, may drift over time.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="stationary-reference-coordinate-system">stationary reference coordinate system</dfn> is defined as an inertial three dimensional
+Cartesian coordinate system that remains stationary as the device hosting the sensor moves through
+the environment.</p>
+   <p class="note" role="note"><span>Note:</span> The relative orientation sensor data could be more accurate than the one provided by absolute
+orientation sensor, as the sensor is not affected by magnetic fields.</p>
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="orientationsensor-interface"><span class="secno">6.1. </span><span class="content">The OrientationSensor Interface</span><a class="self-link" href="#orientationsensor-interface"></a></h3>
 <pre class="idl highlight def"><span class="kt">typedef</span> (<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Float32Array"><span class="kt">Float32Array</span></a> <span class="kt">or</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Float64Array"><span class="kt">Float64Array</span></a> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="https://drafts.fxtf.org/geometry-1/#dommatrix">DOMMatrix</a>) <dfn class="nv dfn-paneled idl-code" data-dfn-type="typedef" data-export="" id="typedefdef-rotationmatrixtype">RotationMatrixType</dfn>;
@@ -1757,10 +1785,16 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
    </div>
    <h3 class="heading settled" data-level="6.2" id="absoluteorientationsensor-interface"><span class="secno">6.2. </span><span class="content">The AbsoluteOrientationSensor Interface</span><a class="self-link" href="#absoluteorientationsensor-interface"></a></h3>
 <pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="AbsoluteOrientationSensor" data-dfn-type="constructor" data-export="" data-lt="AbsoluteOrientationSensor(sensorOptions)|AbsoluteOrientationSensor()" id="dom-absoluteorientationsensor-absoluteorientationsensor">Constructor<a class="self-link" href="#dom-absoluteorientationsensor-absoluteorientationsensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="AbsoluteOrientationSensor/AbsoluteOrientationSensor(sensorOptions)" data-dfn-type="argument" data-export="" id="dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions">sensorOptions<a class="self-link" href="#dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"></a></dfn>)]
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="absoluteorientationsensor">AbsoluteOrientationSensor</dfn> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor-7">OrientationSensor</a> {
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="absoluteorientationsensor">AbsoluteOrientationSensor</dfn> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor-9">OrientationSensor</a> {
 };
 </pre>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-an-absoluteorientationsensor-object">Construct an AbsoluteOrientationSensor Object<a class="self-link" href="#construct-an-absoluteorientationsensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
+   <h3 class="heading settled" data-level="6.3" id="relativeorientationsensor-interface"><span class="secno">6.3. </span><span class="content">The RelativeOrientationSensor Interface</span><a class="self-link" href="#relativeorientationsensor-interface"></a></h3>
+<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="RelativeOrientationSensor" data-dfn-type="constructor" data-export="" data-lt="RelativeOrientationSensor(sensorOptions)|RelativeOrientationSensor()" id="dom-relativeorientationsensor-relativeorientationsensor">Constructor<a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="RelativeOrientationSensor/RelativeOrientationSensor(sensorOptions)" data-dfn-type="argument" data-export="" id="dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions">sensorOptions<a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"></a></dfn>)]
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="relativeorientationsensor">RelativeOrientationSensor</dfn> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor-10">OrientationSensor</a> {
+};
+</pre>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-an-relativeorientationsensor-object">Construct an RelativeOrientationSensor Object<a class="self-link" href="#construct-an-relativeorientationsensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
    <h2 class="heading settled" data-level="7" id="acknowledgements"><span class="secno">7. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>Tobie Langel for the work on Generic Sensor API.</p>
    <h2 class="heading settled" data-level="8" id="conformance"><span class="secno">8. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -1787,19 +1821,24 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li><a href="#dom-absoluteorientationsensor-absoluteorientationsensor">AbsoluteOrientationSensor(sensorOptions)</a><span>, in §6.2</span>
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §8</span>
    <li><a href="#construct-an-absoluteorientationsensor-object">Construct an AbsoluteOrientationSensor Object</a><span>, in §6.2</span>
-   <li><a href="#earths-reference-coordinate-system">Earth’s reference coordinate system</a><span>, in §5</span>
+   <li><a href="#construct-an-relativeorientationsensor-object">Construct an RelativeOrientationSensor Object</a><span>, in §6.3</span>
+   <li><a href="#earths-reference-coordinate-system">Earth’s reference coordinate system</a><span>, in §5.1</span>
    <li><a href="#orientationsensor">OrientationSensor</a><span>, in §6.1</span>
    <li><a href="#dom-orientationsensor-populatematrix">populateMatrix(targetMatrix)</a><span>, in §6.1</span>
    <li><a href="#populate-rotation-matrix">populate rotation matrix</a><span>, in §6.1.2</span>
    <li><a href="#dom-orientationsensor-quaternion">quaternion</a><span>, in §6.1</span>
+   <li><a href="#relativeorientationsensor">RelativeOrientationSensor</a><span>, in §6.3</span>
+   <li><a href="#dom-relativeorientationsensor-relativeorientationsensor">RelativeOrientationSensor()</a><span>, in §6.3</span>
+   <li><a href="#dom-relativeorientationsensor-relativeorientationsensor">RelativeOrientationSensor(sensorOptions)</a><span>, in §6.3</span>
    <li><a href="#typedefdef-rotationmatrixtype">RotationMatrixType</a><span>, in §6.1</span>
+   <li><a href="#stationary-reference-coordinate-system">stationary reference coordinate system</a><span>, in §5.2</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[ACCELEROMETER]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/accelerometer#acceleration">acceleration</a>
+     <li><a href="https://w3c.github.io/accelerometer#accelerometer">Accelerometer</a>
      <li><a href="https://w3c.github.io/accelerometer#local-coordinate-system">local coordinate system</a>
     </ul>
    <li>
@@ -1814,7 +1853,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
      <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
      <li><a href="https://w3c.github.io/sensors#equivalent">equivalent</a>
-     <li><a href="https://w3c.github.io/sensors#high-level">high-level</a>
      <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
      <li><a href="https://w3c.github.io/sensors#low-level">low-level</a>
      <li><a href="https://w3c.github.io/sensors/#request-sensor-access">request sensor access</a>
@@ -1829,7 +1867,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[GYROSCOPE]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/gyroscope#angular-velocity">angular velocity</a>
+     <li><a href="https://w3c.github.io/gyroscope#gyroscope">Gyroscope</a>
     </ul>
    <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
@@ -1842,12 +1880,13 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[MAGNETOMETER]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/magnetometer#magnetic-field">magnetic field</a>
+     <li><a href="https://w3c.github.io/magnetometer#magnetometer">Magnetometer</a>
     </ul>
    <li>
     <a data-link-type="biblio">[motionsensors]</a> defines the following terms:
     <ul>
      <li><a href="https://w3c.github.io/motion-sensors#absolute-orientation">absolute orientation sensor</a>
+     <li><a href="https://w3c.github.io/motion-sensors#relative-orientation">relative orientation sensor</a>
     </ul>
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
@@ -1902,12 +1941,22 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
 <span class="kt"><span class="kt">interface</span></span> <a class="nv" href="#absoluteorientationsensor"><span class="nv">AbsoluteOrientationSensor</span></a> : <a class="n" data-link-type="idl-name" href="#orientationsensor"><span class="n">OrientationSensor</span></a> {
 };
 
+[<a class="nv" href="#dom-relativeorientationsensor-relativeorientationsensor"><span class="nv">Constructor</span></a>(<span class="kt"><span class="kt">optional</span></span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions"><span class="n">SensorOptions</span></a> <a class="nv" href="#dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"><span class="nv">sensorOptions</span></a>)]
+<span class="kt"><span class="kt">interface</span></span> <a class="nv" href="#relativeorientationsensor"><span class="nv">RelativeOrientationSensor</span></a> : <a class="n" data-link-type="idl-name" href="#orientationsensor"><span class="n">OrientationSensor</span></a> {
+};
+
 </pre>
   <aside class="dfn-panel" data-for="earths-reference-coordinate-system">
    <b><a href="#earths-reference-coordinate-system">#earths-reference-coordinate-system</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-earths-reference-coordinate-system-1">1. Introduction</a>
-    <li><a href="#ref-for-earths-reference-coordinate-system-2">5. Model</a>
+    <li><a href="#ref-for-earths-reference-coordinate-system-2">5.1. The AbsoluteOrientationSensor Model</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="stationary-reference-coordinate-system">
+   <b><a href="#stationary-reference-coordinate-system">#stationary-reference-coordinate-system</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-stationary-reference-coordinate-system-1">5.2. The RelativeOrientationSensor Model</a> <a href="#ref-for-stationary-reference-coordinate-system-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="typedefdef-rotationmatrixtype">
@@ -1922,7 +1971,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-orientationsensor-1">1. Introduction</a> <a href="#ref-for-orientationsensor-2">(2)</a> <a href="#ref-for-orientationsensor-3">(3)</a> <a href="#ref-for-orientationsensor-4">(4)</a>
     <li><a href="#ref-for-orientationsensor-5">5. Model</a> <a href="#ref-for-orientationsensor-6">(2)</a>
-    <li><a href="#ref-for-orientationsensor-7">6.2. The AbsoluteOrientationSensor Interface</a>
+    <li><a href="#ref-for-orientationsensor-7">5.1. The AbsoluteOrientationSensor Model</a>
+    <li><a href="#ref-for-orientationsensor-8">5.2. The RelativeOrientationSensor Model</a>
+    <li><a href="#ref-for-orientationsensor-9">6.2. The AbsoluteOrientationSensor Interface</a>
+    <li><a href="#ref-for-orientationsensor-10">6.3. The RelativeOrientationSensor Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-orientationsensor-populatematrix">
@@ -1942,6 +1994,14 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-absoluteorientationsensor-1">1. Introduction</a>
     <li><a href="#ref-for-absoluteorientationsensor-2">5. Model</a> <a href="#ref-for-absoluteorientationsensor-3">(2)</a>
+    <li><a href="#ref-for-absoluteorientationsensor-4">5.1. The AbsoluteOrientationSensor Model</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="relativeorientationsensor">
+   <b><a href="#relativeorientationsensor">#relativeorientationsensor</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-relativeorientationsensor-1">5. Model</a> <a href="#ref-for-relativeorientationsensor-2">(2)</a>
+    <li><a href="#ref-for-relativeorientationsensor-3">5.2. The RelativeOrientationSensor Model</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
