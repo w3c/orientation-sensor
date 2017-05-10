@@ -69,6 +69,7 @@ urlPrefix: https://www.w3.org/TR/orientation-event; spec: DEVICEORIENTATION
 urlPrefix: https://w3c.github.io/motion-sensors; spec: MOTIONSENSORS
   type: dfn
     text: Absolute Orientation Sensor; url: absolute-orientation
+    text: Relative Orientation Sensor; url: relative-orientation
 </pre>
 
 <pre class="link-defaults">
@@ -199,6 +200,12 @@ describes mapping between concrete orientation sensors and permission tokens def
       <td>"<code>accelerometer</code>", "<code>gyroscope</code>", "<code>magnetometer</code>"</td>
     </tr>
   </tbody>
+  <tbody>
+    <tr>
+      <td>{{RelativeOrientationSensor}}</td>
+      <td>"<code>accelerometer</code>", "<code>gyroscope</code>"</td>
+    </tr>
+  </tbody>
 </table>
 
 A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
@@ -213,19 +220,38 @@ is equal to cos(θ/2) goes after. This order is used for better compatibility wi
 however other libraries could use a different order when exposing quaternion as an array, e.g. [q<sub>0</sub>, q<sub>1</sub>,
 q<sub>2</sub>, q<sub>3</sub>].
 
-The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents the [=Absolute
-Orientation Sensor=].
+The concrete {{OrientationSensor}} subclasses that are created through [=sensor-fusion=] of the
+[=low-level=] motion sensors are presented in the table below:
 
-The absolute orientation sensor is a [=high-level=] sensor which is created through [=sensor-fusion=]
-of the [=low-level=] motion sensors:
+<table class="def">
+  <thead>
+    <th>OrientationSensor sublass</th>
+    <th>[=low-level|Low-level=] motion sensors</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{AbsoluteOrientationSensor}}</td>
+      <td>{{Accelerometer}}, {{Gyroscope}}, {{Magnetometer}}</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>{{RelativeOrientationSensor}}</td>
+      <td>{{Accelerometer}}, {{Gyroscope}}</td>
+    </tr>
+  </tbody>
+</table>
 
- - accelerometer that measures [=acceleration=],
- - gyroscope that measures [=angular velocity=], and
- - magnetometer that measures [=magnetic field=].
+Note: {{Accelerometer}}, {{Gyroscope}} and {{Magnetometer}} [=low-level=] sensors are defined in
+[[ACCELEROMETER]], [[GYROSCOPE]], and [[MAGNETOMETER]] specifications respectively. The
+[=sensor-fusion|sensor fusion=] is platform specific and can happen in software or hardware, i.e.
+on a sensor hub.
 
-Note: Corresponding [=low-level=] sensors are defined in [[ACCELEROMETER]], [[GYROSCOPE]], and
-[[MAGNETOMETER]]. Regardless, the fusion is platform specific and can happen in software or
-hardware, i.e. on a sensor hub.
+The AbsoluteOrientationSensor Model {#absoluteorientationsensor-model}
+----------------------------------------------------------------------
+
+The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents
+the [=Absolute Orientation Sensor=].
 
 For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents the rotation of a
 device hosting motion sensors in relation to the <dfn>Earth's reference coordinate system</dfn> defined as a
@@ -241,6 +267,24 @@ Note: Figure below represents the case where device's <a>local coordinate system
 orientation sensor's [=latest reading=] would represent 0 (rad) [[SI]] rotation about each axis.
 
 <img src="images/absolute_orientation_sensor_coordinate_system.png" srcset="images/absolute_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;" alt="AbsoluteOrientationSensor coordinate system.">
+
+The RelativeOrientationSensor Model {#relativeorientationsensor-model}
+----------------------------------------------------------------------
+
+The {{RelativeOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents the
+[=Relative Orientation Sensor=].
+
+For the relative orientation sensor the value of [=latest reading=]["quaternion"] represents the
+rotation of a device hosting motion sensors in relation to a [=stationary reference coordinate
+system=]. The [=stationary reference coordinate system=] may drift due to the bias introduced by
+the gyroscope sensor, thus, the rotation value provided by the sensor, may drift over time.
+
+The <dfn>stationary reference coordinate system</dfn> is defined as an inertial three dimensional
+Cartesian coordinate system that remains stationary as the device hosting the sensor moves through
+the environment.
+
+Note: The relative orientation sensor data could be more accurate than the one provided by absolute
+orientation sensor, as the sensor is not affected by magnetic fields.
 
 API {#api}
 ===
@@ -338,6 +382,18 @@ The AbsoluteOrientationSensor Interface {#absoluteorientationsensor-interface}
 </pre>
 
 To <dfn>Construct an AbsoluteOrientationSensor Object</dfn> the user agent must invoke the
+<a>construct a Sensor object</a> abstract operation.
+
+The RelativeOrientationSensor Interface {#relativeorientationsensor-interface}
+-------------------------------------
+
+<pre class="idl">
+  [Constructor(optional SensorOptions sensorOptions)]
+  interface RelativeOrientationSensor : OrientationSensor {
+  };
+</pre>
+
+To <dfn>Construct an RelativeOrientationSensor Object</dfn> the user agent must invoke the
 <a>construct a Sensor object</a> abstract operation.
 
 Acknowledgements {#acknowledgements}
