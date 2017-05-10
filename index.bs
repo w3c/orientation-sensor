@@ -212,7 +212,7 @@ A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
 The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
 [V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2), cos(θ/2)] where V is
-the unit vector (whole elements are V<sub>x</sub>, V<sub>y</sub>, and V<sub>z</sub>) representing the axis of rotation, and θ is the rotation angle about the axis defined by the unit vector V.
+the unit vector (whose elements are V<sub>x</sub>, V<sub>y</sub>, and V<sub>z</sub>) representing the axis of rotation, and θ is the rotation angle about the axis defined by the unit vector V.
 
 Note: The quaternion components are arranged in the [=list=] as [q<sub>1</sub>, q<sub>2</sub>, q<sub>3</sub>, q<sub>0</sub>]
 [[QUATERNIONS]], i.e. the components representing the vector part of the quaternion go first and the scalar part component which
