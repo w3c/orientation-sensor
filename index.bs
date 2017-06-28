@@ -147,7 +147,7 @@ Examples {#examples}
     sensor.start();
     sensor.onerror = event => console.log(event.error.name, event.error.message);
 
-    sensor.onchange = () => {
+    sensor.onreading = () => {
       sensor.populateMatrix(mat4);
     };
     </pre>
