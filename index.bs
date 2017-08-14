@@ -1,7 +1,7 @@
 <pre class="metadata">
 Title: Orientation Sensor
 Status: ED
-Level: 1
+Level: none
 ED: https://w3c.github.io/orientation-sensor/
 Shortname: orientation-sensor
 TR: https://www.w3.org/TR/orientation-sensor/
