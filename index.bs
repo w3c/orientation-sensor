@@ -295,6 +295,8 @@ The OrientationSensor Interface {#orientationsensor-interface}
 
 <pre class="idl">
   typedef (Float32Array or Float64Array or DOMMatrix) RotationMatrixType;
+
+  [Exposed=Window]
   interface OrientationSensor : Sensor {
     readonly attribute FrozenArray&lt;double>? quaternion;
     void populateMatrix(RotationMatrixType targetMatrix);
@@ -377,7 +379,7 @@ The AbsoluteOrientationSensor Interface {#absoluteorientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions sensorOptions)]
+  [Constructor(optional SensorOptions sensorOptions), Exposed=Window]
   interface AbsoluteOrientationSensor : OrientationSensor {
   };
 </pre>
@@ -389,7 +391,7 @@ The RelativeOrientationSensor Interface {#relativeorientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions sensorOptions)]
+  [Constructor(optional SensorOptions sensorOptions), Exposed=Window]
   interface RelativeOrientationSensor : OrientationSensor {
   };
 </pre>
