@@ -1183,155 +1183,155 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 7018a6f1ff92cfd8deb54176c6a0459be54c3896" name="generator">
+  <meta content="Bikeshed version 459c2a65222f1973d4f1846a767ec88e8a5dae3e" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
 <style>/* style-md-lists */
 
-            /* This is a weird hack for me not yet following the commonmark spec
-               regarding paragraph and lists. */
-            [data-md] > :first-child {
-                margin-top: 0;
-            }
-            [data-md] > :last-child {
-                margin-bottom: 0;
-            }</style>
+/* This is a weird hack for me not yet following the commonmark spec
+   regarding paragraph and lists. */
+[data-md] > :first-child {
+    margin-top: 0;
+}
+[data-md] > :last-child {
+    margin-bottom: 0;
+}</style>
 <style>/* style-selflinks */
 
-            .heading, .issue, .note, .example, li, dt {
-                position: relative;
-            }
-            a.self-link {
-                position: absolute;
-                top: 0;
-                left: calc(-1 * (3.5rem - 26px));
-                width: calc(3.5rem - 26px);
-                height: 2em;
-                text-align: center;
-                border: none;
-                transition: opacity .2s;
-                opacity: .5;
-            }
-            a.self-link:hover {
-                opacity: 1;
-            }
-            .heading > a.self-link {
-                font-size: 83%;
-            }
-            li > a.self-link {
-                left: calc(-1 * (3.5rem - 26px) - 2em);
-            }
-            dfn > a.self-link {
-                top: auto;
-                left: auto;
-                opacity: 0;
-                width: 1.5em;
-                height: 1.5em;
-                background: gray;
-                color: white;
-                font-style: normal;
-                transition: opacity .2s, background-color .2s, color .2s;
-            }
-            dfn:hover > a.self-link {
-                opacity: 1;
-            }
-            dfn > a.self-link:hover {
-                color: black;
-            }
+.heading, .issue, .note, .example, li, dt {
+    position: relative;
+}
+a.self-link {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * (3.5rem - 26px));
+    width: calc(3.5rem - 26px);
+    height: 2em;
+    text-align: center;
+    border: none;
+    transition: opacity .2s;
+    opacity: .5;
+}
+a.self-link:hover {
+    opacity: 1;
+}
+.heading > a.self-link {
+    font-size: 83%;
+}
+li > a.self-link {
+    left: calc(-1 * (3.5rem - 26px) - 2em);
+}
+dfn > a.self-link {
+    top: auto;
+    left: auto;
+    opacity: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: gray;
+    color: white;
+    font-style: normal;
+    transition: opacity .2s, background-color .2s, color .2s;
+}
+dfn:hover > a.self-link {
+    opacity: 1;
+}
+dfn > a.self-link:hover {
+    color: black;
+}
 
-            a.self-link::before            { content: "¶"; }
-            .heading > a.self-link::before { content: "§"; }
-            dfn > a.self-link::before      { content: "#"; }</style>
+a.self-link::before            { content: "¶"; }
+.heading > a.self-link::before { content: "§"; }
+dfn > a.self-link::before      { content: "#"; }</style>
 <style>/* style-counters */
 
-            body {
-                counter-reset: example figure issue;
-            }
-            .issue {
-                counter-increment: issue;
-            }
-            .issue:not(.no-marker)::before {
-                content: "Issue " counter(issue);
-            }
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
 
-            .example {
-                counter-increment: example;
-            }
-            .example:not(.no-marker)::before {
-                content: "Example " counter(example);
-            }
-            .invalid.example:not(.no-marker)::before,
-            .illegal.example:not(.no-marker)::before {
-                content: "Invalid Example" counter(example);
-            }
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
 
-            figcaption {
-                counter-increment: figure;
-            }
-            figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure) " ";
-            }</style>
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}</style>
 <style>/* style-autolinks */
 
-            .css.css, .property.property, .descriptor.descriptor {
-                color: #005a9c;
-                font-size: inherit;
-                font-family: inherit;
-            }
-            .css::before, .property::before, .descriptor::before {
-                content: "‘";
-            }
-            .css::after, .property::after, .descriptor::after {
-                content: "’";
-            }
-            .property, .descriptor {
-                /* Don't wrap property and descriptor names */
-                white-space: nowrap;
-            }
-            .type { /* CSS value <type> */
-                font-style: italic;
-            }
-            pre .property::before, pre .property::after {
-                content: "";
-            }
-            [data-link-type="property"]::before,
-            [data-link-type="propdesc"]::before,
-            [data-link-type="descriptor"]::before,
-            [data-link-type="value"]::before,
-            [data-link-type="function"]::before,
-            [data-link-type="at-rule"]::before,
-            [data-link-type="selector"]::before,
-            [data-link-type="maybe"]::before {
-                content: "‘";
-            }
-            [data-link-type="property"]::after,
-            [data-link-type="propdesc"]::after,
-            [data-link-type="descriptor"]::after,
-            [data-link-type="value"]::after,
-            [data-link-type="function"]::after,
-            [data-link-type="at-rule"]::after,
-            [data-link-type="selector"]::after,
-            [data-link-type="maybe"]::after {
-                content: "’";
-            }
+.css.css, .property.property, .descriptor.descriptor {
+    color: #005a9c;
+    font-size: inherit;
+    font-family: inherit;
+}
+.css::before, .property::before, .descriptor::before {
+    content: "‘";
+}
+.css::after, .property::after, .descriptor::after {
+    content: "’";
+}
+.property, .descriptor {
+    /* Don't wrap property and descriptor names */
+    white-space: nowrap;
+}
+.type { /* CSS value <type> */
+    font-style: italic;
+}
+pre .property::before, pre .property::after {
+    content: "";
+}
+[data-link-type="property"]::before,
+[data-link-type="propdesc"]::before,
+[data-link-type="descriptor"]::before,
+[data-link-type="value"]::before,
+[data-link-type="function"]::before,
+[data-link-type="at-rule"]::before,
+[data-link-type="selector"]::before,
+[data-link-type="maybe"]::before {
+    content: "‘";
+}
+[data-link-type="property"]::after,
+[data-link-type="propdesc"]::after,
+[data-link-type="descriptor"]::after,
+[data-link-type="value"]::after,
+[data-link-type="function"]::after,
+[data-link-type="at-rule"]::after,
+[data-link-type="selector"]::after,
+[data-link-type="maybe"]::after {
+    content: "’";
+}
 
-            [data-link-type].production::before,
-            [data-link-type].production::after,
-            .prod [data-link-type]::before,
-            .prod [data-link-type]::after {
-                content: "";
-            }
+[data-link-type].production::before,
+[data-link-type].production::after,
+.prod [data-link-type]::before,
+.prod [data-link-type]::after {
+    content: "";
+}
 
-            [data-link-type=element],
-            [data-link-type=element-attr] {
-                font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
-                font-size: .9em;
-            }
-            [data-link-type=element]::before { content: "<" }
-            [data-link-type=element]::after  { content: ">" }
+[data-link-type=element],
+[data-link-type=element-attr] {
+    font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    font-size: .9em;
+}
+[data-link-type=element]::before { content: "<" }
+[data-link-type=element]::after  { content: ">" }
 
-            [data-link-type=biblio] {
-                white-space: pre;
-            }</style>
+[data-link-type=biblio] {
+    white-space: pre;
+}</style>
 <style>/* style-dfn-panel */
 
         .dfn-panel {
@@ -1431,7 +1431,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-09-06">6 September 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-09-21">21 September 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1452,13 +1452,13 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
      <dd class="editor p-author h-card vcard" data-editor-id="57705"><a class="p-name fn u-url url" href="http://intel.com/">Kenneth Rohde Christiansen</a> (<span class="p-org org">Intel Corporation</span>)
      <dd class="editor p-author h-card vcard" data-editor-id="41974"><a class="p-name fn u-url url" href="http://intel.com/">Anssi Kostiainen</a> (<span class="p-org org">Intel Corporation</span>)
      <dt>Bug Reports:
-     <dd><span><a href="https://www.github.com/w3c/orientation-sensor/issues/new">via the w3c/orientation-sensor repository on GitHub</a></span>
+     <dd><a href="https://www.github.com/w3c/orientation-sensor/issues/new">via the w3c/orientation-sensor repository on GitHub</a>
      <dt>Test Suite:
-     <dd><span><a href="https://github.com/w3c/web-platform-tests/tree/master/orientation-sensor">web-platform-tests on GitHub</a></span>
+     <dd><a href="https://github.com/w3c/web-platform-tests/tree/master/orientation-sensor">web-platform-tests on GitHub</a>
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2017 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2017 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -1473,18 +1473,18 @@ physical orientation in relation to a stationary three dimensional Cartesian coo
 	It is provided for discussion only and may change at any moment.
 	Its publication here does not imply endorsement of its contents by W3C.
 	Don’t cite this document other than as work in progress. </p>
-   <p> If you wish to make comments regarding this document, please send them to <a href="mailto:public-device-apis@w3.org?Subject=%5Borientation-sensor%5D%20PUT%20SUBJECT%20HERE">public-device-apis@w3.org</a> (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>, <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>).
+   <p> If you wish to make comments regarding this document, please send them to <a href="mailto:public-device-apis@w3.org?Subject=%5Borientation-sensor%5D%20PUT%20SUBJECT%20HERE">public-device-apis@w3.org</a> (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>, <a href="https://lists.w3.org/Archives/Public/public-device-apis/">archives</a>).
 	When sending e-mail,
 	please put the text “orientation-sensor” in the subject,
 	preferably like this:
 	“[orientation-sensor] <em>…summary of comment…</em>”.
 	All comments are welcome. </p>
-   <p> This document was produced by the <a href="http://www.w3.org/2009/dap/">Device and Sensors Working Group</a>. </p>
+   <p> This document was produced by the <a href="https://www.w3.org/2009/dap/">Device and Sensors Working Group</a>. </p>
    <p> This document was produced by a group operating under
-	the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
+	the <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
 	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
-	An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
+	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
    <p> This document is governed by the <a href="https://www.w3.org/2017/Process-20170301/" id="w3c_process_revision">1 March 2017 W3C Process Document</a>. </p>
    <p></p>
   </div>
@@ -1560,9 +1560,9 @@ z-position.</p>
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">();</span>
 <span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">);</span>
 sensor<span class="p">.</span>start<span class="p">();</span>
-sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
 
-sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p">()</span> <span class="o">=></span> <span class="p">{</span>
+sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p">()</span> <span class="p">=></span> <span class="p">{</span>
   sensor<span class="p">.</span>populateMatrix<span class="p">(</span>mat4<span class="p">);</span>
 <span class="p">};</span>
 </pre>
@@ -1572,7 +1572,7 @@ sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p"
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">({</span> frequency<span class="o">:</span> <span class="mi">60</span> <span class="p">});</span>
 <span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">);</span>
 sensor<span class="p">.</span>start<span class="p">();</span>
-sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
 
 <span class="kd">function</span> draw<span class="p">(</span>timestamp<span class="p">)</span> <span class="p">{</span>
   window<span class="p">.</span>requestAnimationFrame<span class="p">(</span>draw<span class="p">);</span>
@@ -1673,11 +1673,12 @@ orientation sensor, as the sensor is not affected by magnetic fields.</p>
 };
 </pre>
    <h4 class="heading settled" data-level="6.1.1" id="orientationsensor-quaternion"><span class="secno">6.1.1. </span><span class="content">OrientationSensor.quaternion</span><a class="self-link" href="#orientationsensor-quaternion"></a></h4>
-   <p>Returns a four-element <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-frozen-array" id="ref-for-idl-frozen-array">FrozenArray</a></code> whose elements contain the components of the unit quaternion representing the device orientation.
-In other words, this attribute returns <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading⑤">latest reading</a>["quaternion"].</p>
+   <p>Returns a four-element <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-frozen-array" id="ref-for-idl-frozen-array">FrozenArray</a></code> whose elements contain the components
+of the unit quaternion representing the device orientation.
+In other words, this attribute returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading">get value from latest reading</a> with <emu-val>this</emu-val> and "quaternion" as arguments.</p>
    <h4 class="heading settled" data-level="6.1.2" id="orientationsensor-populatematrix"><span class="secno">6.1.2. </span><span class="content">OrientationSensor.populateMatrix()</span><a class="self-link" href="#orientationsensor-populatematrix"></a></h4>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix">populateMatrix()</a></code> method  populates the given object with rotation matrix
-which is converted from the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading⑥">latest reading</a>["quaternion"] <a data-link-type="biblio" href="#biblio-quatconv">[QUATCONV]</a>, as shown below:</p>
+which is converted from the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading⑤">latest reading</a>["quaternion"] <a data-link-type="biblio" href="#biblio-quatconv">[QUATCONV]</a>, as shown below:</p>
    <p><img alt="Converting quaternion to rotation matrix." src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;"></p>
    <p>where:</p>
    <ul>
@@ -1702,7 +1703,7 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
       <p>If <var>targetMatrix</var> is of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float32Array" id="ref-for-idl-Float32Array①">Float32Array</a></code> or <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-Float64Array" id="ref-for-idl-Float64Array①">Float64Array</a></code> with a size less than sixteen, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw" id="ref-for-dfn-throw①">throw</a> a
   "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①">TypeError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
-      <p>Let <var>quaternion</var> be the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading⑦">latest reading</a>["quaternion"]</p>
+      <p>Let <var>quaternion</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading①">get value from latest reading</a> with <emu-val>this</emu-val> and "quaternion" as arguments.</p>
      <li data-md="">
       <p>If <var>quaternion</var> is <code>null</code>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw" id="ref-for-dfn-throw②">throw</a> a "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://heycam.github.io/webidl/#notreadableerror" id="ref-for-notreadableerror">NotReadableError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException②">DOMException</a></code> and abort these steps.</p>
      <li data-md="">
@@ -1853,15 +1854,20 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/sensors/#sensor">Sensor</a>
-     <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
      <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
      <li><a href="https://w3c.github.io/sensors#equivalent">equivalent</a>
      <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
      <li><a href="https://w3c.github.io/sensors#low-level">low-level</a>
-     <li><a href="https://w3c.github.io/sensors/#request-sensor-access">request sensor access</a>
      <li><a href="https://w3c.github.io/sensors#sensor">sensor</a>
      <li><a href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[generic-sensor-1]</a> defines the following terms:
+    <ul>
+     <li><a href="https://w3c.github.io/sensors/#sensor">Sensor</a>
+     <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
+     <li><a href="https://w3c.github.io/sensors/#get-value-from-latest-reading">get value from latest reading</a>
+     <li><a href="https://w3c.github.io/sensors/#request-sensor-access">request sensor access</a>
     </ul>
    <li>
     <a data-link-type="biblio">[geometry-1]</a> defines the following terms:

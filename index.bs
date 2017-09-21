@@ -305,8 +305,11 @@ The OrientationSensor Interface {#orientationsensor-interface}
 
 ### OrientationSensor.quaternion ### {#orientationsensor-quaternion}
 
-Returns a four-element {{FrozenArray}} whose elements contain the components of the unit quaternion representing the device orientation.
-In other words, this attribute returns [=latest reading=]["quaternion"].
+Returns a four-element {{FrozenArray}} whose elements contain the components
+of the unit quaternion representing the device orientation.
+In other words, this attribute returns the result of invoking
+[=get value from latest reading=] with <emu-val>this</emu-val>
+and "quaternion" as arguments.
 
 ### OrientationSensor.populateMatrix() ### {#orientationsensor-populatematrix}
 
@@ -332,7 +335,8 @@ run these steps or their [=equivalent=]:
         "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
     1.  If |targetMatrix| is of type {{Float32Array}} or {{Float64Array}} with a size less than sixteen, [=throw=] a
         "{{TypeError!!exception}}" {{DOMException}} and abort these steps.
-    1.  Let |quaternion| be the value of [=latest reading=]["quaternion"]
+    1.  Let |quaternion| be the result of invoking [=get value from latest reading=] with <emu-val>this</emu-val>
+        and "quaternion" as arguments.
     1.  If |quaternion| is `null`, [=throw=] a "{{NotReadableError!!exception}}" {{DOMException}} and abort these steps.
     1.  Let |x| be the value of |quaternion|[0]
     1.  Let |y| be the value of |quaternion|[1]
