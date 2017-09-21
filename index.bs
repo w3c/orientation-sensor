@@ -36,6 +36,7 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: latest reading
     text: sensor
     text: sensor-fusion
+    text: sensor type
 urlPrefix: https://w3c.github.io/accelerometer; spec: ACCELEROMETER
   type: dfn
     text: acceleration
@@ -187,7 +188,7 @@ Model {#model}
 The {{OrientationSensor}} class extends the {{Sensor}} class and provides generic interface
 representing device orientation data.
 
-To access the orientation sensor's [=latest reading=], the user agent must invoke [=request sensor access=] abstract operation for each of the [=low-level=] sensors used by the concrete orientation sensor. The table below
+To access the <dfn>Orientation Sensor</dfn> <a>sensor type</a>'s [=latest reading=], the user agent must invoke [=request sensor access=] abstract operation for each of the [=low-level=] sensors used by the concrete orientation sensor. The table below
 describes mapping between concrete orientation sensors and permission tokens defined by [=low-level=] sensors.
 
 <table class="def">
@@ -209,7 +210,7 @@ describes mapping between concrete orientation sensors and permission tokens def
   </tbody>
 </table>
 
-A [=latest reading=] per [=sensor=] of orientation type includes an [=map/entry=]
+A [=latest reading=] for a {{Sensor}} of <a>Orientation Sensor</a> <a>sensor type</a> includes an [=map/entry=]
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
 The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
 [V<sub>x</sub> * sin(θ/2), V<sub>y</sub> * sin(θ/2), V<sub>z</sub> * sin(θ/2), cos(θ/2)] where V is
