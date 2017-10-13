@@ -34,7 +34,6 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: high-level
     text: low-level
     text: latest reading
-    text: sensor
     text: sensor-fusion
     text: sensor type
 urlPrefix: https://w3c.github.io/accelerometer; spec: ACCELEROMETER
@@ -248,6 +247,37 @@ Note: {{Accelerometer}}, {{Gyroscope}} and {{Magnetometer}} [=low-level=] sensor
 [[ACCELEROMETER]], [[GYROSCOPE]], and [[MAGNETOMETER]] specifications respectively. The
 [=sensor-fusion|sensor fusion=] is platform specific and can happen in software or hardware, i.e.
 on a sensor hub.
+
+<div class="example">
+    This example code explicitly queries permissions for {{AbsoluteOrientationSensor}} before
+    calling {{Sensor/start()}}.
+    <pre highlight="js">
+    const sensor = new AbsoluteOrientationSensor();
+    Promise.all([navigator.permissions.query({ name: "accelerometer" }),
+                 navigator.permissions.query({ name: "magnetometer" }),
+                 navigator.permissions.query({ name: "gyroscope" })])
+           .then(results => {
+                 if (results.every(result => result.state === "granted")) {
+                   sensor.start();
+                   ...
+                 } else {
+                   console.log("No permissions to use AbsoluteOrientationSensor.");
+                 }
+           });
+    </pre>
+
+    Another approach is to simply call {{Sensor/start()}} and subscribe to
+    {{Sensor/onerror}} [=event handler=].
+
+    <pre highlight="js">
+    const sensor = new AbsoluteOrientationSensor();
+    sensor.start();
+    sensor.onerror = event => {
+      if (event.error.name === 'SecurityError')
+        console.log("No permissions to use AbsoluteOrientationSensor.");
+    };
+    </pre>
+</div>
 
 The AbsoluteOrientationSensor Model {#absoluteorientationsensor-model}
 ----------------------------------------------------------------------
