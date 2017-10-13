@@ -6,10 +6,10 @@ ED: https://w3c.github.io/orientation-sensor/
 Shortname: orientation-sensor
 TR: https://www.w3.org/TR/orientation-sensor/
 Previous Version: https://www.w3.org/TR/2017/WD-orientation-sensor-20170511/
-Editor: Mikhail Pozdnyakov 78325, Intel Corporation, http://intel.com/
-Editor: Alexander Shalamov 78335, Intel Corporation, http://intel.com/
-Editor: Kenneth Rohde Christiansen 57705, Intel Corporation, http://intel.com/
-Editor: Anssi Kostiainen 41974, Intel Corporation, http://intel.com/
+Editor: Mikhail Pozdnyakov 78325, Intel Corporation, https://intel.com/
+Editor: Alexander Shalamov 78335, Intel Corporation, https://intel.com/
+Editor: Kenneth Rohde Christiansen 57705, Intel Corporation, https://intel.com/
+Editor: Anssi Kostiainen 41974, Intel Corporation, https://intel.com/
 Group: dap
 Abstract:
   This specification defines a base orientation sensor interface and concrete sensor subclasses to monitor the device's
