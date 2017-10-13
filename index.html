@@ -1183,9 +1183,8 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version df778ba2d9793f77f64705dbba65d0c50f68e0d9" name="generator">
+  <meta content="Bikeshed version 2d63ad75df4c3282ed7d8d3fb42b0c483a131ce1" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
-  <meta content="87dc607027aabbcb2d50bc64a09d562ad4b7d31e" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1432,7 +1431,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-09-21">21 September 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-10-13">13 October 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1448,10 +1447,10 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
      <dt>Issue Tracking:
      <dd><a href="https://github.com/w3c/orientation-sensor/issues/">GitHub</a>
      <dt class="editor">Editors:
-     <dd class="editor p-author h-card vcard" data-editor-id="78325"><a class="p-name fn u-url url" href="http://intel.com/">Mikhail Pozdnyakov</a> (<span class="p-org org">Intel Corporation</span>)
-     <dd class="editor p-author h-card vcard" data-editor-id="78335"><a class="p-name fn u-url url" href="http://intel.com/">Alexander Shalamov</a> (<span class="p-org org">Intel Corporation</span>)
-     <dd class="editor p-author h-card vcard" data-editor-id="57705"><a class="p-name fn u-url url" href="http://intel.com/">Kenneth Rohde Christiansen</a> (<span class="p-org org">Intel Corporation</span>)
-     <dd class="editor p-author h-card vcard" data-editor-id="41974"><a class="p-name fn u-url url" href="http://intel.com/">Anssi Kostiainen</a> (<span class="p-org org">Intel Corporation</span>)
+     <dd class="editor p-author h-card vcard" data-editor-id="78325"><a class="p-name fn u-url url" href="https://intel.com/">Mikhail Pozdnyakov</a> (<span class="p-org org">Intel Corporation</span>)
+     <dd class="editor p-author h-card vcard" data-editor-id="78335"><a class="p-name fn u-url url" href="https://intel.com/">Alexander Shalamov</a> (<span class="p-org org">Intel Corporation</span>)
+     <dd class="editor p-author h-card vcard" data-editor-id="57705"><a class="p-name fn u-url url" href="https://intel.com/">Kenneth Rohde Christiansen</a> (<span class="p-org org">Intel Corporation</span>)
+     <dd class="editor p-author h-card vcard" data-editor-id="41974"><a class="p-name fn u-url url" href="https://intel.com/">Anssi Kostiainen</a> (<span class="p-org org">Intel Corporation</span>)
      <dt>Bug Reports:
      <dd><a href="https://www.github.com/w3c/orientation-sensor/issues/new">via the w3c/orientation-sensor repository on GitHub</a>
      <dt>Test Suite:
@@ -1561,9 +1560,9 @@ z-position.</p>
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">();</span>
 <span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">);</span>
 sensor<span class="p">.</span>start<span class="p">();</span>
-sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
 
-sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p">()</span> <span class="o">=></span> <span class="p">{</span>
+sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p">()</span> <span class="p">=></span> <span class="p">{</span>
   sensor<span class="p">.</span>populateMatrix<span class="p">(</span>mat4<span class="p">);</span>
 <span class="p">};</span>
 </pre>
@@ -1573,7 +1572,7 @@ sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p"
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">({</span> frequency<span class="o">:</span> <span class="mi">60</span> <span class="p">});</span>
 <span class="kr">const</span> mat4 <span class="o">=</span> <span class="k">new</span> Float32Array<span class="p">(</span><span class="mi">16</span><span class="p">);</span>
 sensor<span class="p">.</span>start<span class="p">();</span>
-sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
+sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
 
 <span class="kd">function</span> draw<span class="p">(</span>timestamp<span class="p">)</span> <span class="p">{</span>
   window<span class="p">.</span>requestAnimationFrame<span class="p">(</span>draw<span class="p">);</span>
@@ -1856,20 +1855,16 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
-     <li><a href="https://w3c.github.io/sensors#equivalent">equivalent</a>
-     <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
-     <li><a href="https://w3c.github.io/sensors#low-level">low-level</a>
-     <li><a href="https://w3c.github.io/sensors#sensor-type">sensor type</a>
-     <li><a href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a>
-    </ul>
-   <li>
-    <a data-link-type="biblio">[generic-sensor-1]</a> defines the following terms:
-    <ul>
      <li><a href="https://w3c.github.io/sensors/#sensor">Sensor</a>
      <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
+     <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
+     <li><a href="https://w3c.github.io/sensors#equivalent">equivalent</a>
      <li><a href="https://w3c.github.io/sensors/#get-value-from-latest-reading">get value from latest reading</a>
+     <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
+     <li><a href="https://w3c.github.io/sensors#low-level">low-level</a>
      <li><a href="https://w3c.github.io/sensors/#request-sensor-access">request sensor access</a>
+     <li><a href="https://w3c.github.io/sensors#sensor-type">sensor type</a>
+     <li><a href="https://w3c.github.io/sensors#sensor-fusion">sensor-fusion</a>
     </ul>
    <li>
     <a data-link-type="biblio">[geometry-1]</a> defines the following terms:
@@ -1918,21 +1913,21 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-accelerometer">[ACCELEROMETER]
-   <dd>Anssi Kostiainen; Alexander Shalamov. <a href="https://www.w3.org/TR/accelerometer/">Accelerometer</a>. URL: <a href="https://www.w3.org/TR/accelerometer/">https://www.w3.org/TR/accelerometer/</a>
+   <dd>Anssi Kostiainen; Alexander Shalamov. <a href="https://www.w3.org/TR/accelerometer/">Accelerometer</a>. 14 August 2017. WD. URL: <a href="https://www.w3.org/TR/accelerometer/">https://www.w3.org/TR/accelerometer/</a>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
-   <dd>Rick Waldron; et al. <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a>. URL: <a href="https://www.w3.org/TR/generic-sensor/">https://www.w3.org/TR/generic-sensor/</a>
+   <dd>Rick Waldron; et al. <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a>. 2 October 2017. WD. URL: <a href="https://www.w3.org/TR/generic-sensor/">https://www.w3.org/TR/generic-sensor/</a>
    <dt id="biblio-geometry-1">[GEOMETRY-1]
-   <dd>Simon Pieters; Dirk Schulze; Rik Cabanier. <a href="https://www.w3.org/TR/geometry-1/">Geometry Interfaces Module Level 1</a>. URL: <a href="https://www.w3.org/TR/geometry-1/">https://www.w3.org/TR/geometry-1/</a>
+   <dd>Simon Pieters; Dirk Schulze; Rik Cabanier. <a href="https://www.w3.org/TR/geometry-1/">Geometry Interfaces Module Level 1</a>. 25 November 2014. CR. URL: <a href="https://www.w3.org/TR/geometry-1/">https://www.w3.org/TR/geometry-1/</a>
    <dt id="biblio-gyroscope">[GYROSCOPE]
-   <dd>Anssi Kostiainen; Mikhail Pozdnyakov. <a href="https://www.w3.org/TR/gyroscope/">Gyroscope</a>. URL: <a href="https://www.w3.org/TR/gyroscope/">https://www.w3.org/TR/gyroscope/</a>
+   <dd>Anssi Kostiainen; Mikhail Pozdnyakov. <a href="https://www.w3.org/TR/gyroscope/">Gyroscope</a>. 14 August 2017. WD. URL: <a href="https://www.w3.org/TR/gyroscope/">https://www.w3.org/TR/gyroscope/</a>
    <dt id="biblio-infra">[INFRA]
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-magnetometer">[MAGNETOMETER]
-   <dd>Anssi Kostiainen; Rijubrata Bhaumik. <a href="https://www.w3.org/TR/magnetometer/">Magnetometer</a>. URL: <a href="https://www.w3.org/TR/magnetometer/">https://www.w3.org/TR/magnetometer/</a>
+   <dd>Anssi Kostiainen; Rijubrata Bhaumik. <a href="https://www.w3.org/TR/magnetometer/">Magnetometer</a>. 14 August 2017. WD. URL: <a href="https://www.w3.org/TR/magnetometer/">https://www.w3.org/TR/magnetometer/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
-   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
