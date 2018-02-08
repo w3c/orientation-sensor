@@ -36,10 +36,12 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: latest reading
     text: sensor-fusion
     text: sensor type
+    text: local coordinate system
 urlPrefix: https://w3c.github.io/accelerometer; spec: ACCELEROMETER
   type: dfn
     text: acceleration
-    text: local coordinate system
+    text: device coordinate system
+    text: screen coordinate system
   type: interface
     text: Accelerometer; url: accelerometer
 </pre>
@@ -285,17 +287,19 @@ The AbsoluteOrientationSensor Model {#absoluteorientationsensor-model}
 The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents
 the [=Absolute Orientation Sensor=].
 
-For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents the rotation of a
-device hosting motion sensors in relation to the <dfn>Earth's reference coordinate system</dfn> defined as a
-three dimensional Cartesian coordinate system (x, y, z), where:
+For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents
+the rotation of a device's [=local coordinate system=] in relation to the <dfn>Earth's reference
+coordinate system</dfn> defined as a three dimensional Cartesian coordinate system (x, y, z), where:
 
  - x-axis is a vector product of y.z that is tangential to the ground and points east,
  - y-axis is tangential to the ground and points towards magnetic north, and
  - z-axis points towards the sky and is perpendicular to the plane made up of x and y axes.
 
-The device's <a>local coordinate system</a> is the same as defined by [=low-level=] motion sensors.
+The device's [=local coordinate system=] is the same as defined for the [=low-level=]
+motion sensors. It can be either the [=device coordinate system=] or the
+[=screen coordinate system=].
 
-Note: Figure below represents the case where device's <a>local coordinate system</a> and the <a>Earth's reference coordinate system</a> are aligned, therefore,
+Note: Figure below represents the case where device's [=local coordinate system=] and the <a>Earth's reference coordinate system</a> are aligned, therefore,
 orientation sensor's [=latest reading=] would represent 0 (rad) [[SI]] rotation about each axis.
 
 <img src="images/absolute_orientation_sensor_coordinate_system.png" srcset="images/absolute_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;" alt="AbsoluteOrientationSensor coordinate system.">
@@ -307,13 +311,17 @@ The {{RelativeOrientationSensor}} class is a subclass of {{OrientationSensor}} w
 [=Relative Orientation Sensor=].
 
 For the relative orientation sensor the value of [=latest reading=]["quaternion"] represents the
-rotation of a device hosting motion sensors in relation to a [=stationary reference coordinate
+rotation of a device's [=local coordinate system=] in relation to a [=stationary reference coordinate
 system=]. The [=stationary reference coordinate system=] may drift due to the bias introduced by
 the gyroscope sensor, thus, the rotation value provided by the sensor, may drift over time.
 
 The <dfn>stationary reference coordinate system</dfn> is defined as an inertial three dimensional
 Cartesian coordinate system that remains stationary as the device hosting the sensor moves through
 the environment.
+
+The device's [=local coordinate system=] is the same as defined for the [=low-level=]
+motion sensors. It can be either the [=device coordinate system=] or the
+[=screen coordinate system=].
 
 Note: The relative orientation sensor data could be more accurate than the one provided by absolute
 orientation sensor, as the sensor is not affected by magnetic fields.
@@ -331,6 +339,12 @@ The OrientationSensor Interface {#orientationsensor-interface}
   interface OrientationSensor : Sensor {
     readonly attribute FrozenArray&lt;double>? quaternion;
     void populateMatrix(RotationMatrixType targetMatrix);
+  };
+
+  enum LocalCoordinateSystem { "device", "screen" };
+
+  dictionary OrientationSensorOptions : SensorOptions  {
+    LocalCoordinateSystem referenceFrame = "device";
   };
 </pre>
 
@@ -414,25 +428,45 @@ The AbsoluteOrientationSensor Interface {#absoluteorientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions sensorOptions), SecureContext, Exposed=Window]
+  [Constructor(optional OrientationSensorOptions sensorOptions), SecureContext, Exposed=Window]
   interface AbsoluteOrientationSensor : OrientationSensor {
   };
 </pre>
 
-To <dfn>Construct an AbsoluteOrientationSensor Object</dfn> the user agent must invoke the
-<a>construct a Sensor object</a> abstract operation.
+To construct an {{AbsoluteOrientationSensor}} object the user agent must invoke the
+[=construct an orientation sensor object=] abstract operation.
 
 The RelativeOrientationSensor Interface {#relativeorientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions sensorOptions), SecureContext, Exposed=Window]
+  [Constructor(optional OrientationSensorOptions sensorOptions), SecureContext, Exposed=Window]
   interface RelativeOrientationSensor : OrientationSensor {
   };
 </pre>
 
-To <dfn>Construct an RelativeOrientationSensor Object</dfn> the user agent must invoke the
-<a>construct a Sensor object</a> abstract operation.
+To construct a {{RelativeOrientationSensor}} object the user agent must invoke the
+[=construct an orientation sensor object=] abstract operation.
+
+Abstract Operations {#abstract-operations}
+===================
+
+<h3 dfn export>Construct an Orientation Sensor object</h3>
+
+<div algorithm="construct an orientation sensor object">
+
+    : input
+    :: |options|, a {{OrientationSensorOptions}} object.
+    : output
+    :: A {{Sensor}} object.
+
+    1. Let |sensor_instance| be the result of invoking [=construct a Sensor object=] with |options|.
+    1. If |options|.{{referenceFrame!!dict-member}} is "screen", then:
+       1.  Define [=local coordinate system=] for |sensor_instance|
+           as the [=screen coordinate system=].
+    1. Otherwise, define [=local coordinate system=] for |sensor_instance|
+       as the [=device coordinate system=].
+</div>
 
 Acknowledgements {#acknowledgements}
 ================
