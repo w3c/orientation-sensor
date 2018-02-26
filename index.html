@@ -1185,7 +1185,7 @@ Possible extra rowspan handling
   </style>
   <meta content="Bikeshed version 6aa3aaa1336714f1530c976b6df9a86c683d5968" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
-  <meta content="21f158cd61647f96145ae8d756daf0e5dcec4fd1" name="document-revision">
+  <meta content="ae412f123c519db004472ce14e86db9c3b3236bd" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1853,7 +1853,7 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
     </dl>
     <ol>
      <li data-md="">
-      <p>Let <var>allowed</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors#check-sensor-policy-controlled-features" id="ref-for-check-sensor-policy-controlled-features">check sensor policy-controlled features</a> with <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor①②">OrientationSensor</a></code>.</p>
+      <p>Let <var>allowed</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors#check-sensor-policy-controlled-features" id="ref-for-check-sensor-policy-controlled-features">check sensor policy-controlled features</a> with the <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface①">interface</a> identified by <var>orientation_interface</var>.</p>
      <li data-md="">
       <p>If <var>allowed</var> is false, then:</p>
       <ol>
@@ -1861,7 +1861,7 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
         <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw" id="ref-for-dfn-throw③">Throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror" id="ref-for-securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException③">DOMException</a></code>.</p>
       </ol>
      <li data-md="">
-      <p>Let <var>orientation</var> be a new instance of the <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface①">interface</a> identified by <var>orientation_interface</var>.</p>
+      <p>Let <var>orientation</var> be a new instance of the <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface②">interface</a> identified by <var>orientation_interface</var>.</p>
      <li data-md="">
       <p>Invoke <a data-link-type="dfn" href="https://w3c.github.io/sensors#initialize-a-sensor-object" id="ref-for-initialize-a-sensor-object">initialize a sensor object</a> with <var>orientation</var> and <var>options</var>.</p>
      <li data-md="">
@@ -2096,7 +2096,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-orientationsensor⑦">5.2. The RelativeOrientationSensor Model</a>
     <li><a href="#ref-for-orientationsensor⑧">6.2. The AbsoluteOrientationSensor Interface</a>
     <li><a href="#ref-for-orientationsensor⑨">6.3. The RelativeOrientationSensor Interface</a>
-    <li><a href="#ref-for-orientationsensor①⓪">7.1. Construct an Orientation Sensor object</a> <a href="#ref-for-orientationsensor①①">(2)</a> <a href="#ref-for-orientationsensor①②">(3)</a>
+    <li><a href="#ref-for-orientationsensor①⓪">7.1. Construct an Orientation Sensor object</a> <a href="#ref-for-orientationsensor①①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-orientationsensor-populatematrix">
