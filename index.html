@@ -1183,8 +1183,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 166744eb86a34dbc5493268ea410dc65275aa964" name="generator">
+  <meta content="Bikeshed version 6aa3aaa1336714f1530c976b6df9a86c683d5968" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
+  <meta content="ae412f123c519db004472ce14e86db9c3b3236bd" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1431,7 +1432,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-08">8 February 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-26">26 February 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1481,11 +1482,11 @@ physical orientation in relation to a stationary three dimensional Cartesian coo
 	All comments are welcome. </p>
    <p> This document was produced by the <a href="https://www.w3.org/2009/dap/">Device and Sensors Working Group</a>. </p>
    <p> This document was produced by a group operating under
-	the <a href="https://www.w3.org/Consortium/Patent-Policy/">W3C Patent Policy</a>.
+	the <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
 	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
-	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2018/Process-20180201/" id="w3c_process_revision">1 February 2018 W3C Process Document</a>. </p>
+	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/2017/Process-20170301/" id="w3c_process_revision">1 March 2017 W3C Process Document</a>. </p>
    <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -1638,8 +1639,8 @@ q<sub>2</sub>, q<sub>3</sub>].</p>
    </table>
    <p class="note" role="note"><span>Note:</span> <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/accelerometer#accelerometer" id="ref-for-accelerometer②">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/gyroscope#gyroscope" id="ref-for-gyroscope②">Gyroscope</a></code> and <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/magnetometer#magnetometer" id="ref-for-magnetometer①">Magnetometer</a></code> <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level" id="ref-for-low-level⑤">low-level</a> sensors are defined in <a data-link-type="biblio" href="#biblio-accelerometer">[ACCELEROMETER]</a>, <a data-link-type="biblio" href="#biblio-gyroscope">[GYROSCOPE]</a>, and <a data-link-type="biblio" href="#biblio-magnetometer">[MAGNETOMETER]</a> specifications respectively. The <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion" id="ref-for-sensor-fusion①">sensor fusion</a> is platform specific and can happen in software or hardware, i.e.
 on a sensor hub.</p>
-   <div class="example" id="example-501d0803">
-    <a class="self-link" href="#example-501d0803"></a> This example code explicitly queries permissions for <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor③">AbsoluteOrientationSensor</a></code> before
+   <div class="example" id="example-a5b53191">
+    <a class="self-link" href="#example-a5b53191"></a> This example code explicitly queries permissions for <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor③">AbsoluteOrientationSensor</a></code> before
     calling <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#dom-sensor-start" id="ref-for-dom-sensor-start">start()</a></code>. 
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">();</span>
 Promise<span class="p">.</span>all<span class="p">([</span>navigator<span class="p">.</span>permissions<span class="p">.</span>query<span class="p">({</span> name<span class="o">:</span> <span class="s2">"accelerometer"</span> <span class="p">}),</span>
@@ -1830,35 +1831,49 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="absoluteorientationsensor"><code>AbsoluteOrientationSensor</code></dfn> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor⑧">OrientationSensor</a> {
 };
 </pre>
-   <p>To construct an <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑤">AbsoluteOrientationSensor</a></code> object the user agent must invoke the <a data-link-type="dfn" href="#construct-an-orientation-sensor-object" id="ref-for-construct-an-orientation-sensor-object">construct an orientation sensor object</a> abstract operation.</p>
+   <p>To construct an <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑤">AbsoluteOrientationSensor</a></code> object the user agent must invoke the <a data-link-type="dfn" href="#construct-an-orientation-sensor-object" id="ref-for-construct-an-orientation-sensor-object">construct an orientation sensor object</a> abstract operation for the <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑥">AbsoluteOrientationSensor</a></code> interface.</p>
    <h3 class="heading settled" data-level="6.3" id="relativeorientationsensor-interface"><span class="secno">6.3. </span><span class="content">The RelativeOrientationSensor Interface</span><a class="self-link" href="#relativeorientationsensor-interface"></a></h3>
 <pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="RelativeOrientationSensor" data-dfn-type="constructor" data-export="" data-lt="RelativeOrientationSensor(sensorOptions)|RelativeOrientationSensor()" id="dom-relativeorientationsensor-relativeorientationsensor"><code>Constructor</code><a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions①">OrientationSensorOptions</a> <dfn class="nv idl-code" data-dfn-for="RelativeOrientationSensor/RelativeOrientationSensor(sensorOptions)" data-dfn-type="argument" data-export="" id="dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"><code>sensorOptions</code><a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②">Exposed</a>=<span class="n">Window</span>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="relativeorientationsensor"><code>RelativeOrientationSensor</code></dfn> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor⑨">OrientationSensor</a> {
 };
 </pre>
-   <p>To construct a <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor③">RelativeOrientationSensor</a></code> object the user agent must invoke the <a data-link-type="dfn" href="#construct-an-orientation-sensor-object" id="ref-for-construct-an-orientation-sensor-object①">construct an orientation sensor object</a> abstract operation.</p>
+   <p>To construct a <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor③">RelativeOrientationSensor</a></code> object the user agent must invoke the <a data-link-type="dfn" href="#construct-an-orientation-sensor-object" id="ref-for-construct-an-orientation-sensor-object①">construct an orientation sensor object</a> abstract operation for the <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor④">RelativeOrientationSensor</a></code> interface.</p>
    <h2 class="heading settled" data-level="7" id="abstract-operations"><span class="secno">7. </span><span class="content">Abstract Operations</span><a class="self-link" href="#abstract-operations"></a></h2>
    <h3 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export="" data-level="7.1" data-lt="Construct an Orientation Sensor object" id="construct-an-orientation-sensor-object"><span class="secno">7.1. </span><span class="content">Construct an Orientation Sensor object</span></h3>
    <div class="algorithm" data-algorithm="construct an orientation sensor object">
     <dl>
      <dt data-md="">input
      <dd data-md="">
+      <p><var>orientation_interface</var>, an <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface">interface</a> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-identifier" id="ref-for-dfn-identifier">identifier</a> whose <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-inherited-interfaces" id="ref-for-dfn-inherited-interfaces">inherited interfaces</a> contains <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor①⓪">OrientationSensor</a></code>.</p>
+     <dd data-md="">
       <p><var>options</var>, a <code class="idl"><a data-link-type="idl" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions②">OrientationSensorOptions</a></code> object.</p>
      <dt data-md="">output
      <dd data-md="">
-      <p>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor③">Sensor</a></code> object.</p>
+      <p>An <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor①①">OrientationSensor</a></code> object.</p>
     </dl>
     <ol>
      <li data-md="">
-      <p>Let <var>sensor_instance</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object" id="ref-for-construct-sensor-object">construct a Sensor object</a> with <var>options</var>.</p>
+      <p>Let <var>allowed</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors#check-sensor-policy-controlled-features" id="ref-for-check-sensor-policy-controlled-features">check sensor policy-controlled features</a> with the <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface①">interface</a> identified by <var>orientation_interface</var>.</p>
+     <li data-md="">
+      <p>If <var>allowed</var> is false, then:</p>
+      <ol>
+       <li data-md="">
+        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw" id="ref-for-dfn-throw③">Throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror" id="ref-for-securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException③">DOMException</a></code>.</p>
+      </ol>
+     <li data-md="">
+      <p>Let <var>orientation</var> be a new instance of the <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface②">interface</a> identified by <var>orientation_interface</var>.</p>
+     <li data-md="">
+      <p>Invoke <a data-link-type="dfn" href="https://w3c.github.io/sensors#initialize-a-sensor-object" id="ref-for-initialize-a-sensor-object">initialize a sensor object</a> with <var>orientation</var> and <var>options</var>.</p>
      <li data-md="">
       <p>If <var>options</var>.<code class="idl"><a class="idl-code" data-link-type="dict-member" href="#dom-orientationsensoroptions-referenceframe" id="ref-for-dom-orientationsensoroptions-referenceframe">referenceFrame</a></code> is "screen", then:</p>
       <ol>
        <li data-md="">
-        <p>Define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system⑤">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#screen-coordinate-system" id="ref-for-screen-coordinate-system②">screen coordinate system</a>.</p>
+        <p>Define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system⑤">local coordinate system</a> for <var>orientation</var> as the <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#screen-coordinate-system" id="ref-for-screen-coordinate-system②">screen coordinate system</a>.</p>
       </ol>
      <li data-md="">
-      <p>Otherwise, define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system⑥">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#device-coordinate-system" id="ref-for-device-coordinate-system②">device coordinate system</a>.</p>
+      <p>Otherwise, define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system⑥">local coordinate system</a> for <var>orientation</var> as the <a data-link-type="dfn" href="https://w3c.github.io/accelerometer#device-coordinate-system" id="ref-for-device-coordinate-system②">device coordinate system</a>.</p>
+     <li data-md="">
+      <p>Return <var>orientation</var>.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="8" id="acknowledgements"><span class="secno">8. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
@@ -1925,9 +1940,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <ul>
      <li><a href="https://w3c.github.io/sensors/#sensor">Sensor</a>
      <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
-     <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
+     <li><a href="https://w3c.github.io/sensors#check-sensor-policy-controlled-features">check sensor policy-controlled features</a>
      <li><a href="https://w3c.github.io/sensors#equivalent">equivalent</a>
      <li><a href="https://w3c.github.io/sensors/#get-value-from-latest-reading">get value from latest reading</a>
+     <li><a href="https://w3c.github.io/sensors#initialize-a-sensor-object">initialize a sensor object</a>
      <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
      <li><a href="https://w3c.github.io/sensors#local-coordinate-system">local coordinate system</a>
      <li><a href="https://w3c.github.io/sensors#low-level">low-level</a>
@@ -1981,8 +1997,12 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://heycam.github.io/webidl/#idl-frozen-array">FrozenArray</a>
      <li><a href="https://heycam.github.io/webidl/#notreadableerror">NotReadableError</a>
      <li><a href="https://heycam.github.io/webidl/#SecureContext">SecureContext</a>
+     <li><a href="https://heycam.github.io/webidl/#securityerror">SecurityError</a>
      <li><a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a>
      <li><a href="https://heycam.github.io/webidl/#idl-double">double</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-identifier">identifier</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-inherited-interfaces">inherited interfaces</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-interface">interface</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-throw">throw</a>
     </ul>
   </ul>
@@ -2076,6 +2096,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-orientationsensor⑦">5.2. The RelativeOrientationSensor Model</a>
     <li><a href="#ref-for-orientationsensor⑧">6.2. The AbsoluteOrientationSensor Interface</a>
     <li><a href="#ref-for-orientationsensor⑨">6.3. The RelativeOrientationSensor Interface</a>
+    <li><a href="#ref-for-orientationsensor①⓪">7.1. Construct an Orientation Sensor object</a> <a href="#ref-for-orientationsensor①①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-orientationsensor-populatematrix">
@@ -2116,7 +2137,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-absoluteorientationsensor">1. Introduction</a>
     <li><a href="#ref-for-absoluteorientationsensor①">5. Model</a> <a href="#ref-for-absoluteorientationsensor②">(2)</a> <a href="#ref-for-absoluteorientationsensor③">(3)</a>
     <li><a href="#ref-for-absoluteorientationsensor④">5.1. The AbsoluteOrientationSensor Model</a>
-    <li><a href="#ref-for-absoluteorientationsensor⑤">6.2. The AbsoluteOrientationSensor Interface</a>
+    <li><a href="#ref-for-absoluteorientationsensor⑤">6.2. The AbsoluteOrientationSensor Interface</a> <a href="#ref-for-absoluteorientationsensor⑥">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="relativeorientationsensor">
@@ -2124,7 +2145,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-relativeorientationsensor">5. Model</a> <a href="#ref-for-relativeorientationsensor①">(2)</a>
     <li><a href="#ref-for-relativeorientationsensor②">5.2. The RelativeOrientationSensor Model</a>
-    <li><a href="#ref-for-relativeorientationsensor③">6.3. The RelativeOrientationSensor Interface</a>
+    <li><a href="#ref-for-relativeorientationsensor③">6.3. The RelativeOrientationSensor Interface</a> <a href="#ref-for-relativeorientationsensor④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="construct-an-orientation-sensor-object">
