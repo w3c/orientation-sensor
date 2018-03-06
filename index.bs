@@ -348,7 +348,7 @@ The OrientationSensor Interface {#orientationsensor-interface}
 
   enum LocalCoordinateSystem { "device", "screen" };
 
-  dictionary OrientationSensorOptions : SensorOptions  {
+  dictionary OrientationSensorOptions : SensorOptions {
     LocalCoordinateSystem referenceFrame = "device";
   };
 </pre>
