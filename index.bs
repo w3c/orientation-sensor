@@ -346,10 +346,10 @@ The OrientationSensor Interface {#orientationsensor-interface}
     void populateMatrix(RotationMatrixType targetMatrix);
   };
 
-  enum LocalCoordinateSystem { "device", "screen" };
+  enum OrientationSensorLocalCoordinateSystem { "device", "screen" };
 
   dictionary OrientationSensorOptions : SensorOptions {
-    LocalCoordinateSystem referenceFrame = "device";
+    OrientationSensorLocalCoordinateSystem referenceFrame = "device";
   };
 </pre>
 

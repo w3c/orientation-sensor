@@ -1183,9 +1183,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 6aa3aaa1336714f1530c976b6df9a86c683d5968" name="generator">
+  <meta content="Bikeshed version 66a76cd06d4fa9e491630583356008a71a166760" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
-  <meta content="ae412f123c519db004472ce14e86db9c3b3236bd" name="document-revision">
+  <meta content="87e17d9867ed978af4610aabbadbe86bc22b398d" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1432,7 +1432,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-03-05">5 March 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-03-12">12 March 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1482,11 +1482,11 @@ physical orientation in relation to a stationary three dimensional Cartesian coo
 	All comments are welcome. </p>
    <p> This document was produced by the <a href="https://www.w3.org/2009/dap/">Device and Sensors Working Group</a>. </p>
    <p> This document was produced by a group operating under
-	the <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
+	the <a href="https://www.w3.org/Consortium/Patent-Policy/">W3C Patent Policy</a>.
 	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
-	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2017/Process-20170301/" id="w3c_process_revision">1 March 2017 W3C Process Document</a>. </p>
+	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/2018/Process-20180201/" id="w3c_process_revision">1 February 2018 W3C Process Document</a>. </p>
    <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -1639,8 +1639,8 @@ q<sub>2</sub>, q<sub>3</sub>].</p>
    </table>
    <p class="note" role="note"><span>Note:</span> <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/accelerometer#accelerometer" id="ref-for-accelerometer②">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/gyroscope#gyroscope" id="ref-for-gyroscope②">Gyroscope</a></code> and <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/magnetometer#magnetometer" id="ref-for-magnetometer①">Magnetometer</a></code> <a data-link-type="dfn" href="https://w3c.github.io/sensors#low-level" id="ref-for-low-level⑤">low-level</a> sensors are defined in <a data-link-type="biblio" href="#biblio-accelerometer">[ACCELEROMETER]</a>, <a data-link-type="biblio" href="#biblio-gyroscope">[GYROSCOPE]</a>, and <a data-link-type="biblio" href="#biblio-magnetometer">[MAGNETOMETER]</a> specifications respectively. The <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-fusion" id="ref-for-sensor-fusion①">sensor fusion</a> is platform specific and can happen in software or hardware, i.e.
 on a sensor hub.</p>
-   <div class="example" id="example-a5b53191">
-    <a class="self-link" href="#example-a5b53191"></a> This example code explicitly queries permissions for <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor③">AbsoluteOrientationSensor</a></code> before
+   <div class="example" id="example-501d0803">
+    <a class="self-link" href="#example-501d0803"></a> This example code explicitly queries permissions for <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor③">AbsoluteOrientationSensor</a></code> before
     calling <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#dom-sensor-start" id="ref-for-dom-sensor-start">start()</a></code>. 
 <pre class="highlight"><span class="kr">const</span> sensor <span class="o">=</span> <span class="k">new</span> AbsoluteOrientationSensor<span class="p">();</span>
 Promise<span class="p">.</span>all<span class="p">([</span>navigator<span class="p">.</span>permissions<span class="p">.</span>query<span class="p">({</span> name<span class="o">:</span> <span class="s2">"accelerometer"</span> <span class="p">}),</span>
@@ -1704,10 +1704,10 @@ orientation sensor, as the sensor is not affected by magnetic fields.</p>
   <span class="kt">void</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="OrientationSensor" data-dfn-type="method" data-export="" data-lt="populateMatrix(targetMatrix)" id="dom-orientationsensor-populatematrix"><code>populateMatrix</code></dfn>(<a class="n" data-link-type="idl-name" href="#typedefdef-rotationmatrixtype" id="ref-for-typedefdef-rotationmatrixtype">RotationMatrixType</a> <dfn class="nv idl-code" data-dfn-for="OrientationSensor/populateMatrix(targetMatrix)" data-dfn-type="argument" data-export="" id="dom-orientationsensor-populatematrix-targetmatrix-targetmatrix"><code>targetMatrix</code><a class="self-link" href="#dom-orientationsensor-populatematrix-targetmatrix-targetmatrix"></a></dfn>);
 };
 
-<span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></dfn> { <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;device&quot;|device" id="dom-localcoordinatesystem-device"><code>"device"</code><a class="self-link" href="#dom-localcoordinatesystem-device"></a></dfn>, <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;screen&quot;|screen" id="dom-localcoordinatesystem-screen"><code>"screen"</code><a class="self-link" href="#dom-localcoordinatesystem-screen"></a></dfn> };
+<span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-orientationsensorlocalcoordinatesystem"><code>OrientationSensorLocalCoordinateSystem</code></dfn> { <dfn class="s idl-code" data-dfn-for="OrientationSensorLocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;device&quot;|device" id="dom-orientationsensorlocalcoordinatesystem-device"><code>"device"</code><a class="self-link" href="#dom-orientationsensorlocalcoordinatesystem-device"></a></dfn>, <dfn class="s idl-code" data-dfn-for="OrientationSensorLocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;screen&quot;|screen" id="dom-orientationsensorlocalcoordinatesystem-screen"><code>"screen"</code><a class="self-link" href="#dom-orientationsensorlocalcoordinatesystem-screen"></a></dfn> };
 
 <span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-orientationsensoroptions"><code>OrientationSensorOptions</code></dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①">SensorOptions</a> {
-  <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem">LocalCoordinateSystem</a> <dfn class="nv dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="OrientationSensorOptions" data-dfn-type="dict-member" data-export="" data-type="LocalCoordinateSystem " id="dom-orientationsensoroptions-referenceframe"><code>referenceFrame</code></dfn> = "device";
+  <a class="n" data-link-type="idl-name" href="#enumdef-orientationsensorlocalcoordinatesystem" id="ref-for-enumdef-orientationsensorlocalcoordinatesystem">OrientationSensorLocalCoordinateSystem</a> <dfn class="nv dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="OrientationSensorOptions" data-dfn-type="dict-member" data-export="" data-type="OrientationSensorLocalCoordinateSystem " id="dom-orientationsensoroptions-referenceframe"><code>referenceFrame</code></dfn> = "device";
 };
 </pre>
    <h4 class="heading settled" data-level="6.1.1" id="orientationsensor-quaternion"><span class="secno">6.1.1. </span><span class="content">OrientationSensor.quaternion</span><a class="self-link" href="#orientationsensor-quaternion"></a></h4>
@@ -1902,12 +1902,12 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li><a href="#dom-absoluteorientationsensor-absoluteorientationsensor">AbsoluteOrientationSensor(sensorOptions)</a><span>, in §6.2</span>
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §9</span>
    <li><a href="#construct-an-orientation-sensor-object">Construct an Orientation Sensor object</a><span>, in §7</span>
-   <li><a href="#dom-localcoordinatesystem-device">device</a><span>, in §6.1</span>
-   <li><a href="#dom-localcoordinatesystem-device">"device"</a><span>, in §6.1</span>
+   <li><a href="#dom-orientationsensorlocalcoordinatesystem-device">device</a><span>, in §6.1</span>
+   <li><a href="#dom-orientationsensorlocalcoordinatesystem-device">"device"</a><span>, in §6.1</span>
    <li><a href="#earths-reference-coordinate-system">Earth’s reference coordinate system</a><span>, in §5.1</span>
-   <li><a href="#enumdef-localcoordinatesystem">LocalCoordinateSystem</a><span>, in §6.1</span>
    <li><a href="#orientationsensor">OrientationSensor</a><span>, in §6.1</span>
    <li><a href="#orientation-sensor">Orientation Sensor</a><span>, in §5</span>
+   <li><a href="#enumdef-orientationsensorlocalcoordinatesystem">OrientationSensorLocalCoordinateSystem</a><span>, in §6.1</span>
    <li><a href="#dictdef-orientationsensoroptions">OrientationSensorOptions</a><span>, in §6.1</span>
    <li><a href="#dom-orientationsensor-populatematrix">populateMatrix(targetMatrix)</a><span>, in §6.1</span>
    <li><a href="#populate-rotation-matrix">populate rotation matrix</a><span>, in §6.1.2</span>
@@ -1917,8 +1917,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li><a href="#dom-relativeorientationsensor-relativeorientationsensor">RelativeOrientationSensor()</a><span>, in §6.3</span>
    <li><a href="#dom-relativeorientationsensor-relativeorientationsensor">RelativeOrientationSensor(sensorOptions)</a><span>, in §6.3</span>
    <li><a href="#typedefdef-rotationmatrixtype">RotationMatrixType</a><span>, in §6.1</span>
-   <li><a href="#dom-localcoordinatesystem-screen">"screen"</a><span>, in §6.1</span>
-   <li><a href="#dom-localcoordinatesystem-screen">screen</a><span>, in §6.1</span>
+   <li><a href="#dom-orientationsensorlocalcoordinatesystem-screen">"screen"</a><span>, in §6.1</span>
+   <li><a href="#dom-orientationsensorlocalcoordinatesystem-screen">screen</a><span>, in §6.1</span>
    <li><a href="#stationary-reference-coordinate-system">stationary reference coordinate system</a><span>, in §5.2</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2046,10 +2046,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <span class="kt">void</span> <a class="nv" href="#dom-orientationsensor-populatematrix"><code>populateMatrix</code></a>(<a class="n" data-link-type="idl-name" href="#typedefdef-rotationmatrixtype" id="ref-for-typedefdef-rotationmatrixtype②">RotationMatrixType</a> <a class="nv" href="#dom-orientationsensor-populatematrix-targetmatrix-targetmatrix"><code>targetMatrix</code></a>);
 };
 
-<span class="kt">enum</span> <a class="nv" href="#enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></a> { <a class="s" href="#dom-localcoordinatesystem-device"><code>"device"</code></a>, <a class="s" href="#dom-localcoordinatesystem-screen"><code>"screen"</code></a> };
+<span class="kt">enum</span> <a class="nv" href="#enumdef-orientationsensorlocalcoordinatesystem"><code>OrientationSensorLocalCoordinateSystem</code></a> { <a class="s" href="#dom-orientationsensorlocalcoordinatesystem-device"><code>"device"</code></a>, <a class="s" href="#dom-orientationsensorlocalcoordinatesystem-screen"><code>"screen"</code></a> };
 
 <span class="kt">dictionary</span> <a class="nv" href="#dictdef-orientationsensoroptions"><code>OrientationSensorOptions</code></a> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①①">SensorOptions</a> {
-  <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem①">LocalCoordinateSystem</a> <a class="nv" data-default="&quot;device&quot;" data-type="LocalCoordinateSystem " href="#dom-orientationsensoroptions-referenceframe"><code>referenceFrame</code></a> = "device";
+  <a class="n" data-link-type="idl-name" href="#enumdef-orientationsensorlocalcoordinatesystem" id="ref-for-enumdef-orientationsensorlocalcoordinatesystem①">OrientationSensorLocalCoordinateSystem</a> <a class="nv" data-default="&quot;device&quot;" data-type="OrientationSensorLocalCoordinateSystem " href="#dom-orientationsensoroptions-referenceframe"><code>referenceFrame</code></a> = "device";
 };
 
 [<a class="nv" href="#dom-absoluteorientationsensor-absoluteorientationsensor"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions③">OrientationSensorOptions</a> <a class="nv" href="#dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"><code>sensorOptions</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①①">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①①">Exposed</a>=<span class="n">Window</span>]
@@ -2105,10 +2105,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-dom-orientationsensor-populatematrix">6.1.2. OrientationSensor.populateMatrix()</a> <a href="#ref-for-dom-orientationsensor-populatematrix①">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="enumdef-localcoordinatesystem">
-   <b><a href="#enumdef-localcoordinatesystem">#enumdef-localcoordinatesystem</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="enumdef-orientationsensorlocalcoordinatesystem">
+   <b><a href="#enumdef-orientationsensorlocalcoordinatesystem">#enumdef-orientationsensorlocalcoordinatesystem</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-enumdef-localcoordinatesystem">6.1. The OrientationSensor Interface</a>
+    <li><a href="#ref-for-enumdef-orientationsensorlocalcoordinatesystem">6.1. The OrientationSensor Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-orientationsensoroptions">
