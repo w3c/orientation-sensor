@@ -39,6 +39,7 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: sensor type
     text: local coordinate system
     text: check sensor policy-controlled features; url: check-sensor-policy-controlled-features
+    text: supported sensor options
 urlPrefix: https://w3c.github.io/accelerometer; spec: ACCELEROMETER
   type: dfn
     text: acceleration
@@ -442,6 +443,9 @@ To construct an {{AbsoluteOrientationSensor}} object the user agent must invoke 
 [=construct an orientation sensor object=] abstract operation for the {{AbsoluteOrientationSensor}}
 interface.
 
+[=Supported sensor options=] for {{AbsoluteOrientationSensor}} are
+"frequency" and "referenceFrame".
+
 The RelativeOrientationSensor Interface {#relativeorientationsensor-interface}
 -------------------------------------
 
@@ -454,6 +458,9 @@ The RelativeOrientationSensor Interface {#relativeorientationsensor-interface}
 To construct a {{RelativeOrientationSensor}} object the user agent must invoke the
 [=construct an orientation sensor object=] abstract operation for the {{RelativeOrientationSensor}}
 interface.
+
+[=Supported sensor options=] for {{RelativeOrientationSensor}} are
+"frequency" and "referenceFrame".
 
 Abstract Operations {#abstract-operations}
 ===================
