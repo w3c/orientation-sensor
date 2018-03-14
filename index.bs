@@ -25,7 +25,7 @@ Boilerplate: omit issues-index, omit conformance
 Ignored Vars: sensor_instance, targetMatrix, x, y, z, w
 </pre>
 <pre class="anchors">
-urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
+urlPrefix: https://w3c.github.io/sensors/; spec: GENERIC-SENSOR
   type: dfn
     text: activated
     text: construct a sensor object; url: construct-sensor-object
@@ -40,7 +40,7 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: local coordinate system
     text: check sensor policy-controlled features; url: check-sensor-policy-controlled-features
     text: supported sensor options
-urlPrefix: https://w3c.github.io/accelerometer; spec: ACCELEROMETER
+urlPrefix: https://w3c.github.io/accelerometer/; spec: ACCELEROMETER
   type: dfn
     text: acceleration
     text: device coordinate system
@@ -50,7 +50,7 @@ urlPrefix: https://w3c.github.io/accelerometer; spec: ACCELEROMETER
 </pre>
 
 <pre class="anchors">
-urlPrefix: https://w3c.github.io/gyroscope; spec: GYROSCOPE
+urlPrefix: https://w3c.github.io/gyroscope/; spec: GYROSCOPE
   type: dfn
     text: angular velocity
   type: interface
@@ -58,7 +58,7 @@ urlPrefix: https://w3c.github.io/gyroscope; spec: GYROSCOPE
 </pre>
 
 <pre class="anchors">
-urlPrefix: https://w3c.github.io/magnetometer; spec: MAGNETOMETER
+urlPrefix: https://w3c.github.io/magnetometer/; spec: MAGNETOMETER
   type: dfn
     text: magnetic field
   type: interface
@@ -66,13 +66,13 @@ urlPrefix: https://w3c.github.io/magnetometer; spec: MAGNETOMETER
 </pre>
 
 <pre class="anchors">
-urlPrefix: https://www.w3.org/TR/orientation-event; spec: DEVICEORIENTATION
+urlPrefix: https://www.w3.org/TR/2016/CR-orientation-event-20160818/; spec: DEVICEORIENTATION
   type: interface
     text: DeviceOrientationEvent; url: deviceorientation_event
 </pre>
 
 <pre class="anchors">
-urlPrefix: https://w3c.github.io/motion-sensors; spec: MOTIONSENSORS
+urlPrefix: https://w3c.github.io/motion-sensors/; spec: MOTIONSENSORS
   type: dfn
     text: Absolute Orientation Sensor; url: absolute-orientation
     text: Relative Orientation Sensor; url: relative-orientation
