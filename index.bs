@@ -503,7 +503,7 @@ of {{AbsoluteOrientationSensor}} and {{RelativeOrientationSensor}} APIs.
 
 The {{AbsoluteOrientationSensor}} class has an associated [=mock sensor type=] which is
 <a for="MockSensorType" enum-value>"absolute-orientation"</a>, its [=mock sensor reading values=]
-dictionary is defined as follow:
+dictionary is defined as follows:
 
 <pre class="idl">
   dictionary AbsoluteOrientationReadingValues {
@@ -513,7 +513,7 @@ dictionary is defined as follow:
 
 The {{RelativeOrientationSensor}} class has an associated [=mock sensor type=] which is
 <a for="MockSensorType" enum-value>"relative-orientation"</a>, its [=mock sensor reading values=]
-dictionary is defined as follow:
+dictionary is defined as follows:
 
 <pre class="idl">
   dictionary RelativeOrientationReadingValues : AbsoluteOrientationReadingValues {
