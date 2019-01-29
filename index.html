@@ -1219,9 +1219,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 9c6ae748322940994300e90a77c34437364b40a6" name="generator">
+  <meta content="Bikeshed version eee3e9e7543e2188fb60d183a6cf3fe3a7d971c1" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
-  <meta content="06341059030e1f9ec8d698d4e766aacc2d0601c4" name="document-revision">
+  <meta content="03a4b0804a001e76b542b3894d9e1802363b8b98" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1479,7 +1479,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-01-28">28 January 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-01-29">29 January 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1937,12 +1937,12 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
 dimensional Cartesian coordinate system for the purposes of testing a user agent’s implementation
 of <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑧">AbsoluteOrientationSensor</a></code> and <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor⑥">RelativeOrientationSensor</a></code> APIs. 
    <h3 class="heading settled" data-level="8.1" id="mock-orientation-sensor-type"><span class="secno">8.1. </span><span class="content">Mock Sensor Type</span><a class="self-link" href="#mock-orientation-sensor-type"></a></h3>
-   <p>The <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑨">AbsoluteOrientationSensor</a></code> class has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-type" id="ref-for-mock-sensor-type">mock sensor type</a> which is <a class="idl-code" data-link-type="enum-value">"absolute-orientation"</a>, its <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-reading-values" id="ref-for-mock-sensor-reading-values">mock sensor reading values</a> dictionary is defined as follows:</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑨">AbsoluteOrientationSensor</a></code> class has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-type" id="ref-for-mock-sensor-type">mock sensor type</a> which is <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-mocksensortype-absolute-orientation" id="ref-for-dom-mocksensortype-absolute-orientation">"absolute-orientation"</a>, its <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-reading-values" id="ref-for-mock-sensor-reading-values">mock sensor reading values</a> dictionary is defined as follows:</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-absoluteorientationreadingvalues"><code><c- g>AbsoluteOrientationReadingValues</c-></code></dfn> {
   <c- b>required</c-> <c- b>FrozenArray</c->&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double①"><c- b>double</c-></a>>? <dfn class="idl-code" data-dfn-for="AbsoluteOrientationReadingValues" data-dfn-type="dict-member" data-export data-type="FrozenArray<double>? " id="dom-absoluteorientationreadingvalues-quaternion"><code><c- g>quaternion</c-></code><a class="self-link" href="#dom-absoluteorientationreadingvalues-quaternion"></a></dfn>;
 };
 </pre>
-   <p>The <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor⑦">RelativeOrientationSensor</a></code> class has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-type" id="ref-for-mock-sensor-type①">mock sensor type</a> which is <a class="idl-code" data-link-type="enum-value">"relative-orientation"</a>, its <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-reading-values" id="ref-for-mock-sensor-reading-values①">mock sensor reading values</a> dictionary is defined as follows:</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor⑦">RelativeOrientationSensor</a></code> class has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-type" id="ref-for-mock-sensor-type①">mock sensor type</a> which is <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-mocksensortype-relative-orientation" id="ref-for-dom-mocksensortype-relative-orientation">"relative-orientation"</a>, its <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-reading-values" id="ref-for-mock-sensor-reading-values①">mock sensor reading values</a> dictionary is defined as follows:</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="idl-code" data-dfn-type="dictionary" data-export id="dictdef-relativeorientationreadingvalues"><code><c- g>RelativeOrientationReadingValues</c-></code><a class="self-link" href="#dictdef-relativeorientationreadingvalues"></a></dfn> : <a class="n" data-link-type="idl-name" href="#dictdef-absoluteorientationreadingvalues" id="ref-for-dictdef-absoluteorientationreadingvalues"><c- n>AbsoluteOrientationReadingValues</c-></a> {
 };
 </pre>
@@ -2022,6 +2022,18 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <a href="https://www.w3.org/TR/2016/CR-orientation-event-20160818/#deviceorientation_event">https://www.w3.org/TR/2016/CR-orientation-event-20160818/#deviceorientation_event</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-deviceorientation_event">1. Introduction</a> <a href="#ref-for-deviceorientation_event①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-mocksensortype-absolute-orientation">
+   <a href="https://w3c.github.io/sensors/#dom-mocksensortype-absolute-orientation">https://w3c.github.io/sensors/#dom-mocksensortype-absolute-orientation</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mocksensortype-absolute-orientation">8.1. Mock Sensor Type</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-mocksensortype-relative-orientation">
+   <a href="https://w3c.github.io/sensors/#dom-mocksensortype-relative-orientation">https://w3c.github.io/sensors/#dom-mocksensortype-relative-orientation</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mocksensortype-relative-orientation">8.1. Mock Sensor Type</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-sensor">
@@ -2315,6 +2327,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-dom-mocksensortype-absolute-orientation" style="color:initial">"absolute-orientation"</span>
+     <li><span class="dfn-paneled" id="term-for-dom-mocksensortype-relative-orientation" style="color:initial">"relative-orientation"</span>
      <li><span class="dfn-paneled" id="term-for-sensor" style="color:initial">Sensor</span>
      <li><span class="dfn-paneled" id="term-for-dictdef-sensoroptions" style="color:initial">SensorOptions</span>
      <li><span class="dfn-paneled" id="term-for-automation" style="color:initial">automation</span>
