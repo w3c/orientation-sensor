@@ -1030,7 +1030,7 @@ Possible extra rowspan handling
 		}
 	/* } */
 
-	@supports (display:grid) {
+	@supports (display:grid) and (display:contents) {
 		/* Use #toc over .toc to override non-@supports rules. */
 		#toc {
 			display: grid;
@@ -1219,8 +1219,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version c03af8da7325f5ae3f9ca742161b5d270bbce12f" name="generator">
+  <meta content="Bikeshed version 220086d88511a9c99d7a1f9b5447db7e7b99e053" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
+  <meta content="d03f8cc646841346a6aaf137a5764dc798bb6cca" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1478,7 +1479,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-03-08">8 March 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-09">9 August 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1879,7 +1880,7 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
     </ol>
    </div>
    <h3 class="heading settled" data-level="6.2" id="absoluteorientationsensor-interface"><span class="secno">6.2. </span><span class="content">The AbsoluteOrientationSensor Interface</span><a class="self-link" href="#absoluteorientationsensor-interface"></a></h3>
-<pre class="idl highlight def">[<dfn class="idl-code" data-dfn-for="AbsoluteOrientationSensor" data-dfn-type="constructor" data-export data-lt="AbsoluteOrientationSensor(sensorOptions)|AbsoluteOrientationSensor()" id="dom-absoluteorientationsensor-absoluteorientationsensor"><code><c- g>Constructor</c-></code><a class="self-link" href="#dom-absoluteorientationsensor-absoluteorientationsensor"></a></dfn>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions"><c- n>OrientationSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="AbsoluteOrientationSensor/AbsoluteOrientationSensor(sensorOptions)" data-dfn-type="argument" data-export id="dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code><a class="self-link" href="#dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"></a></dfn>), <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
+<pre class="idl highlight def">[<dfn class="idl-code" data-dfn-for="AbsoluteOrientationSensor" data-dfn-type="constructor" data-export data-lt="AbsoluteOrientationSensor(sensorOptions)|AbsoluteOrientationSensor()" id="dom-absoluteorientationsensor-absoluteorientationsensor"><code><c- g>Constructor</c-></code><a class="self-link" href="#dom-absoluteorientationsensor-absoluteorientationsensor"></a></dfn>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions"><c- n>OrientationSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="AbsoluteOrientationSensor/AbsoluteOrientationSensor(sensorOptions)" data-dfn-type="argument" data-export id="dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code><a class="self-link" href="#dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"></a></dfn> = {}), <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="absoluteorientationsensor"><code><c- g>AbsoluteOrientationSensor</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor⑧"><c- n>OrientationSensor</c-></a> {
 };
 </pre>
@@ -1887,7 +1888,7 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
    <p><a data-link-type="dfn" href="https://w3c.github.io/sensors/#supported-sensor-options" id="ref-for-supported-sensor-options">Supported sensor options</a> for <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑦">AbsoluteOrientationSensor</a></code> are
 "frequency" and "referenceFrame".</p>
    <h3 class="heading settled" data-level="6.3" id="relativeorientationsensor-interface"><span class="secno">6.3. </span><span class="content">The RelativeOrientationSensor Interface</span><a class="self-link" href="#relativeorientationsensor-interface"></a></h3>
-<pre class="idl highlight def">[<dfn class="idl-code" data-dfn-for="RelativeOrientationSensor" data-dfn-type="constructor" data-export data-lt="RelativeOrientationSensor(sensorOptions)|RelativeOrientationSensor()" id="dom-relativeorientationsensor-relativeorientationsensor"><code><c- g>Constructor</c-></code><a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor"></a></dfn>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions①"><c- n>OrientationSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="RelativeOrientationSensor/RelativeOrientationSensor(sensorOptions)" data-dfn-type="argument" data-export id="dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code><a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"></a></dfn>), <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
+<pre class="idl highlight def">[<dfn class="idl-code" data-dfn-for="RelativeOrientationSensor" data-dfn-type="constructor" data-export data-lt="RelativeOrientationSensor(sensorOptions)|RelativeOrientationSensor()" id="dom-relativeorientationsensor-relativeorientationsensor"><code><c- g>Constructor</c-></code><a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor"></a></dfn>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions①"><c- n>OrientationSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="RelativeOrientationSensor/RelativeOrientationSensor(sensorOptions)" data-dfn-type="argument" data-export id="dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code><a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"></a></dfn> = {}), <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="relativeorientationsensor"><code><c- g>RelativeOrientationSensor</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor⑨"><c- n>OrientationSensor</c-></a> {
 };
 </pre>
@@ -2419,7 +2420,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
-   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
@@ -2447,11 +2448,11 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <a class="n" data-link-type="idl-name" href="#enumdef-orientationsensorlocalcoordinatesystem" id="ref-for-enumdef-orientationsensorlocalcoordinatesystem①"><c- n>OrientationSensorLocalCoordinateSystem</c-></a> <a data-default="&quot;device&quot;" data-type="OrientationSensorLocalCoordinateSystem " href="#dom-orientationsensoroptions-referenceframe"><code><c- g>referenceFrame</c-></code></a> = "device";
 };
 
-[<a href="#dom-absoluteorientationsensor-absoluteorientationsensor"><code><c- g>Constructor</c-></code></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions③"><c- n>OrientationSensorOptions</c-></a> <a href="#dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code></a>), <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①①"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
+[<a href="#dom-absoluteorientationsensor-absoluteorientationsensor"><code><c- g>Constructor</c-></code></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions③"><c- n>OrientationSensorOptions</c-></a> <a href="#dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code></a> = {}), <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①①"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <a href="#absoluteorientationsensor"><code><c- g>AbsoluteOrientationSensor</c-></code></a> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor⑧①"><c- n>OrientationSensor</c-></a> {
 };
 
-[<a href="#dom-relativeorientationsensor-relativeorientationsensor"><code><c- g>Constructor</c-></code></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions①①"><c- n>OrientationSensorOptions</c-></a> <a href="#dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code></a>), <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②①"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
+[<a href="#dom-relativeorientationsensor-relativeorientationsensor"><code><c- g>Constructor</c-></code></a>(<c- b>optional</c-> <a class="n" data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions①①"><c- n>OrientationSensorOptions</c-></a> <a href="#dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code></a> = {}), <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②①"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <a href="#relativeorientationsensor"><code><c- g>RelativeOrientationSensor</c-></code></a> : <a class="n" data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor⑨①"><c- n>OrientationSensor</c-></a> {
 };
 
