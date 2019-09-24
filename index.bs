@@ -437,8 +437,9 @@ The AbsoluteOrientationSensor Interface {#absoluteorientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
-  [Constructor(optional OrientationSensorOptions sensorOptions = {}), SecureContext, Exposed=Window]
+  [SecureContext, Exposed=Window]
   interface AbsoluteOrientationSensor : OrientationSensor {
+    constructor(optional OrientationSensorOptions sensorOptions = {});
   };
 </pre>
 
@@ -453,8 +454,9 @@ The RelativeOrientationSensor Interface {#relativeorientationsensor-interface}
 -------------------------------------
 
 <pre class="idl">
-  [Constructor(optional OrientationSensorOptions sensorOptions = {}), SecureContext, Exposed=Window]
+  [SecureContext, Exposed=Window]
   interface RelativeOrientationSensor : OrientationSensor {
+    constructor(optional OrientationSensorOptions sensorOptions = {});
   };
 </pre>
 
