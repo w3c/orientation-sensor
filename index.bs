@@ -5,7 +5,7 @@ Level: none
 ED: https://w3c.github.io/orientation-sensor/
 Shortname: orientation-sensor
 TR: https://www.w3.org/TR/orientation-sensor/
-Previous Version: https://www.w3.org/TR/2018/CR-orientation-sensor-20180320/
+Previous Version: https://www.w3.org/TR/2019/WD-orientation-sensor-20190307/
 Editor: Kenneth Rohde Christiansen 57705, Intel Corporation, https://intel.com/
 Editor: Anssi Kostiainen 41974, Intel Corporation, https://intel.com/
 Former Editor: Mikhail Pozdnyakov 78325, Intel Corporation, https://intel.com/
