@@ -103,15 +103,10 @@ spec: webidl;
 <pre class=biblio>
 {
     "QUATERNIONS": {
-        "authors": [
-            "Kuipers, Jack B"
-        ],
         "id": "QUATERNIONS",
-        "href": "http://www.emis.ams.org/proceedings/Varna/vol1/GEOM09.pdf",
-        "title": "Quaternions and rotation sequences. Vol. 66.",
-        "date": "1999",
-        "status": "Informational",
-        "publisher": "Princeton university press"
+        "href": "https://en.wikipedia.org/wiki/Quaternion",
+        "title": "Quaternion",
+        "publisher": "Wikipedia"
     },
     "QUATCONV": {
         "authors": [
