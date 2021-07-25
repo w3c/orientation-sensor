@@ -5,9 +5,9 @@
   <title>Orientation Sensor</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 7573c85df, updated Fri Feb 19 16:30:08 2021 -0800" name="generator">
+  <meta content="Bikeshed version 59d067506, updated Fri Jul 23 15:43:29 2021 -0700" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
-  <meta content="a428d9ea50bc89146e6e469a5c935dc2cd92cd24" name="document-revision">
+  <meta content="49a08a86ff4a29223d598865212ad40b97c83d56" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -114,9 +114,9 @@ pre .property::before, pre .property::after {
     --ins-bg: transparent;
 
     --a-normal-text: #034575;
-    --a-normal-underline: #707070;
+    --a-normal-underline: #bbb;
     --a-visited-text: var(--a-normal-text);
-    --a-visited-underline: #bbb;
+    --a-visited-underline: #707070;
     --a-hover-bg: rgba(75%, 75%, 75%, .25);
     --a-active-text: #c00;
     --a-active-underline: #c00;
@@ -259,6 +259,62 @@ figcaption:not(.no-marker)::before {
 [data-md] > :last-child {
     margin-bottom: 0;
 }</style>
+<style>/* style-mdn-anno */
+
+            @media (max-width: 767px) { .mdn-anno { opacity: .1 } }
+            .mdn-anno { font: 1em sans-serif; padding: 0.3em; position: absolute; z-index: 8; right: 0.3em; background: #EEE; color: black; box-shadow: 0 0 3px #999; overflow: hidden; border-collapse: initial; border-spacing: initial; min-width: 9em; max-width: min-content; white-space: nowrap; word-wrap: normal; hyphens: none}
+            .mdn-anno:not(.wrapped) { opacity: 1}
+            .mdn-anno:hover { z-index: 9 }
+            .mdn-anno.wrapped { min-width: 0 }
+            .mdn-anno.wrapped > :not(button) { display: none; }
+            .mdn-anno > .mdn-anno-btn { cursor: pointer; border: none; color: #000; background: transparent; margin: -8px; float: right; padding: 10px 8px 8px 8px; outline: none; }
+            .mdn-anno > .mdn-anno-btn > .less-than-two-engines-flag { color: red; padding-right: 2px; }
+            .mdn-anno > .mdn-anno-btn > .all-engines-flag { color: green; padding-right: 2px; }
+            .mdn-anno > .mdn-anno-btn > span { color: #fff; background-color: #000; font-weight: normal; font-family: zillaslab, Palatino, "Palatino Linotype", serif; padding: 2px 3px 0px 3px; line-height: 1.3em; vertical-align: top; }
+            .mdn-anno > .feature { margin-top: 20px; }
+            .mdn-anno > .feature:not(:first-of-type) { border-top: 1px solid #999; margin-top: 6px; padding-top: 2px; }
+            .mdn-anno > .feature > .less-than-two-engines-text { color: red }
+            .mdn-anno > .feature > .all-engines-text { color: green }
+            .mdn-anno > .feature > p { font-size: .75em; margin-top: 6px; margin-bottom: 0; }
+            .mdn-anno > .feature > p + p { margin-top: 3px; }
+            .mdn-anno > .feature > .support { display: block; font-size: 0.6em; margin: 0; padding: 0; margin-top: 2px }
+            .mdn-anno > .feature > .support + div { padding-top: 0.5em; }
+            .mdn-anno > .feature > .support > hr { display: block; border: none; border-top: 1px dotted #999; padding: 3px 0px 0px 0px; margin: 2px 3px 0px 3px; }
+            .mdn-anno > .feature > .support > hr::before { content: ""; }
+            .mdn-anno > .feature > .support > span { padding: 0.2em 0; display: block; display: table; }
+            .mdn-anno > .feature > .support > span.no { color: #CCCCCC; filter: grayscale(100%); }
+            .mdn-anno > .feature > .support > span.no::before { opacity: 0.5; }
+            .mdn-anno > .feature > .support > span:first-of-type { padding-top: 0.5em; }
+            .mdn-anno > .feature > .support > span > span { padding: 0 0.5em; display: table-cell; }
+            .mdn-anno > .feature > .support > span > span:first-child { width: 100%; }
+            .mdn-anno > .feature > .support > span > span:last-child { width: 100%; white-space: pre; padding: 0; }
+            .mdn-anno > .feature > .support > span::before { content: ' '; display: table-cell; min-width: 1.5em; height: 1.5em; background: no-repeat center center; background-size: contain; text-align: right; font-size: 0.75em; font-weight: bold; }
+            .mdn-anno > .feature > .support > .chrome_android::before { background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg); }
+            .mdn-anno > .feature > .support > .firefox_android::before { background-image: url(https://resources.whatwg.org/browser-logos/firefox.png); }
+            .mdn-anno > .feature > .support > .chrome::before { background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg); }
+            .mdn-anno > .feature > .support > .edge_blink::before { background-image: url(https://resources.whatwg.org/browser-logos/edge.svg); }
+            .mdn-anno > .feature > .support > .edge::before { background-image: url(https://resources.whatwg.org/browser-logos/edge_legacy.svg); }
+            .mdn-anno > .feature > .support > .firefox::before { background-image: url(https://resources.whatwg.org/browser-logos/firefox.png); }
+            .mdn-anno > .feature > .support > .ie::before { background-image: url(https://resources.whatwg.org/browser-logos/ie.png); }
+            .mdn-anno > .feature > .support > .safari_ios::before { background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg); }
+            .mdn-anno > .feature > .support > .nodejs::before { background-image: url(https://nodejs.org/static/images/favicons/favicon.ico); }
+            .mdn-anno > .feature > .support > .opera_android::before { background-image: url(https://resources.whatwg.org/browser-logos/opera.svg); }
+            .mdn-anno > .feature > .support > .opera::before { background-image: url(https://resources.whatwg.org/browser-logos/opera.svg); }
+            .mdn-anno > .feature > .support > .safari::before { background-image: url(https://resources.whatwg.org/browser-logos/safari.png); }
+            .mdn-anno > .feature > .support > .samsunginternet_android::before { background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg); }
+            .mdn-anno > .feature > .support > .webview_android::before { background-image: url(https://resources.whatwg.org/browser-logos/android-webview.png); }
+            .name-slug-mismatch { color: red }
+            .caniuse-status:hover { z-index: 9; }
+
+            /* dt, li, .issue, .note, and .example are "position: relative", so to put annotation at right margin, must move to right of containing block */
+            .h-entry:not(.status-LS) dt > .mdn-anno, .h-entry:not(.status-LS) li > .mdn-anno, .h-entry:not(.status-LS) .issue > .mdn-anno, .h-entry:not(.status-LS) .note > .mdn-anno, .h-entry:not(.status-LS) .example > .mdn-anno { right: -6.7em; }
+            .h-entry p + .mdn-anno { margin-top: 0; }
+            h2 + .mdn-anno.after { margin: -48px 0 0 0; }
+            h3 + .mdn-anno.after { margin: -46px 0 0 0; }
+            h4 + .mdn-anno.after { margin: -42px 0 0 0; }
+            h5 + .mdn-anno.after { margin: -40px 0 0 0; }
+            h6 + .mdn-anno.after { margin: -40px 0 0 0; }
+            </style>
 <style>/* style-selflinks */
 
 :root {
@@ -579,35 +635,31 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-02-23">23 February 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-07-25">25 July 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
      <dd><a class="u-url" href="https://w3c.github.io/orientation-sensor/">https://w3c.github.io/orientation-sensor/</a>
      <dt>Latest published version:
      <dd><a href="https://www.w3.org/TR/orientation-sensor/">https://www.w3.org/TR/orientation-sensor/</a>
-     <dt>Previous Versions:
-     <dd><a href="https://www.w3.org/TR/2019/WD-orientation-sensor-20190307/" rel="prev">https://www.w3.org/TR/2019/WD-orientation-sensor-20190307/</a>
      <dt>Version History:
      <dd><a href="https://github.com/w3c/orientation-sensor/commits/main/index.bs">https://github.com/w3c/orientation-sensor/commits/main/index.bs</a>
      <dt>Feedback:
      <dd><span><a href="mailto:public-device-apis@w3.org?subject=%5Borientation-sensor%5D%20YOUR%20TOPIC%20HERE">public-device-apis@w3.org</a> with subject line “<kbd>[orientation-sensor] <i data-lt>… message topic …</i></kbd>” (<a href="https://lists.w3.org/Archives/Public/public-device-apis/" rel="discussion">archives</a>)</span>
      <dt>Issue Tracking:
-     <dd><a href="https://github.com/w3c/orientation-sensor/issues/">GitHub</a>
+     <dd><a href="https://github.com/w3c/magnetometer/issues">Orientation Sensor Issues Repository</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard" data-editor-id="57705"><a class="p-name fn u-url url" href="https://intel.com/">Kenneth Rohde Christiansen</a> (<span class="p-org org">Intel Corporation</span>)
      <dd class="editor p-author h-card vcard" data-editor-id="41974"><a class="p-name fn u-url url" href="https://intel.com/">Anssi Kostiainen</a> (<span class="p-org org">Intel Corporation</span>)
      <dt class="editor">Former Editors:
      <dd class="editor p-author h-card vcard" data-editor-id="78325"><a class="p-name fn u-url url" href="https://intel.com/">Mikhail Pozdnyakov</a> (<span class="p-org org">Intel Corporation</span>)
      <dd class="editor p-author h-card vcard" data-editor-id="78335"><a class="p-name fn u-url url" href="https://intel.com/">Alexander Shalamov</a> (<span class="p-org org">Intel Corporation</span>)
-     <dt>Bug Reports:
-     <dd><a href="https://www.github.com/w3c/orientation-sensor/issues/new">via the w3c/orientation-sensor repository on GitHub</a>
      <dt>Test Suite:
-     <dd><a href="https://github.com/web-platform-tests/wpt/tree/main/orientation-sensor">web-platform-tests on GitHub</a>
+     <dd><a href="https://github.com/web-platform-tests/wpt/tree/master/orientation-sensor">web-platform-tests on GitHub</a>
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2021 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>, <a href="https://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2021 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>, <a href="https://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document" rel="license">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -631,11 +683,18 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p> This document was produced by the <a href="https://www.w3.org/das/">Devices and Sensors Working Group</a>. </p>
    <p> This document was produced by a group operating under
 	the <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/">W3C Patent Policy</a>.
-	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
+	W3C maintains a <a href="https://www.w3.org/groups/wg/das/ipr" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
 	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
    <p> This document is governed by the <a href="https://www.w3.org/2020/Process-20200915/" id="w3c_process_revision">15 September 2020 W3C Process Document</a>. </p>
    <p></p>
+   <p>The Devices and Sensors Working Group is pursuing modern security and privacy
+
+reviews for this specification in consideration of the amount of change in both
+this specification and in privacy and security review practices since the
+horizontal reviews took place. Similarly, the group is pursuing an update to the
+Technical Architecture Group review for this specification to account for the
+latest architectural review practices.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
@@ -849,6 +908,22 @@ the environment.</p>
 orientation sensor, as the sensor is not affected by magnetic fields.</p>
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="orientationsensor-interface"><span class="secno">6.1. </span><span class="content">The OrientationSensor Interface</span><a class="self-link" href="#orientationsensor-interface"></a></h3>
+   <div class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OrientationSensor" title="The OrientationSensor interface of the Sensor APIs is the base class for orientation sensors. This interface cannot be used directly. Instead it provides properties and methods accessed by interfaces that inherit from it.">OrientationSensor</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>67+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>54+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>67+</span></span><span class="webview_android yes"><span>Android WebView</span><span>67+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>9.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>48+</span></span>
+     </div>
+    </div>
+   </div>
 <pre class="idl highlight def"><c- b>typedef</c-> (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Float32Array" id="ref-for-idl-Float32Array"><c- b>Float32Array</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-Float64Array" id="ref-for-idl-Float64Array"><c- b>Float64Array</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="https://drafts.fxtf.org/geometry-1/#dommatrix" id="ref-for-dommatrix"><c- n>DOMMatrix</c-></a>) <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export id="typedefdef-rotationmatrixtype"><code><c- g>RotationMatrixType</c-></code></dfn>;
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -864,13 +939,45 @@ orientation sensor, as the sensor is not affected by magnetic fields.</p>
 };
 </pre>
    <h4 class="heading settled" data-level="6.1.1" id="orientationsensor-quaternion"><span class="secno">6.1.1. </span><span class="content">OrientationSensor.quaternion</span><a class="self-link" href="#orientationsensor-quaternion"></a></h4>
+   <div class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OrientationSensor/quaternion" title="The quaternion read-only property of the OrientationSensor interface returns a four element Array whose elements contain the components of the unit quaternion representing the device&apos;s orientation.">OrientationSensor/quaternion</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>67+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>54+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>67+</span></span><span class="webview_android yes"><span>Android WebView</span><span>67+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>9.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>48+</span></span>
+     </div>
+    </div>
+   </div>
    <p>Returns a four-element <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-frozen-array" id="ref-for-idl-frozen-array①">FrozenArray</a></code> whose elements contain the components
 of the unit quaternion representing the device orientation.
 In other words, this attribute returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading">get value from latest reading</a> with <emu-val>this</emu-val> and "quaternion" as arguments.</p>
    <h4 class="heading settled" data-level="6.1.2" id="orientationsensor-populatematrix"><span class="secno">6.1.2. </span><span class="content">OrientationSensor.populateMatrix()</span><a class="self-link" href="#orientationsensor-populatematrix"></a></h4>
+   <div class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OrientationSensor/populateMatrix" title="he populateMatrix method of the OrientationSensor interface populates the given target matrix with the rotation matrix based on the latest sensor reading. The rotation matrix is shown below.">OrientationSensor/populateMatrix</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>67+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>54+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>67+</span></span><span class="webview_android yes"><span>Android WebView</span><span>67+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>9.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>48+</span></span>
+     </div>
+    </div>
+   </div>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix">populateMatrix()</a></code> method  populates the given object with rotation matrix
 which is converted from the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading⑤">latest reading</a>["quaternion"] <a data-link-type="biblio" href="#biblio-quatconv">[QUATCONV]</a>, as shown below:</p>
-   <p><img alt="Converting quaternion to rotation matrix." src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;"></p>
+   <p><img alt="Converting quaternion to rotation matrix." height="205" src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;" width="795"></p>
    <p>where:</p>
    <ul>
     <li data-md>
@@ -980,6 +1087,38 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
     </ol>
    </div>
    <h3 class="heading settled" data-level="6.2" id="absoluteorientationsensor-interface"><span class="secno">6.2. </span><span class="content">The AbsoluteOrientationSensor Interface</span><a class="self-link" href="#absoluteorientationsensor-interface"></a></h3>
+   <div class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/AbsoluteOrientationSensor" title="The AbsoluteOrientationSensor interface of the Sensor APIs describes the device&apos;s physical orientation in relation to the Earth&apos;s reference coordinate system.">AbsoluteOrientationSensor</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>67+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>54+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>67+</span></span><span class="webview_android yes"><span>Android WebView</span><span>67+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>9.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>48+</span></span>
+     </div>
+    </div>
+   </div>
+   <div class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/AbsoluteOrientationSensor/AbsoluteOrientationSensor" title="The AbsoluteOrientationSensor() constructor creates a new AbsoluteOrientationSensor object which describes the device&apos;s physical orientation in relation to the Earth&apos;s reference coordinate system.">AbsoluteOrientationSensor/AbsoluteOrientationSensor</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>67+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>54+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>67+</span></span><span class="webview_android yes"><span>Android WebView</span><span>67+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>9.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>48+</span></span>
+     </div>
+    </div>
+   </div>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="absoluteorientationsensor"><code><c- g>AbsoluteOrientationSensor</c-></code></dfn> : <a data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor⑧"><c- n>OrientationSensor</c-></a> {
   <dfn class="idl-code" data-dfn-for="AbsoluteOrientationSensor" data-dfn-type="constructor" data-export data-lt="AbsoluteOrientationSensor(sensorOptions)|constructor(sensorOptions)|AbsoluteOrientationSensor()|constructor()" id="dom-absoluteorientationsensor-absoluteorientationsensor"><code><c- g>constructor</c-></code><a class="self-link" href="#dom-absoluteorientationsensor-absoluteorientationsensor"></a></dfn>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions"><c- n>OrientationSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="AbsoluteOrientationSensor/AbsoluteOrientationSensor(sensorOptions), AbsoluteOrientationSensor/constructor(sensorOptions), AbsoluteOrientationSensor/AbsoluteOrientationSensor(), AbsoluteOrientationSensor/constructor()" data-dfn-type="argument" data-export id="dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code><a class="self-link" href="#dom-absoluteorientationsensor-absoluteorientationsensor-sensoroptions-sensoroptions"></a></dfn> = {});
@@ -989,6 +1128,38 @@ run these steps or their <a data-link-type="dfn" href="https://w3c.github.io/sen
    <p><a data-link-type="dfn" href="https://w3c.github.io/sensors/#supported-sensor-options" id="ref-for-supported-sensor-options">Supported sensor options</a> for <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑦">AbsoluteOrientationSensor</a></code> are
 "frequency" and "referenceFrame".</p>
    <h3 class="heading settled" data-level="6.3" id="relativeorientationsensor-interface"><span class="secno">6.3. </span><span class="content">The RelativeOrientationSensor Interface</span><a class="self-link" href="#relativeorientationsensor-interface"></a></h3>
+   <div class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/RelativeOrientationSensor" title="The RelativeOrientationSensor interface of the Sensor APIs describes the device&apos;s physical orientation without regard to the Earth&apos;s reference coordinate system.">RelativeOrientationSensor</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>67+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>54+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="chrome_android yes"><span>Chrome for Android</span><span>67+</span></span><span class="webview_android yes"><span>Android WebView</span><span>67+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>9.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>48+</span></span>
+     </div>
+    </div>
+   </div>
+   <div class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/RelativeOrientationSensor/RelativeOrientationSensor" title="The RelativeOrientationSensor() constructor creates a new RelativeOrientationSensor object which describes the device&apos;s physical orientation.">RelativeOrientationSensor/RelativeOrientationSensor</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>67+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>54+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="chrome_android yes"><span>Chrome for Android</span><span>67+</span></span><span class="webview_android yes"><span>Android WebView</span><span>67+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>9.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>48+</span></span>
+     </div>
+    </div>
+   </div>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="relativeorientationsensor"><code><c- g>RelativeOrientationSensor</c-></code></dfn> : <a data-link-type="idl-name" href="#orientationsensor" id="ref-for-orientationsensor⑨"><c- n>OrientationSensor</c-></a> {
   <dfn class="idl-code" data-dfn-for="RelativeOrientationSensor" data-dfn-type="constructor" data-export data-lt="RelativeOrientationSensor(sensorOptions)|constructor(sensorOptions)|RelativeOrientationSensor()|constructor()" id="dom-relativeorientationsensor-relativeorientationsensor"><code><c- g>constructor</c-></code><a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor"></a></dfn>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-orientationsensoroptions" id="ref-for-dictdef-orientationsensoroptions①"><c- n>OrientationSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="RelativeOrientationSensor/RelativeOrientationSensor(sensorOptions), RelativeOrientationSensor/constructor(sensorOptions), RelativeOrientationSensor/RelativeOrientationSensor(), RelativeOrientationSensor/constructor()" data-dfn-type="argument" data-export id="dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code><a class="self-link" href="#dom-relativeorientationsensor-relativeorientationsensor-sensoroptions-sensoroptions"></a></dfn> = {});
@@ -1529,19 +1700,19 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-accelerometer">[ACCELEROMETER]
-   <dd>Anssi Kostiainen. <a href="https://www.w3.org/TR/accelerometer/">Accelerometer</a>. 12 December 2019. CR. URL: <a href="https://www.w3.org/TR/accelerometer/">https://www.w3.org/TR/accelerometer/</a>
+   <dd>Anssi Kostiainen; Alexander Shalamov. <a href="https://www.w3.org/TR/accelerometer/">Accelerometer</a>. 24 July 2021. CR. URL: <a href="https://www.w3.org/TR/accelerometer/">https://www.w3.org/TR/accelerometer/</a>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
-   <dd>Rick Waldron. <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a>. 12 December 2019. CR. URL: <a href="https://www.w3.org/TR/generic-sensor/">https://www.w3.org/TR/generic-sensor/</a>
+   <dd>Rick Waldron; et al. <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a>. 24 July 2021. CR. URL: <a href="https://www.w3.org/TR/generic-sensor/">https://www.w3.org/TR/generic-sensor/</a>
    <dt id="biblio-geometry-1">[GEOMETRY-1]
    <dd>Simon Pieters; Chris Harrelson. <a href="https://www.w3.org/TR/geometry-1/">Geometry Interfaces Module Level 1</a>. 4 December 2018. CR. URL: <a href="https://www.w3.org/TR/geometry-1/">https://www.w3.org/TR/geometry-1/</a>
    <dt id="biblio-gyroscope">[GYROSCOPE]
-   <dd>Anssi Kostiainen. <a href="https://www.w3.org/TR/gyroscope/">Gyroscope</a>. 12 December 2019. CR. URL: <a href="https://www.w3.org/TR/gyroscope/">https://www.w3.org/TR/gyroscope/</a>
+   <dd>Anssi Kostiainen; Mikhail Pozdnyakov. <a href="https://www.w3.org/TR/gyroscope/">Gyroscope</a>. 24 July 2021. CR. URL: <a href="https://www.w3.org/TR/gyroscope/">https://www.w3.org/TR/gyroscope/</a>
    <dt id="biblio-infra">[INFRA]
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-magnetometer">[MAGNETOMETER]
-   <dd>Anssi Kostiainen; Rijubrata Bhaumik. <a href="https://www.w3.org/TR/magnetometer/">Magnetometer</a>. 7 March 2019. WD. URL: <a href="https://www.w3.org/TR/magnetometer/">https://www.w3.org/TR/magnetometer/</a>
+   <dd>Anssi Kostiainen; Rijubrata Bhaumik. <a href="https://www.w3.org/TR/magnetometer/">Magnetometer</a>. 24 July 2021. WD. URL: <a href="https://www.w3.org/TR/magnetometer/">https://www.w3.org/TR/magnetometer/</a>
    <dt id="biblio-rfc2119">[RFC2119]
-   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
    <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
@@ -1550,9 +1721,9 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-quatconv">[QUATCONV]
-   <dd>Watt, Alan H., and Mark Watt.. <a href="http://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf">Advanced animation and rendering techniques., page 362</a>. 1992. Informational. URL: <a href="http://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf">http://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf</a>
+   <dd>Watt, Alan H., and Mark Watt.. <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf">Advanced animation and rendering techniques., page 362</a>. 1992. Informational. URL: <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf">https://www.cs.cmu.edu/afs/cs/academic/class/15462-s14/www/lec_slides/3DRotationNotes.pdf</a>
    <dt id="biblio-quaternions">[QUATERNIONS]
-   <dd>Kuipers, Jack B. <a href="http://www.emis.ams.org/proceedings/Varna/vol1/GEOM09.pdf">Quaternions and rotation sequences. Vol. 66.</a>. 1999. Informational. URL: <a href="http://www.emis.ams.org/proceedings/Varna/vol1/GEOM09.pdf">http://www.emis.ams.org/proceedings/Varna/vol1/GEOM09.pdf</a>
+   <dd><a href="https://en.wikipedia.org/wiki/Quaternion">Quaternion</a>. URL: <a href="https://en.wikipedia.org/wiki/Quaternion">https://en.wikipedia.org/wiki/Quaternion</a>
    <dt id="biblio-si">[SI]
    <dd><a href="http://www.bipm.org/en/publications/si-brochure/">SI Brochure: The International System of Units (SI), 8th edition</a>. 2014. URL: <a href="http://www.bipm.org/en/publications/si-brochure/">http://www.bipm.org/en/publications/si-brochure/</a>
   </dl>
@@ -1750,6 +1921,14 @@ document.body.addEventListener("click", function(e) {
 
 });
 </script>
+<script>/* script-mdn-anno */
+
+            document.body.addEventListener("click", (e) => {
+                if(e.target.closest(".mdn-anno-btn")) {
+                    e.target.closest(".mdn-anno").classList.toggle("wrapped");
+                }
+            });
+            </script>
 <script>/* script-var-click-highlighting */
 
     document.addEventListener("click", e=>{
