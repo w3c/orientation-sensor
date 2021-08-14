@@ -21,7 +21,7 @@ Status Text:
   Technical Architecture Group review for this specification to account for the
   latest architectural review practices.
 Version History: https://github.com/w3c/orientation-sensor/commits/main/index.bs
-Issue Tracking: Orientation Sensor Issues Repository https://github.com/w3c/magnetometer/issues
+Issue Tracking: Orientation Sensor Issues Repository https://github.com/w3c/orientation-sensor/issues
 Indent: 2
 Repository: w3c/orientation-sensor
 Markup Shorthands: markdown on
