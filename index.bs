@@ -224,6 +224,10 @@ describes mapping between concrete orientation sensors and permission tokens def
   </tbody>
 </table>
 
+The {{AbsoluteOrientationSensor}} is a [=policy-controlled feature=] identified by strings "accelerometer", "gyroscope" and "magnetometer" . Its [=default allowlist=] is `'self'`.
+
+The {{RelativeOrientationSensor}} is a [=policy-controlled feature=] identified by strings "accelerometer" and "gyroscope". Its [=default allowlist=] is `'self'`.
+
 A [=latest reading=] for a {{Sensor}} of <a>Orientation Sensor</a> <a>sensor type</a> includes an [=map/entry=]
 whose [=map/key=] is "quaternion" and whose [=map/value=] contains a four element [=list=].
 The elements of the [=list=] are equal to components of a unit quaternion [[QUATERNIONS]]
