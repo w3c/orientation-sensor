@@ -40,7 +40,6 @@ urlPrefix: https://w3c.github.io/sensors/; spec: GENERIC-SENSOR
     text: construct a sensor object; url: construct-sensor-object
     text: initialize a sensor object; url: initialize-a-sensor-object
     text: default sensor
-    text: equivalent
     text: high-level
     text: low-level
     text: latest reading
@@ -375,7 +374,7 @@ and "quaternion" as arguments.
 
 ### OrientationSensor.populateMatrix() ### {#orientationsensor-populatematrix}
 
-The {{OrientationSensor/populateMatrix()}} method  populates the given object with rotation matrix
+The {{OrientationSensor/populateMatrix()}} method populates the given object with rotation matrix
 which is converted from the value of [=latest reading=]["quaternion"] [[QUATCONV]], as shown below:
 
 <img src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;" alt="Converting quaternion to rotation matrix.">
@@ -387,12 +386,10 @@ where:
  - Y = V<sub>y</sub> * sin(θ/2)
  - Z = V<sub>z</sub> * sin(θ/2)
 
-The rotation matrix is flattened in |targetMatrix| object according to the column-major order, as described in
-[=populate rotation matrix=] algorighm.
+The rotation matrix is flattened in |targetMatrix| object according to the column-major order.
 
 <div algorithm="populate rotation matrix">
-To <dfn>populate rotation matrix</dfn>, the {{OrientationSensor/populateMatrix()}} method must
-run these steps or their [=equivalent=]:
+The {{OrientationSensor/populateMatrix(targetMatrix)}} method steps are:
     1.  If |targetMatrix| is not of type defined by {{RotationMatrixType}} union, [=throw=] a
         "{{TypeError!!exception}}" exception and abort these steps.
     1.  If |targetMatrix| is of type {{Float32Array}} or {{Float64Array}} with a size less than sixteen, [=throw=] a
