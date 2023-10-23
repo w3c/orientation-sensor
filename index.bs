@@ -48,9 +48,6 @@ urlPrefix: https://w3c.github.io/sensors/; spec: GENERIC-SENSOR
     text: local coordinate system
     text: check sensor policy-controlled features; url: check-sensor-policy-controlled-features
     text: supported sensor options
-    text: automation
-    text: mock sensor type
-    text: mock sensor reading values
 urlPrefix: https://w3c.github.io/accelerometer/; spec: ACCELEROMETER
   type: dfn
     text: acceleration
@@ -501,31 +498,18 @@ Abstract Operations {#abstract-operations}
 
 Automation {#automation}
 ==========
-This section extends the [=automation=] section defined in the Generic Sensor API [[GENERIC-SENSOR]]
-to provide mocking information about the device's physical orientation in relation to a three
-dimensional Cartesian coordinate system for the purposes of testing a user agent's implementation
-of {{AbsoluteOrientationSensor}} and {{RelativeOrientationSensor}} APIs.
 
-<h3 id="mock-orientation-sensor-type">Mock Sensor Type</h3>
+This section extends [[GENERIC-SENSOR#automation]] by providing [=Orientation Sensor=]-specific virtual sensor metadata.
 
-The {{AbsoluteOrientationSensor}} class has an associated [=mock sensor type=] which is
-<a for="MockSensorType" enum-value>"absolute-orientation"</a>, its [=mock sensor reading values=]
-dictionary is defined as follows:
+<div algorithm>
+The <dfn>orientation reading parsing algorithm</dfn>, given a JSON {{Object}} |parameters|, must return the result of invoking [=parse quaternion reading=] with |parameters|.
+</div>
 
-<pre class="idl">
-  dictionary AbsoluteOrientationReadingValues {
-    required FrozenArray&lt;double>? quaternion;
-  };
-</pre>
-
-The {{RelativeOrientationSensor}} class has an associated [=mock sensor type=] which is
-<a for="MockSensorType" enum-value>"relative-orientation"</a>, its [=mock sensor reading values=]
-dictionary is defined as follows:
-
-<pre class="idl">
-  dictionary RelativeOrientationReadingValues : AbsoluteOrientationReadingValues {
-  };
-</pre>
+The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
+: [=map/key=]
+:: "`absolute-orientation`" or "`relative-orientation`"
+: [=map/value=]
+:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/virtual sensor type=] is [=Orientation Sensor=] and [=reading parsing algorithm=] is [=orientation reading parsing algorithm=].
 
 Acknowledgements {#acknowledgements}
 ================
