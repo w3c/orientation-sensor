@@ -5,9 +5,9 @@
   <title>Orientation Sensor</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version d29f71adb, updated Wed Jul 19 11:08:56 2023 -0700" name="generator">
+  <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
-  <meta content="5dc2ade540e2d4846d20a06ba9e07911ff12ed2b" name="document-revision">
+  <meta content="07f7a4b8e35cabb7ea9f277e85f0cc7e1a66fe49" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -889,7 +889,7 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-08-01">1 August 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-10-24">24 October 2023</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1110,8 +1110,8 @@ q<sub>2</sub>, q<sub>3</sub>].</p>
    </table>
    <p class="note" role="note"><span class="marker">Note:</span> <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/accelerometer/#accelerometer" id="ref-for-accelerometer②">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/gyroscope/#gyroscope" id="ref-for-gyroscope②">Gyroscope</a></code> and <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/magnetometer/#magnetometer" id="ref-for-magnetometer①">Magnetometer</a></code> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#low-level" id="ref-for-low-level⑤">low-level</a> sensors are defined in <a data-link-type="biblio" href="#biblio-accelerometer" title="Accelerometer">[ACCELEROMETER]</a>, <a data-link-type="biblio" href="#biblio-gyroscope" title="Gyroscope">[GYROSCOPE]</a>, and <a data-link-type="biblio" href="#biblio-magnetometer" title="Magnetometer">[MAGNETOMETER]</a> specifications respectively. The <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-fusion" id="ref-for-sensor-fusion①">sensor fusion</a> is platform specific and can happen in software or hardware, i.e.
 on a sensor hub.</p>
-   <div class="example" id="example-3de21396">
-    <a class="self-link" href="#example-3de21396"></a> This example code explicitly queries permissions for <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor④">AbsoluteOrientationSensor</a></code> before
+   <div class="example" id="example-694b679a">
+    <a class="self-link" href="#example-694b679a"></a> This example code explicitly queries permissions for <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor④">AbsoluteOrientationSensor</a></code> before
     calling <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#dom-sensor-start" id="ref-for-dom-sensor-start">start()</a></code>. 
 <pre class="highlight"><c- a>const</c-> sensor <c- o>=</c-> <c- ow>new</c-> AbsoluteOrientationSensor<c- p>();</c->
 Promise<c- p>.</c->all<c- p>([</c->navigator<c- p>.</c->permissions<c- p>.</c->query<c- p>({</c-> name<c- o>:</c-> <c- u>"accelerometer"</c-> <c- p>}),</c->
@@ -1128,11 +1128,11 @@ Promise<c- p>.</c->all<c- p>([</c->navigator<c- p>.</c->permissions<c- p>.</c->q
 </pre>
     <p>Another approach is to simply call <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#dom-sensor-start" id="ref-for-dom-sensor-start①">start()</a></code> and subscribe to <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#dom-sensor-onerror" id="ref-for-dom-sensor-onerror">onerror</a></code> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers" id="ref-for-event-handlers">event handler</a>.</p>
 <pre class="highlight"><c- a>const</c-> sensor <c- o>=</c-> <c- ow>new</c-> AbsoluteOrientationSensor<c- p>();</c->
-sensor<c- p>.</c->start<c- p>();</c->
 sensor<c- p>.</c->onerror <c- o>=</c-> event <c- p>=></c-> <c- p>{</c->
-  <c- k>if</c-> <c- p>(</c->event<c- p>.</c->error<c- p>.</c->name <c- o>===</c-> <c- t>'SecurityError'</c-><c- p>)</c->
+  <c- k>if</c-> <c- p>(</c->event<c- p>.</c->error<c- p>.</c->name <c- o>===</c-> <c- t>'NotAllowedError'</c-><c- p>)</c->
     console<c- p>.</c->log<c- p>(</c-><c- u>"No permissions to use AbsoluteOrientationSensor."</c-><c- p>);</c->
 <c- p>};</c->
+sensor<c- p>.</c->start<c- p>();</c->
 </pre>
    </div>
    <h3 class="heading settled" data-level="5.1" id="absoluteorientationsensor-model"><span class="secno">5.1. </span><span class="content">The AbsoluteOrientationSensor Model</span><a class="self-link" href="#absoluteorientationsensor-model"></a></h3>
@@ -1357,12 +1357,12 @@ which is converted from the value of <a data-link-type="dfn" href="https://w3c.g
 dimensional Cartesian coordinate system for the purposes of testing a user agent’s implementation
 of <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑨">AbsoluteOrientationSensor</a></code> and <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor⑦">RelativeOrientationSensor</a></code> APIs. 
    <h3 class="heading settled" data-level="8.1" id="mock-orientation-sensor-type"><span class="secno">8.1. </span><span class="content">Mock Sensor Type</span><a class="self-link" href="#mock-orientation-sensor-type"></a></h3>
-   <p>The <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor①⓪">AbsoluteOrientationSensor</a></code> class has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-type" id="ref-for-mock-sensor-type">mock sensor type</a> which is <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-mocksensortype-absolute-orientation" id="ref-for-dom-mocksensortype-absolute-orientation">"absolute-orientation"</a>, its <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-reading-values" id="ref-for-mock-sensor-reading-values">mock sensor reading values</a> dictionary is defined as follows:</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor①⓪">AbsoluteOrientationSensor</a></code> class has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-type" id="ref-for-mock-sensor-type">mock sensor type</a> which is <a class="idl-code" data-link-type="enum-value">"absolute-orientation"</a>, its <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-reading-values" id="ref-for-mock-sensor-reading-values">mock sensor reading values</a> dictionary is defined as follows:</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-absoluteorientationreadingvalues"><code><c- g>AbsoluteOrientationReadingValues</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-frozen-array" id="ref-for-idl-frozen-array②"><c- b>FrozenArray</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double①"><c- b>double</c-></a>>? <dfn class="idl-code" data-dfn-for="AbsoluteOrientationReadingValues" data-dfn-type="dict-member" data-export data-type="FrozenArray<double>? " id="dom-absoluteorientationreadingvalues-quaternion"><code><c- g>quaternion</c-></code><a class="self-link" href="#dom-absoluteorientationreadingvalues-quaternion"></a></dfn>;
 };
 </pre>
-   <p>The <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor⑧">RelativeOrientationSensor</a></code> class has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-type" id="ref-for-mock-sensor-type①">mock sensor type</a> which is <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/sensors/#dom-mocksensortype-relative-orientation" id="ref-for-dom-mocksensortype-relative-orientation">"relative-orientation"</a>, its <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-reading-values" id="ref-for-mock-sensor-reading-values①">mock sensor reading values</a> dictionary is defined as follows:</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor⑧">RelativeOrientationSensor</a></code> class has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-type" id="ref-for-mock-sensor-type①">mock sensor type</a> which is <a class="idl-code" data-link-type="enum-value">"relative-orientation"</a>, its <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mock-sensor-reading-values" id="ref-for-mock-sensor-reading-values①">mock sensor reading values</a> dictionary is defined as follows:</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="idl-code" data-dfn-type="dictionary" data-export id="dictdef-relativeorientationreadingvalues"><code><c- g>RelativeOrientationReadingValues</c-></code><a class="self-link" href="#dictdef-relativeorientationreadingvalues"></a></dfn> : <a data-link-type="idl-name" href="#dictdef-absoluteorientationreadingvalues" id="ref-for-dictdef-absoluteorientationreadingvalues"><c- n>AbsoluteOrientationReadingValues</c-></a> {
 };
 </pre>
@@ -1444,8 +1444,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="1405315e">"absolute-orientation"</span>
-     <li><span class="dfn-paneled" id="0fe98df2">"relative-orientation"</span>
      <li><span class="dfn-paneled" id="1b956603">Sensor</span>
      <li><span class="dfn-paneled" id="207de9db">SensorOptions</span>
      <li><span class="dfn-paneled" id="8b05f5b6">automation</span>
@@ -2014,8 +2012,6 @@ window.dfnpanelData['ffcc175a'] = {"dfnID": "ffcc175a", "url": "https://w3c.gith
 window.dfnpanelData['7892f569'] = {"dfnID": "7892f569", "url": "https://w3c.github.io/accelerometer/#device-coordinate-system", "dfnText": "device coordinate system", "refSections": [{"refs": [{"id": "ref-for-device-coordinate-system"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-device-coordinate-system\u2460"}], "title": "5.2. The RelativeOrientationSensor Model"}, {"refs": [{"id": "ref-for-device-coordinate-system\u2461"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
 window.dfnpanelData['9d689cca'] = {"dfnID": "9d689cca", "url": "https://w3c.github.io/accelerometer/#screen-coordinate-system", "dfnText": "screen coordinate system", "refSections": [{"refs": [{"id": "ref-for-screen-coordinate-system"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-screen-coordinate-system\u2460"}], "title": "5.2. The RelativeOrientationSensor Model"}, {"refs": [{"id": "ref-for-screen-coordinate-system\u2461"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
 window.dfnpanelData['32e66fc3'] = {"dfnID": "32e66fc3", "url": "https://www.w3.org/TR/2016/CR-orientation-event-20160818/#deviceorientation_event", "dfnText": "DeviceOrientationEvent", "refSections": [{"refs": [{"id": "ref-for-deviceorientation_event"}, {"id": "ref-for-deviceorientation_event\u2460"}], "title": "1. Introduction"}], "external": true};
-window.dfnpanelData['1405315e'] = {"dfnID": "1405315e", "url": "https://w3c.github.io/sensors/#dom-mocksensortype-absolute-orientation", "dfnText": "\"absolute-orientation\"", "refSections": [{"refs": [{"id": "ref-for-dom-mocksensortype-absolute-orientation"}], "title": "8.1. Mock Sensor Type"}], "external": true};
-window.dfnpanelData['0fe98df2'] = {"dfnID": "0fe98df2", "url": "https://w3c.github.io/sensors/#dom-mocksensortype-relative-orientation", "dfnText": "\"relative-orientation\"", "refSections": [{"refs": [{"id": "ref-for-dom-mocksensortype-relative-orientation"}], "title": "8.1. Mock Sensor Type"}], "external": true};
 window.dfnpanelData['1b956603'] = {"dfnID": "1b956603", "url": "https://w3c.github.io/sensors/#sensor", "dfnText": "Sensor", "refSections": [{"refs": [{"id": "ref-for-sensor"}, {"id": "ref-for-sensor\u2460"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-sensor\u2461"}], "title": "6.1. The OrientationSensor Interface"}], "external": true};
 window.dfnpanelData['207de9db'] = {"dfnID": "207de9db", "url": "https://w3c.github.io/sensors/#dictdef-sensoroptions", "dfnText": "SensorOptions", "refSections": [{"refs": [{"id": "ref-for-dictdef-sensoroptions"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-dictdef-sensoroptions\u2460"}], "title": "6.1. The OrientationSensor Interface"}], "external": true};
 window.dfnpanelData['8b05f5b6'] = {"dfnID": "8b05f5b6", "url": "https://w3c.github.io/sensors/#automation", "dfnText": "automation", "refSections": [{"refs": [{"id": "ref-for-automation"}], "title": "8. Automation"}], "external": true};
