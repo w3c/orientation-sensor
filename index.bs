@@ -289,11 +289,11 @@ on a sensor hub.
 
     <pre highlight="js">
     const sensor = new AbsoluteOrientationSensor();
-    sensor.start();
     sensor.onerror = event => {
-      if (event.error.name === 'SecurityError')
+      if (event.error.name === 'NotAllowedError')
         console.log("No permissions to use AbsoluteOrientationSensor.");
     };
+    sensor.start();
     </pre>
 </div>
 
