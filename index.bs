@@ -82,13 +82,6 @@ urlPrefix: https://www.w3.org/TR/2016/CR-orientation-event-20160818/; spec: DEVI
     text: DeviceOrientationEvent; url: deviceorientation_event
 </pre>
 
-<pre class="anchors">
-urlPrefix: https://w3c.github.io/motion-sensors/; spec: MOTIONSENSORS
-  type: dfn
-    text: Absolute Orientation Sensor; url: absolute-orientation
-    text: Relative Orientation Sensor; url: relative-orientation
-</pre>
-
 <pre class="link-defaults">
 spec:infra;
   type:dfn;
@@ -300,8 +293,7 @@ on a sensor hub.
 The AbsoluteOrientationSensor Model {#absoluteorientationsensor-model}
 ----------------------------------------------------------------------
 
-The {{AbsoluteOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents
-the [=Absolute Orientation Sensor=].
+The <dfn id="absolute-orientation-sensor-type">Absolute Orientation Sensor</dfn> [=sensor type=] represents the sensor described in [[MOTION-SENSORS#absolute-orientation]]. Its associated [=extension sensor interface=] is {{AbsoluteOrientationSensor}}, a subclass of {{OrientationSensor}}.
 
 For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents
 the rotation of a device's [=local coordinate system=] in relation to the <dfn>Earth's reference
@@ -323,8 +315,7 @@ orientation sensor's [=latest reading=] would represent 0 (rad) [[SI]] rotation 
 The RelativeOrientationSensor Model {#relativeorientationsensor-model}
 ----------------------------------------------------------------------
 
-The {{RelativeOrientationSensor}} class is a subclass of {{OrientationSensor}} which represents the
-[=Relative Orientation Sensor=].
+The <dfn id="relative-orientation-sensor-type">Relative Orientation Sensor</dfn> [=sensor type=] represents the sensor described in [[MOTION-SENSORS#relative-orientation]]. Its associated [=extension sensor interface=] is {{RelativeOrientationSensor}}, a subclass of {{OrientationSensor}}.
 
 For the relative orientation sensor the value of [=latest reading=]["quaternion"] represents the
 rotation of a device's [=local coordinate system=] in relation to a [=stationary reference coordinate
