@@ -492,7 +492,7 @@ Automation {#automation}
 
 This section extends [[GENERIC-SENSOR#automation]] by providing [=Orientation Sensor=]-specific virtual sensor metadata.
 
-<h3 dfn> Absolute Orientation Sensor automation</h3>
+<h3 id="absolute-orientation-sensor-automation">Absolute Orientation Sensor automation</h3>
 
 The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
 : [=map/key=]
@@ -500,7 +500,7 @@ The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/e
 : [=map/value=]
 :: A [=virtual sensor metadata=] whose [=virtual sensor metadata/virtual sensor type=] is [=Absolute Orientation Sensor=] and [=reading parsing algorithm=] is [=parse quaternion reading=].
 
-<h3 dfn>Relative Orientation Sensor automation</h3>
+<h3 id="relative-orientation-sensor-automation">Relative Orientation Sensor automation</h3>
 
 The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
 : [=map/key=]
