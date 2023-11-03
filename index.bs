@@ -293,7 +293,7 @@ The AbsoluteOrientationSensor Model {#absoluteorientationsensor-model}
 The <dfn id="absolute-orientation-sensor-type">Absolute Orientation Sensor</dfn> [=sensor type=] represents the sensor described in [[MOTION-SENSORS#absolute-orientation]]. Its associated [=extension sensor interface=] is {{AbsoluteOrientationSensor}}, a subclass of {{OrientationSensor}}.
 
 For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents
-the rotation of a device's [=local coordinate system=] in relation to the <dfn>Earth's reference
+the rotation of a device's [=local coordinate system=] in relation to the <dfn export>Earth's reference
 coordinate system</dfn> defined as a three dimensional Cartesian coordinate system (x, y, z), where:
 
  - x-axis is a vector product of y.z that is tangential to the ground and points east,
