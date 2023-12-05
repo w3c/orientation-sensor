@@ -291,7 +291,7 @@ The AbsoluteOrientationSensor Model {#absoluteorientationsensor-model}
 ----------------------------------------------------------------------
 
 The <dfn id="absolute-orientation-sensor-type">Absolute Orientation Sensor</dfn> [=sensor type=] represents the sensor described in [[MOTION-SENSORS#absolute-orientation]]. Its associated [=extension sensor interface=] is {{AbsoluteOrientationSensor}}, a subclass of {{OrientationSensor}}. Its associated [=virtual sensor type=] is
-"<code><dfn data-lt="absolute-orientation virtual sensor type">absolute-orientation</dfn></code>".
+"<code><a data-lt="absolute-orientation virtual sensor type">absolute-orientation</a></code>".
 
 For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents
 the rotation of a device's [=local coordinate system=] in relation to the <dfn export>Earth's reference
@@ -314,7 +314,7 @@ The RelativeOrientationSensor Model {#relativeorientationsensor-model}
 ----------------------------------------------------------------------
 
 The <dfn id="relative-orientation-sensor-type">Relative Orientation Sensor</dfn> [=sensor type=] represents the sensor described in [[MOTION-SENSORS#relative-orientation]]. Its associated [=extension sensor interface=] is {{RelativeOrientationSensor}}, a subclass of {{OrientationSensor}}. Its associated [=virtual sensor type=] is
-"<code><dfn data-lt="relative-orientation virtual sensor type">relative-orientation</dfn></code>".
+"<code><a data-lt="relative-orientation virtual sensor type">relative-orientation</a></code>".
 
 For the relative orientation sensor the value of [=latest reading=]["quaternion"] represents the
 rotation of a device's [=local coordinate system=] in relation to a [=stationary reference coordinate
