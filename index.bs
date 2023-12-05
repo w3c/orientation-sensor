@@ -506,26 +506,62 @@ To <dfn lt="converting a quaternion to rotation matrix">convert a quaternion to 
 
 </div>
 
+<h3 id="helper-create-quaternion-from-euler-angles">Create a quaternion from Euler angles</h3>
+
+<div algorithm>
+<!--
+    This algorithm was copied from
+    https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/sensor/sensor_inspector_agent.cc;l=27;drc=047c7dc4ee1ce908d7fea38ca063fa2f80f92c77
+-->
+
+To <dfn>create a quaternion from Euler angles</dfn> given a number |alpha|, a number |beta| and a number |gamma|:
+
+    1. Let |alphaInRadians| be |alpha| converted from degrees to radians.
+    1. Let |betaInRadians| be |beta| converted from degrees to radians.
+    1. Let |gammaInRadians| be |gamma| converted from degrees to radians.
+    1. Let |cosZ| be the cosine of (0.5 * |alphaInRadians|).
+    1. Let |sinZ| be the sine of (0.5 * |alphaInRadians|).
+    1. Let |cosX| be the cosine of (0.5 * |betaInRadians|).
+    1. Let |sinX| be the sine of (0.5 * |betaInRadians|).
+    1. Let |cosY| be the cosine of (0.5 * |gammaInRadians|).
+    1. Let |sinY| be the sine of (0.5 * |gammaInRadians|).
+    1. Let |quaternionX| be (|sinX| * |cosY| * |cosZ| - |cosX| * |sinY| * |sinZ|).
+    1. Let |quaternionY| be (|cosX| * |sinY| * |cosZ| + |sinX| * |cosY| * |sinZ|).
+    1. Let |quaternionZ| be (|cosX| * |cosY| * |sinZ| + |sinX| * |sinY| * |cosZ|).
+    1. Let |quaternionW| be (|cosX| * |cosY| * |cosZ| - |sinX| * |sinY| * |sinZ|).
+    1. Return « |quaternionX|, |quaternionY|, |quaternionZ|, |quaternionW| ».
+
+</div>
+
 Automation {#automation}
 ==========
 
 This section extends [[GENERIC-SENSOR#automation]] by providing [=Orientation Sensor=]-specific virtual sensor metadata.
 
-<h3 id="absolute-orientation-sensor-automation">Absolute Orientation Sensor automation</h3>
+Modifications to other specifications {#modifications-to-other-specifications}
+-------------------------------------
 
-The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
-: [=map/key=]
-:: "<code>[=absolute-orientation virtual sensor type|absolute-orientation=]</code>"
-: [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse quaternion reading=].
+This specification integrates with [[DEVICE-ORIENTATION#automation]] as follows.
 
-<h3 id="relative-orientation-sensor-automation">Relative Orientation Sensor automation</h3>
+<div algorithm="parse-orientation-data-reading-modifications">
+The [=parse orientation data reading=] algorithm is modified as follows:
 
-The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
-: [=map/key=]
-:: "<code>[=relative-orientation virtual sensor type|relative-orientation=]</code>"
-: [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse quaternion reading=].
+    * Add the following steps after setting |reading|'s "`alpha`", "`beta`", and "`gamma`" keys and before returning |reading|:
+        1. [=map/Set=] |reading|["`quaternion`"] to the result of invoking [=create a quaternion from Euler angles=] with |reading|["`alpha`"], |reading|["`beta`"], and |reading|["`gamma`"].
+
+</div>
+
+Note: This specification does not currently provide a way for specifying quaternions in WebDriver (and consequently deriving Euler angles from the quaternion) directly. This decision was made for simplicity and under the assumption that automation users are much more likely to work with Euler angles as inputs (or pick specific quaternion values and provide the corresponding Euler angle values on their own). Feedback from users with different use cases who are interested in being able to provide quaternion values directly is welcome via <a href="https://github.com/w3c/orientation-sensor/issues">this specification's issue tracker</a>.
+
+Absolute Orientation Sensor automation {#absolute-orientation-sensor-automation}
+--------------------------------------
+
+The [=absolute-orientation virtual sensor type=] and its corresponding entry in the [=per-type virtual sensor metadata=] [=map=] are defined in [[DEVICE-ORIENTATION#automation]].
+
+Relative Orientation Sensor automation {#relative-orientation-sensor-automation}
+--------------------------------------
+
+The [=relative-orientation virtual sensor type=] and its corresponding entry in the [=per-type virtual sensor metadata=] [=map=] are defined in [[DEVICE-ORIENTATION#automation]].
 
 Acknowledgements {#acknowledgements}
 ================
