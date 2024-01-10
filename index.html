@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
-  <meta content="1eb77b2a8911f523dd8c18dee7b5d3c9b7babfe4" name="document-revision">
+  <meta content="7cb6cae81cd90bfc590e3c96be120598461f419c" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -889,7 +889,7 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Orientation Sensor</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-01-05">5 January 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-01-10">10 January 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -983,12 +983,15 @@ architectural review practices.</p>
      <a href="#abstract-operations"><span class="secno">7</span> <span class="content">Abstract Operations</span></a>
      <ol class="toc">
       <li><a href="#construct-an-orientation-sensor-object"><span class="secno">7.1</span> <span class="content">Construct an Orientation Sensor object</span></a>
+      <li><a href="#convert-quaternion-to-rotation-matrix"><span class="secno">7.2</span> <span class="content">Convert quaternion to rotation matrix</span></a>
+      <li><a href="#helper-create-quaternion-from-euler-angles"><span class="secno">7.3</span> <span class="content">Create a quaternion from Euler angles</span></a>
      </ol>
     <li>
      <a href="#automation"><span class="secno">8</span> <span class="content">Automation</span></a>
      <ol class="toc">
-      <li><a href="#absolute-orientation-sensor-automation"><span class="secno">8.1</span> <span class="content">Absolute Orientation Sensor automation</span></a>
-      <li><a href="#relative-orientation-sensor-automation"><span class="secno">8.2</span> <span class="content">Relative Orientation Sensor automation</span></a>
+      <li><a href="#modifications-to-other-specifications"><span class="secno">8.1</span> <span class="content">Modifications to other specifications</span></a>
+      <li><a href="#absolute-orientation-sensor-automation"><span class="secno">8.2</span> <span class="content">Absolute Orientation Sensor automation</span></a>
+      <li><a href="#relative-orientation-sensor-automation"><span class="secno">8.3</span> <span class="content">Relative Orientation Sensor automation</span></a>
      </ol>
     <li><a href="#acknowledgements"><span class="secno">9</span> <span class="content">Acknowledgements</span></a>
     <li><a href="#conformance"><span class="secno">10</span> <span class="content">Conformance</span></a>
@@ -1138,7 +1141,7 @@ sensor<c- p>.</c->start<c- p>();</c->
    </div>
    <h3 class="heading settled" data-level="5.1" id="absoluteorientationsensor-model"><span class="secno">5.1. </span><span class="content">The AbsoluteOrientationSensor Model</span><a class="self-link" href="#absoluteorientationsensor-model"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport id="absolute-orientation-sensor-type">Absolute Orientation Sensor<a class="self-link" href="#absolute-orientation-sensor-type"></a></dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type②">sensor type</a> represents the sensor described in <a href="https://w3c.github.io/motion-sensors/#absolute-orientation">Motion Sensors Explainer § absolute-orientation</a>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#extension-sensor-interface" id="ref-for-extension-sensor-interface">extension sensor interface</a> is <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑤">AbsoluteOrientationSensor</a></code>, a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor⑥">OrientationSensor</a></code>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type">virtual sensor type</a> is
-"<code><dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="absolute-orientation virtual sensor type" data-noexport id="absolute-orientation-virtual-sensor-type">absolute-orientation</dfn></code>".</p>
+"<code><a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#absolute-orientation-virtual-sensor-type" id="ref-for-absolute-orientation-virtual-sensor-type">absolute-orientation</a></code>".</p>
    <p>For the absolute orientation sensor the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading②">latest reading</a>["quaternion"] represents
 the rotation of a device’s <a data-link-type="dfn" href="https://w3c.github.io/sensors/#local-coordinate-system" id="ref-for-local-coordinate-system">local coordinate system</a> in relation to the <dfn class="dfn-paneled" data-dfn-type="dfn" data-export data-lt="Earth’s reference coordinate system" id="earths-reference-coordinate-system">Earth’s reference
 coordinate system</dfn> defined as a three dimensional Cartesian coordinate system (x, y, z), where:</p>
@@ -1156,7 +1159,7 @@ orientation sensor’s <a data-link-type="dfn" href="https://w3c.github.io/senso
    <p><img alt="AbsoluteOrientationSensor coordinate system." src="images/absolute_orientation_sensor_coordinate_system.png" srcset="images/absolute_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;"></p>
    <h3 class="heading settled" data-level="5.2" id="relativeorientationsensor-model"><span class="secno">5.2. </span><span class="content">The RelativeOrientationSensor Model</span><a class="self-link" href="#relativeorientationsensor-model"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport id="relative-orientation-sensor-type">Relative Orientation Sensor<a class="self-link" href="#relative-orientation-sensor-type"></a></dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type③">sensor type</a> represents the sensor described in <a href="https://w3c.github.io/motion-sensors/#relative-orientation">Motion Sensors Explainer § relative-orientation</a>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#extension-sensor-interface" id="ref-for-extension-sensor-interface①">extension sensor interface</a> is <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor③">RelativeOrientationSensor</a></code>, a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor⑦">OrientationSensor</a></code>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type①">virtual sensor type</a> is
-"<code><dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="relative-orientation virtual sensor type" data-noexport id="relative-orientation-virtual-sensor-type">relative-orientation</dfn></code>".</p>
+"<code><a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#relative-orientation-virtual-sensor-type" id="ref-for-relative-orientation-virtual-sensor-type">relative-orientation</a></code>".</p>
    <p>For the relative orientation sensor the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading④">latest reading</a>["quaternion"] represents the
 rotation of a device’s <a data-link-type="dfn" href="https://w3c.github.io/sensors/#local-coordinate-system" id="ref-for-local-coordinate-system③">local coordinate system</a> in relation to a <a data-link-type="dfn" href="#stationary-reference-coordinate-system" id="ref-for-stationary-reference-coordinate-system">stationary reference coordinate
 system</a>. The <a data-link-type="dfn" href="#stationary-reference-coordinate-system" id="ref-for-stationary-reference-coordinate-system①">stationary reference coordinate system</a> may drift due to the bias introduced by
@@ -1188,113 +1191,89 @@ orientation sensor, as the sensor is not affected by magnetic fields.</p>
 of the unit quaternion representing the device orientation.
 In other words, this attribute returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading">get value from latest reading</a> with <emu-val>this</emu-val> and "quaternion" as arguments.</p>
    <h4 class="heading settled" data-level="6.1.2" id="orientationsensor-populatematrix"><span class="secno">6.1.2. </span><span class="content">OrientationSensor.populateMatrix()</span><a class="self-link" href="#orientationsensor-populatematrix"></a></h4>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix">populateMatrix()</a></code> method populates the given object with rotation matrix
-which is converted from the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading⑤">latest reading</a>["quaternion"] <a data-link-type="biblio" href="#biblio-quatconv" title="Advanced animation and rendering techniques., page 362">[QUATCONV]</a>, as shown below:</p>
-   <p><img alt="Converting quaternion to rotation matrix." height="205" src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;" width="795"></p>
-   <p>where:</p>
-   <ul>
-    <li data-md>
-     <p>W = cos(θ/2)</p>
-    <li data-md>
-     <p>X = V<sub>x</sub> * sin(θ/2)</p>
-    <li data-md>
-     <p>Y = V<sub>y</sub> * sin(θ/2)</p>
-    <li data-md>
-     <p>Z = V<sub>z</sub> * sin(θ/2)</p>
-   </ul>
-   <p>The rotation matrix is flattened in <var>targetMatrix</var> object according to the column-major order.</p>
    <div class="algorithm" data-algorithm="populate rotation matrix">
-     The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix①">populateMatrix(targetMatrix)</a></code> method steps are: 
+     The <code class="idl"><a data-link-type="idl" href="#dom-orientationsensor-populatematrix" id="ref-for-dom-orientationsensor-populatematrix">populateMatrix(targetMatrix)</a></code> method steps are: 
     <ol>
      <li data-md>
-      <p>If <var>targetMatrix</var> is not of type defined by <code class="idl"><a data-link-type="idl" href="#typedefdef-rotationmatrixtype" id="ref-for-typedefdef-rotationmatrixtype①">RotationMatrixType</a></code> union, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw">throw</a> a
+      <p>If <var>targetMatrix</var> is of type <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-Float32Array" id="ref-for-idl-Float32Array①">Float32Array</a></code> or <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-Float64Array" id="ref-for-idl-Float64Array①">Float64Array</a></code> with a size less than sixteen, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw">throw</a> a
   "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror">TypeError</a></code>" exception and abort these steps.</p>
      <li data-md>
-      <p>If <var>targetMatrix</var> is of type <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-Float32Array" id="ref-for-idl-Float32Array①">Float32Array</a></code> or <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-Float64Array" id="ref-for-idl-Float64Array①">Float64Array</a></code> with a size less than sixteen, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw①">throw</a> a
-  "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①">TypeError</a></code>" exception and abort these steps.</p>
+      <p>Let <var>quaternion</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading①">get value from latest reading</a> with <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a> and "quaternion" as arguments.</p>
      <li data-md>
-      <p>Let <var>quaternion</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading①">get value from latest reading</a> with <emu-val>this</emu-val> and "quaternion" as arguments.</p>
+      <p>If <var>quaternion</var> is <code>null</code>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw①">throw</a> a "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notreadableerror" id="ref-for-notreadableerror">NotReadableError</a></code>" <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code> and abort these steps.</p>
      <li data-md>
-      <p>If <var>quaternion</var> is <code>null</code>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw②">throw</a> a "<code class="idl"><a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notreadableerror" id="ref-for-notreadableerror">NotReadableError</a></code>" <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code> and abort these steps.</p>
-     <li data-md>
-      <p>Let <var>x</var> be the value of <var>quaternion</var>[0]</p>
-     <li data-md>
-      <p>Let <var>y</var> be the value of <var>quaternion</var>[1]</p>
-     <li data-md>
-      <p>Let <var>z</var> be the value of <var>quaternion</var>[2]</p>
-     <li data-md>
-      <p>Let <var>w</var> be the value of <var>quaternion</var>[3]</p>
+      <p>Let <var>rotationMatrix</var> be the result of <a data-link-type="dfn" href="#converting-a-quaternion-to-rotation-matrix" id="ref-for-converting-a-quaternion-to-rotation-matrix">converting a quaternion to rotation matrix</a> with <var>quaternion</var>[0], <var>quaternion</var>[1], <var>quaternion</var>[2], and <var>quaternion</var>[3].</p>
      <li data-md>
       <p>If <var>targetMatrix</var> is of <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-Float32Array" id="ref-for-idl-Float32Array②">Float32Array</a></code> or <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-Float64Array" id="ref-for-idl-Float64Array②">Float64Array</a></code> type, run these sub-steps:</p>
       <ol>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[0] = 1 - 2 * y * y - 2 * z * z</p>
+        <p>Set <var>targetMatrix</var>[0] = <var>rotationMatrix</var>[0]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[1] = 2 * x * y - 2 * z * w</p>
+        <p>Set <var>targetMatrix</var>[1] = <var>rotationMatrix</var>[1]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[2] = 2 * x * z + 2 * y * w</p>
+        <p>Set <var>targetMatrix</var>[2] = <var>rotationMatrix</var>[2]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[3] = 0</p>
+        <p>Set <var>targetMatrix</var>[3] = <var>rotationMatrix</var>[3]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[4] = 2 * x * y + 2 * z * w</p>
+        <p>Set <var>targetMatrix</var>[4] = <var>rotationMatrix</var>[4]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[5] = 1 - 2 * x * x - 2 * z * z</p>
+        <p>Set <var>targetMatrix</var>[5] = <var>rotationMatrix</var>[5]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[6] = 2 * y * z - 2 * x * w</p>
+        <p>Set <var>targetMatrix</var>[6] = <var>rotationMatrix</var>[6]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[7] = 0</p>
+        <p>Set <var>targetMatrix</var>[7] = <var>rotationMatrix</var>[7]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[8] = 2 * x * z - 2 * y * w</p>
+        <p>Set <var>targetMatrix</var>[8] = <var>rotationMatrix</var>[8]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[9] = 2 * y * z + 2 * x * w</p>
+        <p>Set <var>targetMatrix</var>[9] = <var>rotationMatrix</var>[9]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[10] = 1 - 2 * x * x - 2 * y * y</p>
+        <p>Set <var>targetMatrix</var>[10] = <var>rotationMatrix</var>[10]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[11] = 0</p>
+        <p>Set <var>targetMatrix</var>[11] = <var>rotationMatrix</var>[11]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[12] = 0</p>
+        <p>Set <var>targetMatrix</var>[12] = <var>rotationMatrix</var>[12]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[13] = 0</p>
+        <p>Set <var>targetMatrix</var>[13] = <var>rotationMatrix</var>[13]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[14] = 0</p>
+        <p>Set <var>targetMatrix</var>[14] = <var>rotationMatrix</var>[14]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>[15] = 1</p>
+        <p>Set <var>targetMatrix</var>[15] = <var>rotationMatrix</var>[15]</p>
       </ol>
      <li data-md>
       <p>If <var>targetMatrix</var> is of <code class="idl"><a data-link-type="idl" href="https://drafts.fxtf.org/geometry-1/#dommatrix" id="ref-for-dommatrix①">DOMMatrix</a></code> type, run these sub-steps:</p>
       <ol>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m11 = 1 - 2 * y * y - 2 * z * z</p>
+        <p>Set <var>targetMatrix</var>.m11 = <var>rotationMatrix</var>[0]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m12 = 2 * x * y - 2 * z * w</p>
+        <p>Set <var>targetMatrix</var>.m12 = <var>rotationMatrix</var>[1]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m13 = 2 * x * z + 2 * y * w</p>
+        <p>Set <var>targetMatrix</var>.m13 = <var>rotationMatrix</var>[2]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m14 = 0</p>
+        <p>Set <var>targetMatrix</var>.m14 = <var>rotationMatrix</var>[3]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m21 = 2 * x * y + 2 * z * w</p>
+        <p>Set <var>targetMatrix</var>.m21 = <var>rotationMatrix</var>[4]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m22 = 1 - 2 * x * x - 2 * z * z</p>
+        <p>Set <var>targetMatrix</var>.m22 = <var>rotationMatrix</var>[5]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m23 = 2 * y * z - 2 * x * w</p>
+        <p>Set <var>targetMatrix</var>.m23 = <var>rotationMatrix</var>[6]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m24 = 0</p>
+        <p>Set <var>targetMatrix</var>.m24 = <var>rotationMatrix</var>[7]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m31 = 2 * x * z - 2 * y * w</p>
+        <p>Set <var>targetMatrix</var>.m31 = <var>rotationMatrix</var>[8]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m32 = 2 * y * z + 2 * x * w</p>
+        <p>Set <var>targetMatrix</var>.m32 = <var>rotationMatrix</var>[9]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m33 = 1 - 2 * x * x - 2 * y * y</p>
+        <p>Set <var>targetMatrix</var>.m33 = <var>rotationMatrix</var>[10]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m34 = 0</p>
+        <p>Set <var>targetMatrix</var>.m34 = <var>rotationMatrix</var>[11]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m41 = 0</p>
+        <p>Set <var>targetMatrix</var>.m41 = <var>rotationMatrix</var>[12]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m42 = 0</p>
+        <p>Set <var>targetMatrix</var>.m42 = <var>rotationMatrix</var>[13]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m43 = 0</p>
+        <p>Set <var>targetMatrix</var>.m43 = <var>rotationMatrix</var>[14]</p>
        <li data-md>
-        <p>Set <var>targetMatrix</var>.m44 = 1</p>
+        <p>Set <var>targetMatrix</var>.m44 = <var>rotationMatrix</var>[15]</p>
       </ol>
     </ol>
    </div>
@@ -1336,7 +1315,7 @@ which is converted from the value of <a data-link-type="dfn" href="https://w3c.g
       <p>If <var>allowed</var> is false, then:</p>
       <ol>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw③">Throw</a> a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#securityerror" id="ref-for-securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code>.</p>
+        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw②">Throw</a> a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#securityerror" id="ref-for-securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code>.</p>
       </ol>
      <li data-md>
       <p>Let <var>orientation</var> be a new instance of the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface" id="ref-for-dfn-interface②">interface</a> identified by <var>orientation_interface</var>.</p>
@@ -1354,28 +1333,113 @@ which is converted from the value of <a data-link-type="dfn" href="https://w3c.g
       <p>Return <var>orientation</var>.</p>
     </ol>
    </div>
+   <h3 class="heading settled" data-level="7.2" id="convert-quaternion-to-rotation-matrix"><span class="secno">7.2. </span><span class="content">Convert quaternion to rotation matrix</span><a class="self-link" href="#convert-quaternion-to-rotation-matrix"></a></h3>
+   <p>The <a data-link-type="dfn" href="#converting-a-quaternion-to-rotation-matrix" id="ref-for-converting-a-quaternion-to-rotation-matrix①">convert a quaternion to rotation matrix</a> algorithm creates a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list③">list</a> representation of a rotation matrix in column-major order converted from a quaternion <a data-link-type="biblio" href="#biblio-quatconv" title="Advanced animation and rendering techniques., page 362">[QUATCONV]</a>, as shown below:</p>
+   <p><img alt="Converting quaternion to rotation matrix." height="205" src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;" width="795"></p>
+   <p>where:</p>
+   <ul>
+    <li data-md>
+     <p>W = cos(θ/2)</p>
+    <li data-md>
+     <p>X = V<sub>x</sub> * sin(θ/2)</p>
+    <li data-md>
+     <p>Y = V<sub>y</sub> * sin(θ/2)</p>
+    <li data-md>
+     <p>Z = V<sub>z</sub> * sin(θ/2)</p>
+   </ul>
+   <div class="algorithm" data-algorithm="converting a quaternion to rotation matrix">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="converting a quaternion to rotation matrix" data-noexport id="converting-a-quaternion-to-rotation-matrix">convert a quaternion to rotation matrix</dfn> given a number <var>x</var>, a number <var>y</var>, a number <var>z</var>, and a number <var>w</var>: 
+    <ol>
+     <li data-md>
+      <p>Let <var>m11</var> be 1 - 2 * y * y - 2 * z * z</p>
+     <li data-md>
+      <p>Let <var>m12</var> be 2 * x * y - 2 * z * w</p>
+     <li data-md>
+      <p>Let <var>m13</var> be 2 * x * z + 2 * y * w</p>
+     <li data-md>
+      <p>Let <var>m14</var> be 0</p>
+     <li data-md>
+      <p>Let <var>m21</var> be 2 * x * y + 2 * z * w</p>
+     <li data-md>
+      <p>Let <var>m22</var> be 1 - 2 * x * x - 2 * z * z</p>
+     <li data-md>
+      <p>Let <var>m23</var> be 2 * y * z - 2 * x * w</p>
+     <li data-md>
+      <p>Let <var>m24</var> be 0</p>
+     <li data-md>
+      <p>Let <var>m31</var> be 2 * x * z - 2 * y * w</p>
+     <li data-md>
+      <p>Let <var>m32</var> be 2 * y * z + 2 * x * w</p>
+     <li data-md>
+      <p>Let <var>m33</var> be 1 - 2 * x * x - 2 * y * y</p>
+     <li data-md>
+      <p>Let <var>m34</var> be 0</p>
+     <li data-md>
+      <p>Let <var>m41</var> be 0</p>
+     <li data-md>
+      <p>Let <var>m42</var> be 0</p>
+     <li data-md>
+      <p>Let <var>m43</var> be 0</p>
+     <li data-md>
+      <p>Let <var>m44</var> be 1</p>
+     <li data-md>
+      <p>Return « <var>m11</var>, <var>m12</var>, <var>m13</var>, <var>m14</var>, <var>m21</var>, <var>m22</var>, <var>m23</var>, <var>m24</var>, <var>m31</var>, <var>m32</var>, <var>m33</var>, <var>m34</var>, <var>m41</var>, <var>m42</var>, <var>m43</var>, <var>m44</var> ».</p>
+    </ol>
+   </div>
+   <h3 class="heading settled" data-level="7.3" id="helper-create-quaternion-from-euler-angles"><span class="secno">7.3. </span><span class="content">Create a quaternion from Euler angles</span><a class="self-link" href="#helper-create-quaternion-from-euler-angles"></a></h3>
+   <div class="algorithm" data-algorithm="create a quaternion from Euler angles">
+    <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="create-a-quaternion-from-euler-angles">create a quaternion from Euler angles</dfn> given a number <var>alpha</var>, a number <var>beta</var> and a number <var>gamma</var>:</p>
+    <ol>
+     <li data-md>
+      <p>Let <var>alphaInRadians</var> be <var>alpha</var> converted from degrees to radians.</p>
+     <li data-md>
+      <p>Let <var>betaInRadians</var> be <var>beta</var> converted from degrees to radians.</p>
+     <li data-md>
+      <p>Let <var>gammaInRadians</var> be <var>gamma</var> converted from degrees to radians.</p>
+     <li data-md>
+      <p>Let <var>cosZ</var> be the cosine of (0.5 * <var>alphaInRadians</var>).</p>
+     <li data-md>
+      <p>Let <var>sinZ</var> be the sine of (0.5 * <var>alphaInRadians</var>).</p>
+     <li data-md>
+      <p>Let <var>cosX</var> be the cosine of (0.5 * <var>betaInRadians</var>).</p>
+     <li data-md>
+      <p>Let <var>sinX</var> be the sine of (0.5 * <var>betaInRadians</var>).</p>
+     <li data-md>
+      <p>Let <var>cosY</var> be the cosine of (0.5 * <var>gammaInRadians</var>).</p>
+     <li data-md>
+      <p>Let <var>sinY</var> be the sine of (0.5 * <var>gammaInRadians</var>).</p>
+     <li data-md>
+      <p>Let <var>quaternionX</var> be (<var>sinX</var> * <var>cosY</var> * <var>cosZ</var> - <var>cosX</var> * <var>sinY</var> * <var>sinZ</var>).</p>
+     <li data-md>
+      <p>Let <var>quaternionY</var> be (<var>cosX</var> * <var>sinY</var> * <var>cosZ</var> + <var>sinX</var> * <var>cosY</var> * <var>sinZ</var>).</p>
+     <li data-md>
+      <p>Let <var>quaternionZ</var> be (<var>cosX</var> * <var>cosY</var> * <var>sinZ</var> + <var>sinX</var> * <var>sinY</var> * <var>cosZ</var>).</p>
+     <li data-md>
+      <p>Let <var>quaternionW</var> be (<var>cosX</var> * <var>cosY</var> * <var>cosZ</var> - <var>sinX</var> * <var>sinY</var> * <var>sinZ</var>).</p>
+     <li data-md>
+      <p>Return « <var>quaternionX</var>, <var>quaternionY</var>, <var>quaternionZ</var>, <var>quaternionW</var> ».</p>
+    </ol>
+   </div>
    <h2 class="heading settled" data-level="8" id="automation"><span class="secno">8. </span><span class="content">Automation</span><a class="self-link" href="#automation"></a></h2>
    <p>This section extends <a href="https://w3c.github.io/sensors/#automation"><cite>Generic Sensor API</cite> § 9 Automation</a> by providing <a data-link-type="dfn" href="#orientation-sensor" id="ref-for-orientation-sensor①">Orientation Sensor</a>-specific virtual sensor metadata.</p>
-   <h3 class="heading settled" data-level="8.1" id="absolute-orientation-sensor-automation"><span class="secno">8.1. </span><span class="content">Absolute Orientation Sensor automation</span><a class="self-link" href="#absolute-orientation-sensor-automation"></a></h3>
-   <p>The <a data-link-type="dfn" href="https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata" id="ref-for-per-type-virtual-sensor-metadata">per-type virtual sensor metadata</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-ordered-map">map</a> must have the following <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry①">entry</a>:</p>
-   <dl>
-    <dt data-md><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key①">key</a>
-    <dd data-md>
-     <p>"<code><a data-link-type="dfn" href="#absolute-orientation-virtual-sensor-type" id="ref-for-absolute-orientation-virtual-sensor-type">absolute-orientation</a></code>"</p>
-    <dt data-md><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value①">value</a>
-    <dd data-md>
-     <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata" id="ref-for-virtual-sensor-metadata">virtual sensor metadata</a> whose <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm" id="ref-for-virtual-sensor-metadata-reading-parsing-algorithm">reading parsing algorithm</a> is <a data-link-type="dfn" href="https://w3c.github.io/sensors/#parse-quaternion-reading" id="ref-for-parse-quaternion-reading">parse quaternion reading</a>.</p>
-   </dl>
-   <h3 class="heading settled" data-level="8.2" id="relative-orientation-sensor-automation"><span class="secno">8.2. </span><span class="content">Relative Orientation Sensor automation</span><a class="self-link" href="#relative-orientation-sensor-automation"></a></h3>
-   <p>The <a data-link-type="dfn" href="https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata" id="ref-for-per-type-virtual-sensor-metadata①">per-type virtual sensor metadata</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-ordered-map①">map</a> must have the following <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry②">entry</a>:</p>
-   <dl>
-    <dt data-md><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key②">key</a>
-    <dd data-md>
-     <p>"<code><a data-link-type="dfn" href="#relative-orientation-virtual-sensor-type" id="ref-for-relative-orientation-virtual-sensor-type">relative-orientation</a></code>"</p>
-    <dt data-md><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value②">value</a>
-    <dd data-md>
-     <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata" id="ref-for-virtual-sensor-metadata①">virtual sensor metadata</a> whose <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm" id="ref-for-virtual-sensor-metadata-reading-parsing-algorithm①">reading parsing algorithm</a> is <a data-link-type="dfn" href="https://w3c.github.io/sensors/#parse-quaternion-reading" id="ref-for-parse-quaternion-reading①">parse quaternion reading</a>.</p>
-   </dl>
+   <h3 class="heading settled" data-level="8.1" id="modifications-to-other-specifications"><span class="secno">8.1. </span><span class="content">Modifications to other specifications</span><a class="self-link" href="#modifications-to-other-specifications"></a></h3>
+   <p>This specification integrates with <a href="https://w3c.github.io/deviceorientation/#automation">DeviceOrientation Event Specification § automation</a> as follows.</p>
+   <div class="algorithm" data-algorithm="parse-orientation-data-reading-modifications">
+     The <a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#parse-orientation-data-reading" id="ref-for-parse-orientation-data-reading">parse orientation data reading</a> algorithm is modified as follows: 
+    <ul>
+     <li data-md>
+      <p>Add the following steps after setting <var>reading</var>’s "<code>alpha</code>", "<code>beta</code>", and "<code>gamma</code>" keys and before returning <var>reading</var>:</p>
+      <ol>
+       <li data-md>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-set" id="ref-for-map-set">Set</a> <var>reading</var>["<code>quaternion</code>"] to the result of invoking <a data-link-type="dfn" href="#create-a-quaternion-from-euler-angles" id="ref-for-create-a-quaternion-from-euler-angles">create a quaternion from Euler angles</a> with <var>reading</var>["<code>alpha</code>"], <var>reading</var>["<code>beta</code>"], and <var>reading</var>["<code>gamma</code>"].</p>
+      </ol>
+    </ul>
+   </div>
+   <p class="note" role="note"><span class="marker">Note:</span> This specification does not currently provide a way for specifying quaternions in WebDriver (and consequently deriving Euler angles from the quaternion) directly. This decision was made for simplicity and under the assumption that automation users are much more likely to work with Euler angles as inputs (or pick specific quaternion values and provide the corresponding Euler angle values on their own). Feedback from users with different use cases who are interested in being able to provide quaternion values directly is welcome via <a href="https://github.com/w3c/orientation-sensor/issues">this specification’s issue tracker</a>.</p>
+   <h3 class="heading settled" data-level="8.2" id="absolute-orientation-sensor-automation"><span class="secno">8.2. </span><span class="content">Absolute Orientation Sensor automation</span><a class="self-link" href="#absolute-orientation-sensor-automation"></a></h3>
+   <p>The <a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#absolute-orientation-virtual-sensor-type" id="ref-for-absolute-orientation-virtual-sensor-type①">absolute-orientation virtual sensor type</a> and its corresponding entry in the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata" id="ref-for-per-type-virtual-sensor-metadata">per-type virtual sensor metadata</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-ordered-map">map</a> are defined in <a href="https://w3c.github.io/deviceorientation/#automation">DeviceOrientation Event Specification § automation</a>.</p>
+   <h3 class="heading settled" data-level="8.3" id="relative-orientation-sensor-automation"><span class="secno">8.3. </span><span class="content">Relative Orientation Sensor automation</span><a class="self-link" href="#relative-orientation-sensor-automation"></a></h3>
+   <p>The <a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#relative-orientation-virtual-sensor-type" id="ref-for-relative-orientation-virtual-sensor-type①">relative-orientation virtual sensor type</a> and its corresponding entry in the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata" id="ref-for-per-type-virtual-sensor-metadata①">per-type virtual sensor metadata</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-ordered-map①">map</a> are defined in <a href="https://w3c.github.io/deviceorientation/#automation">DeviceOrientation Event Specification § automation</a>.</p>
    <h2 class="heading settled" data-level="9" id="acknowledgements"><span class="secno">9. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>Tobie Langel for the work on Generic Sensor API.</p>
    <h2 class="heading settled" data-level="10" id="conformance"><span class="secno">10. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -1401,7 +1465,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li><a href="#absoluteorientationsensor">AbsoluteOrientationSensor</a><span>, in § 6.2</span>
    <li><a href="#dom-absoluteorientationsensor-absoluteorientationsensor">AbsoluteOrientationSensor()</a><span>, in § 6.2</span>
    <li><a href="#dom-absoluteorientationsensor-absoluteorientationsensor">AbsoluteOrientationSensor(sensorOptions)</a><span>, in § 6.2</span>
-   <li><a href="#absolute-orientation-virtual-sensor-type">absolute-orientation virtual sensor type</a><span>, in § 5.1</span>
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in § 10</span>
    <li><a href="#construct-an-orientation-sensor-object">Construct an Orientation Sensor object</a><span>, in § 7</span>
    <li>
@@ -1416,6 +1479,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="#dom-absoluteorientationsensor-absoluteorientationsensor">constructor for AbsoluteOrientationSensor</a><span>, in § 6.2</span>
      <li><a href="#dom-relativeorientationsensor-relativeorientationsensor">constructor for RelativeOrientationSensor</a><span>, in § 6.3</span>
     </ul>
+   <li><a href="#converting-a-quaternion-to-rotation-matrix">converting a quaternion to rotation matrix</a><span>, in § 7.2</span>
+   <li><a href="#create-a-quaternion-from-euler-angles">create a quaternion from Euler angles</a><span>, in § 7.3</span>
    <li><a href="#dom-orientationsensorlocalcoordinatesystem-device">"device"</a><span>, in § 6.1</span>
    <li><a href="#earths-reference-coordinate-system">Earth’s reference coordinate system</a><span>, in § 5.1</span>
    <li><a href="#orientation-sensor">Orientation Sensor</a><span>, in § 5</span>
@@ -1429,7 +1494,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li><a href="#relativeorientationsensor">RelativeOrientationSensor</a><span>, in § 6.3</span>
    <li><a href="#dom-relativeorientationsensor-relativeorientationsensor">RelativeOrientationSensor()</a><span>, in § 6.3</span>
    <li><a href="#dom-relativeorientationsensor-relativeorientationsensor">RelativeOrientationSensor(sensorOptions)</a><span>, in § 6.3</span>
-   <li><a href="#relative-orientation-virtual-sensor-type">relative-orientation virtual sensor type</a><span>, in § 5.2</span>
    <li><a href="#typedefdef-rotationmatrixtype">RotationMatrixType</a><span>, in § 6.1</span>
    <li><a href="#dom-orientationsensorlocalcoordinatesystem-screen">"screen"</a><span>, in § 6.1</span>
    <li><a href="#stationary-reference-coordinate-system">stationary reference coordinate system</a><span>, in § 5.2</span>
@@ -1461,15 +1525,12 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><span class="dfn-paneled" id="95a8cb5f">local coordinate system</span>
      <li><span class="dfn-paneled" id="eb8343c0">low-level</span>
      <li><span class="dfn-paneled" id="fd03f682">onerror</span>
-     <li><span class="dfn-paneled" id="101cbf19">parse quaternion reading</span>
      <li><span class="dfn-paneled" id="5d47b5a4">per-type virtual sensor metadata</span>
-     <li><span class="dfn-paneled" id="611c5008">reading parsing algorithm</span>
      <li><span class="dfn-paneled" id="277a4c80">request sensor access</span>
      <li><span class="dfn-paneled" id="f96b75e9">sensor type</span>
      <li><span class="dfn-paneled" id="61e7f6a4">sensor-fusion</span>
      <li><span class="dfn-paneled" id="c29c300e">start()</span>
      <li><span class="dfn-paneled" id="13f5be19">supported sensor options</span>
-     <li><span class="dfn-paneled" id="bb15fee5">virtual sensor metadata</span>
      <li><span class="dfn-paneled" id="4fa114dd">virtual sensor type</span>
     </ul>
    <li>
@@ -1494,12 +1555,20 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><span class="dfn-paneled" id="d14a6f26">key</span>
      <li><span class="dfn-paneled" id="649608b9">list</span>
      <li><span class="dfn-paneled" id="3fca5a9e">map</span>
+     <li><span class="dfn-paneled" id="0e6b2056">set</span>
      <li><span class="dfn-paneled" id="802b0fdd">value</span>
     </ul>
    <li>
     <a data-link-type="biblio">[MAGNETOMETER]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="5e19184b">Magnetometer</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[ORIENTATION-EVENT]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="32c9d1b1">absolute-orientation virtual sensor type</span>
+     <li><span class="dfn-paneled" id="d22f9e83">parse orientation data reading</span>
+     <li><span class="dfn-paneled" id="31d7bfd5">relative-orientation virtual sensor type</span>
     </ul>
    <li>
     <a data-link-type="biblio">[PERMISSIONS-POLICY-1]</a> defines the following terms:
@@ -1523,6 +1592,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><span class="dfn-paneled" id="980252f2">identifier</span>
      <li><span class="dfn-paneled" id="fc14fa8a">inherited interfaces</span>
      <li><span class="dfn-paneled" id="1422ec4e">interface</span>
+     <li><span class="dfn-paneled" id="4013a022">this</span>
      <li><span class="dfn-paneled" id="b4cfa5ce">throw</span>
      <li><span class="dfn-paneled" id="5f90bbfb">undefined</span>
     </ul>
@@ -1544,6 +1614,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dd>Anssi Kostiainen; Rijubrata Bhaumik. <a href="https://w3c.github.io/magnetometer/"><cite>Magnetometer</cite></a>. URL: <a href="https://w3c.github.io/magnetometer/">https://w3c.github.io/magnetometer/</a>
    <dt id="biblio-motion-sensors">[MOTION-SENSORS]
    <dd>Kenneth Christiansen; Alexander Shalamov. <a href="https://w3c.github.io/motion-sensors/"><cite>Motion Sensors Explainer</cite></a>. URL: <a href="https://w3c.github.io/motion-sensors/">https://w3c.github.io/motion-sensors/</a>
+   <dt id="biblio-orientation-event">[ORIENTATION-EVENT]
+   <dd>Reilly Grant; Raphael Kubo da Costa. <a href="https://w3c.github.io/deviceorientation/"><cite>DeviceOrientation Event Specification</cite></a>. URL: <a href="https://w3c.github.io/deviceorientation/">https://w3c.github.io/deviceorientation/</a>
    <dt id="biblio-permissions-policy-1">[PERMISSIONS-POLICY-1]
    <dd>Ian Clelland. <a href="https://w3c.github.io/webappsec-permissions-policy/"><cite>Permissions Policy</cite></a>. URL: <a href="https://w3c.github.io/webappsec-permissions-policy/">https://w3c.github.io/webappsec-permissions-policy/</a>
    <dt id="biblio-rfc2119">[RFC2119]
@@ -2018,29 +2090,30 @@ window.dfnpanelData['5822d2f3'] = {"dfnID": "5822d2f3", "url": "https://w3c.gith
 window.dfnpanelData['beb7996f'] = {"dfnID": "beb7996f", "url": "https://w3c.github.io/sensors/#extension-sensor-interface", "dfnText": "extension sensor interface", "refSections": [{"refs": [{"id": "ref-for-extension-sensor-interface"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-extension-sensor-interface\u2460"}], "title": "5.2. The RelativeOrientationSensor Model"}], "external": true};
 window.dfnpanelData['fd4ad34f'] = {"dfnID": "fd4ad34f", "url": "https://w3c.github.io/sensors/#get-value-from-latest-reading", "dfnText": "get value from latest reading", "refSections": [{"refs": [{"id": "ref-for-get-value-from-latest-reading"}], "title": "6.1.1. OrientationSensor.quaternion"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2460"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": true};
 window.dfnpanelData['0026f53f'] = {"dfnID": "0026f53f", "url": "https://w3c.github.io/sensors/#initialize-a-sensor-object", "dfnText": "initialize a sensor object", "refSections": [{"refs": [{"id": "ref-for-initialize-a-sensor-object"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
-window.dfnpanelData['378064f9'] = {"dfnID": "378064f9", "url": "https://w3c.github.io/sensors/#latest-reading", "dfnText": "latest reading", "refSections": [{"refs": [{"id": "ref-for-latest-reading"}, {"id": "ref-for-latest-reading\u2460"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-latest-reading\u2461"}, {"id": "ref-for-latest-reading\u2462"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-latest-reading\u2463"}], "title": "5.2. The RelativeOrientationSensor Model"}, {"refs": [{"id": "ref-for-latest-reading\u2464"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": true};
+window.dfnpanelData['378064f9'] = {"dfnID": "378064f9", "url": "https://w3c.github.io/sensors/#latest-reading", "dfnText": "latest reading", "refSections": [{"refs": [{"id": "ref-for-latest-reading"}, {"id": "ref-for-latest-reading\u2460"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-latest-reading\u2461"}, {"id": "ref-for-latest-reading\u2462"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-latest-reading\u2463"}], "title": "5.2. The RelativeOrientationSensor Model"}], "external": true};
 window.dfnpanelData['95a8cb5f'] = {"dfnID": "95a8cb5f", "url": "https://w3c.github.io/sensors/#local-coordinate-system", "dfnText": "local coordinate system", "refSections": [{"refs": [{"id": "ref-for-local-coordinate-system"}, {"id": "ref-for-local-coordinate-system\u2460"}, {"id": "ref-for-local-coordinate-system\u2461"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-local-coordinate-system\u2462"}, {"id": "ref-for-local-coordinate-system\u2463"}], "title": "5.2. The RelativeOrientationSensor Model"}, {"refs": [{"id": "ref-for-local-coordinate-system\u2464"}, {"id": "ref-for-local-coordinate-system\u2465"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
 window.dfnpanelData['eb8343c0'] = {"dfnID": "eb8343c0", "url": "https://w3c.github.io/sensors/#low-level", "dfnText": "low-level", "refSections": [{"refs": [{"id": "ref-for-low-level"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-low-level\u2460"}, {"id": "ref-for-low-level\u2461"}, {"id": "ref-for-low-level\u2462"}, {"id": "ref-for-low-level\u2463"}, {"id": "ref-for-low-level\u2464"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-low-level\u2465"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-low-level\u2466"}], "title": "5.2. The RelativeOrientationSensor Model"}], "external": true};
 window.dfnpanelData['fd03f682'] = {"dfnID": "fd03f682", "url": "https://w3c.github.io/sensors/#dom-sensor-onerror", "dfnText": "onerror", "refSections": [{"refs": [{"id": "ref-for-dom-sensor-onerror"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['101cbf19'] = {"dfnID": "101cbf19", "url": "https://w3c.github.io/sensors/#parse-quaternion-reading", "dfnText": "parse quaternion reading", "refSections": [{"refs": [{"id": "ref-for-parse-quaternion-reading"}], "title": "8.1. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-parse-quaternion-reading\u2460"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": true};
-window.dfnpanelData['5d47b5a4'] = {"dfnID": "5d47b5a4", "url": "https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata", "dfnText": "per-type virtual sensor metadata", "refSections": [{"refs": [{"id": "ref-for-per-type-virtual-sensor-metadata"}], "title": "8.1. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-per-type-virtual-sensor-metadata\u2460"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": true};
-window.dfnpanelData['611c5008'] = {"dfnID": "611c5008", "url": "https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm", "dfnText": "reading parsing algorithm", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-metadata-reading-parsing-algorithm"}], "title": "8.1. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-virtual-sensor-metadata-reading-parsing-algorithm\u2460"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": true};
+window.dfnpanelData['5d47b5a4'] = {"dfnID": "5d47b5a4", "url": "https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata", "dfnText": "per-type virtual sensor metadata", "refSections": [{"refs": [{"id": "ref-for-per-type-virtual-sensor-metadata"}], "title": "8.2. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-per-type-virtual-sensor-metadata\u2460"}], "title": "8.3. Relative Orientation Sensor automation"}], "external": true};
 window.dfnpanelData['277a4c80'] = {"dfnID": "277a4c80", "url": "https://w3c.github.io/sensors/#request-sensor-access", "dfnText": "request sensor access", "refSections": [{"refs": [{"id": "ref-for-request-sensor-access"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['f96b75e9'] = {"dfnID": "f96b75e9", "url": "https://w3c.github.io/sensors/#sensor-type", "dfnText": "sensor type", "refSections": [{"refs": [{"id": "ref-for-sensor-type"}, {"id": "ref-for-sensor-type\u2460"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-sensor-type\u2461"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-sensor-type\u2462"}], "title": "5.2. The RelativeOrientationSensor Model"}], "external": true};
 window.dfnpanelData['61e7f6a4'] = {"dfnID": "61e7f6a4", "url": "https://w3c.github.io/sensors/#sensor-fusion", "dfnText": "sensor-fusion", "refSections": [{"refs": [{"id": "ref-for-sensor-fusion"}, {"id": "ref-for-sensor-fusion\u2460"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['c29c300e'] = {"dfnID": "c29c300e", "url": "https://w3c.github.io/sensors/#dom-sensor-start", "dfnText": "start()", "refSections": [{"refs": [{"id": "ref-for-dom-sensor-start"}, {"id": "ref-for-dom-sensor-start\u2460"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['13f5be19'] = {"dfnID": "13f5be19", "url": "https://w3c.github.io/sensors/#supported-sensor-options", "dfnText": "supported sensor options", "refSections": [{"refs": [{"id": "ref-for-supported-sensor-options"}], "title": "6.2. The AbsoluteOrientationSensor Interface"}, {"refs": [{"id": "ref-for-supported-sensor-options\u2460"}], "title": "6.3. The RelativeOrientationSensor Interface"}], "external": true};
-window.dfnpanelData['bb15fee5'] = {"dfnID": "bb15fee5", "url": "https://w3c.github.io/sensors/#virtual-sensor-metadata", "dfnText": "virtual sensor metadata", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-metadata"}], "title": "8.1. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-virtual-sensor-metadata\u2460"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": true};
 window.dfnpanelData['4fa114dd'] = {"dfnID": "4fa114dd", "url": "https://w3c.github.io/sensors/#virtual-sensor-type", "dfnText": "virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-type"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-virtual-sensor-type\u2460"}], "title": "5.2. The RelativeOrientationSensor Model"}], "external": true};
 window.dfnpanelData['4ffe871f'] = {"dfnID": "4ffe871f", "url": "https://drafts.fxtf.org/geometry-1/#dommatrix", "dfnText": "DOMMatrix", "refSections": [{"refs": [{"id": "ref-for-dommatrix"}], "title": "6.1. The OrientationSensor Interface"}, {"refs": [{"id": "ref-for-dommatrix\u2460"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": true};
 window.dfnpanelData['68c96227'] = {"dfnID": "68c96227", "url": "https://w3c.github.io/gyroscope/#gyroscope", "dfnText": "Gyroscope", "refSections": [{"refs": [{"id": "ref-for-gyroscope"}, {"id": "ref-for-gyroscope\u2460"}, {"id": "ref-for-gyroscope\u2461"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['6a5a59a0'] = {"dfnID": "6a5a59a0", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers", "dfnText": "event handler", "refSections": [{"refs": [{"id": "ref-for-event-handlers"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['8958b003'] = {"dfnID": "8958b003", "url": "https://infra.spec.whatwg.org/#map-entry", "dfnText": "entry", "refSections": [{"refs": [{"id": "ref-for-map-entry"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-map-entry\u2460"}], "title": "8.1. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-map-entry\u2461"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": true};
-window.dfnpanelData['d14a6f26'] = {"dfnID": "d14a6f26", "url": "https://infra.spec.whatwg.org/#map-key", "dfnText": "key", "refSections": [{"refs": [{"id": "ref-for-map-key"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-map-key\u2460"}], "title": "8.1. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-map-key\u2461"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": true};
-window.dfnpanelData['649608b9'] = {"dfnID": "649608b9", "url": "https://infra.spec.whatwg.org/#list", "dfnText": "list", "refSections": [{"refs": [{"id": "ref-for-list"}, {"id": "ref-for-list\u2460"}, {"id": "ref-for-list\u2461"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['3fca5a9e'] = {"dfnID": "3fca5a9e", "url": "https://infra.spec.whatwg.org/#ordered-map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-ordered-map"}], "title": "8.1. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-ordered-map\u2460"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": true};
-window.dfnpanelData['802b0fdd'] = {"dfnID": "802b0fdd", "url": "https://infra.spec.whatwg.org/#map-value", "dfnText": "value", "refSections": [{"refs": [{"id": "ref-for-map-value"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-map-value\u2460"}], "title": "8.1. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-map-value\u2461"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": true};
+window.dfnpanelData['8958b003'] = {"dfnID": "8958b003", "url": "https://infra.spec.whatwg.org/#map-entry", "dfnText": "entry", "refSections": [{"refs": [{"id": "ref-for-map-entry"}], "title": "5. Model"}], "external": true};
+window.dfnpanelData['d14a6f26'] = {"dfnID": "d14a6f26", "url": "https://infra.spec.whatwg.org/#map-key", "dfnText": "key", "refSections": [{"refs": [{"id": "ref-for-map-key"}], "title": "5. Model"}], "external": true};
+window.dfnpanelData['649608b9'] = {"dfnID": "649608b9", "url": "https://infra.spec.whatwg.org/#list", "dfnText": "list", "refSections": [{"refs": [{"id": "ref-for-list"}, {"id": "ref-for-list\u2460"}, {"id": "ref-for-list\u2461"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-list\u2462"}], "title": "7.2. Convert quaternion to rotation matrix"}], "external": true};
+window.dfnpanelData['3fca5a9e'] = {"dfnID": "3fca5a9e", "url": "https://infra.spec.whatwg.org/#ordered-map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-ordered-map"}], "title": "8.2. Absolute Orientation Sensor automation"}, {"refs": [{"id": "ref-for-ordered-map\u2460"}], "title": "8.3. Relative Orientation Sensor automation"}], "external": true};
+window.dfnpanelData['0e6b2056'] = {"dfnID": "0e6b2056", "url": "https://infra.spec.whatwg.org/#map-set", "dfnText": "set", "refSections": [{"refs": [{"id": "ref-for-map-set"}], "title": "8.1. Modifications to other specifications"}], "external": true};
+window.dfnpanelData['802b0fdd'] = {"dfnID": "802b0fdd", "url": "https://infra.spec.whatwg.org/#map-value", "dfnText": "value", "refSections": [{"refs": [{"id": "ref-for-map-value"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['5e19184b'] = {"dfnID": "5e19184b", "url": "https://w3c.github.io/magnetometer/#magnetometer", "dfnText": "Magnetometer", "refSections": [{"refs": [{"id": "ref-for-magnetometer"}, {"id": "ref-for-magnetometer\u2460"}], "title": "5. Model"}], "external": true};
+window.dfnpanelData['32c9d1b1'] = {"dfnID": "32c9d1b1", "url": "https://w3c.github.io/deviceorientation/#absolute-orientation-virtual-sensor-type", "dfnText": "absolute-orientation virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-absolute-orientation-virtual-sensor-type"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-absolute-orientation-virtual-sensor-type\u2460"}], "title": "8.2. Absolute Orientation Sensor automation"}], "external": true};
+window.dfnpanelData['d22f9e83'] = {"dfnID": "d22f9e83", "url": "https://w3c.github.io/deviceorientation/#parse-orientation-data-reading", "dfnText": "parse orientation data reading", "refSections": [{"refs": [{"id": "ref-for-parse-orientation-data-reading"}], "title": "8.1. Modifications to other specifications"}], "external": true};
+window.dfnpanelData['31d7bfd5'] = {"dfnID": "31d7bfd5", "url": "https://w3c.github.io/deviceorientation/#relative-orientation-virtual-sensor-type", "dfnText": "relative-orientation virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-relative-orientation-virtual-sensor-type"}], "title": "5.2. The RelativeOrientationSensor Model"}, {"refs": [{"id": "ref-for-relative-orientation-virtual-sensor-type\u2460"}], "title": "8.3. Relative Orientation Sensor automation"}], "external": true};
 window.dfnpanelData['1570624a'] = {"dfnID": "1570624a", "url": "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist", "dfnText": "default allowlist", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature-default-allowlist"}, {"id": "ref-for-policy-controlled-feature-default-allowlist\u2460"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['cc890cc1'] = {"dfnID": "cc890cc1", "url": "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature", "dfnText": "policy-controlled feature", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature"}, {"id": "ref-for-policy-controlled-feature\u2460"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['dca2de17'] = {"dfnID": "dca2de17", "url": "https://webidl.spec.whatwg.org/#idl-DOMException", "dfnText": "DOMException", "refSections": [{"refs": [{"id": "ref-for-idl-DOMException"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}, {"refs": [{"id": "ref-for-idl-DOMException\u2460"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
@@ -2051,27 +2124,28 @@ window.dfnpanelData['dcf5fafa'] = {"dfnID": "dcf5fafa", "url": "https://webidl.s
 window.dfnpanelData['0be3911e'] = {"dfnID": "0be3911e", "url": "https://webidl.spec.whatwg.org/#notreadableerror", "dfnText": "NotReadableError", "refSections": [{"refs": [{"id": "ref-for-notreadableerror"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": true};
 window.dfnpanelData['b75bb3bd'] = {"dfnID": "b75bb3bd", "url": "https://webidl.spec.whatwg.org/#SecureContext", "dfnText": "SecureContext", "refSections": [{"refs": [{"id": "ref-for-SecureContext"}], "title": "6.1. The OrientationSensor Interface"}, {"refs": [{"id": "ref-for-SecureContext\u2460"}], "title": "6.2. The AbsoluteOrientationSensor Interface"}, {"refs": [{"id": "ref-for-SecureContext\u2461"}], "title": "6.3. The RelativeOrientationSensor Interface"}], "external": true};
 window.dfnpanelData['c3e881ef'] = {"dfnID": "c3e881ef", "url": "https://webidl.spec.whatwg.org/#securityerror", "dfnText": "SecurityError", "refSections": [{"refs": [{"id": "ref-for-securityerror"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
-window.dfnpanelData['82ca3efc'] = {"dfnID": "82ca3efc", "url": "https://webidl.spec.whatwg.org/#exceptiondef-typeerror", "dfnText": "TypeError", "refSections": [{"refs": [{"id": "ref-for-exceptiondef-typeerror"}, {"id": "ref-for-exceptiondef-typeerror\u2460"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": true};
+window.dfnpanelData['82ca3efc'] = {"dfnID": "82ca3efc", "url": "https://webidl.spec.whatwg.org/#exceptiondef-typeerror", "dfnText": "TypeError", "refSections": [{"refs": [{"id": "ref-for-exceptiondef-typeerror"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": true};
 window.dfnpanelData['8c800cdf'] = {"dfnID": "8c800cdf", "url": "https://webidl.spec.whatwg.org/#idl-double", "dfnText": "double", "refSections": [{"refs": [{"id": "ref-for-idl-double"}], "title": "6.1. The OrientationSensor Interface"}], "external": true};
 window.dfnpanelData['980252f2'] = {"dfnID": "980252f2", "url": "https://webidl.spec.whatwg.org/#dfn-identifier", "dfnText": "identifier", "refSections": [{"refs": [{"id": "ref-for-dfn-identifier"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
 window.dfnpanelData['fc14fa8a'] = {"dfnID": "fc14fa8a", "url": "https://webidl.spec.whatwg.org/#dfn-inherited-interfaces", "dfnText": "inherited interfaces", "refSections": [{"refs": [{"id": "ref-for-dfn-inherited-interfaces"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
 window.dfnpanelData['1422ec4e'] = {"dfnID": "1422ec4e", "url": "https://webidl.spec.whatwg.org/#dfn-interface", "dfnText": "interface", "refSections": [{"refs": [{"id": "ref-for-dfn-interface"}, {"id": "ref-for-dfn-interface\u2460"}, {"id": "ref-for-dfn-interface\u2461"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
-window.dfnpanelData['b4cfa5ce'] = {"dfnID": "b4cfa5ce", "url": "https://webidl.spec.whatwg.org/#dfn-throw", "dfnText": "throw", "refSections": [{"refs": [{"id": "ref-for-dfn-throw"}, {"id": "ref-for-dfn-throw\u2460"}, {"id": "ref-for-dfn-throw\u2461"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}, {"refs": [{"id": "ref-for-dfn-throw\u2462"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
+window.dfnpanelData['4013a022'] = {"dfnID": "4013a022", "url": "https://webidl.spec.whatwg.org/#this", "dfnText": "this", "refSections": [{"refs": [{"id": "ref-for-this"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": true};
+window.dfnpanelData['b4cfa5ce'] = {"dfnID": "b4cfa5ce", "url": "https://webidl.spec.whatwg.org/#dfn-throw", "dfnText": "throw", "refSections": [{"refs": [{"id": "ref-for-dfn-throw"}, {"id": "ref-for-dfn-throw\u2460"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}, {"refs": [{"id": "ref-for-dfn-throw\u2461"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": true};
 window.dfnpanelData['5f90bbfb'] = {"dfnID": "5f90bbfb", "url": "https://webidl.spec.whatwg.org/#idl-undefined", "dfnText": "undefined", "refSections": [{"refs": [{"id": "ref-for-idl-undefined"}], "title": "6.1. The OrientationSensor Interface"}], "external": true};
 window.dfnpanelData['orientation-sensor'] = {"dfnID": "orientation-sensor", "url": "#orientation-sensor", "dfnText": "Orientation Sensor", "refSections": [{"refs": [{"id": "ref-for-orientation-sensor"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-orientation-sensor\u2460"}], "title": "8. Automation"}], "external": false};
-window.dfnpanelData['absolute-orientation-virtual-sensor-type'] = {"dfnID": "absolute-orientation-virtual-sensor-type", "url": "#absolute-orientation-virtual-sensor-type", "dfnText": "absolute-orientation", "refSections": [{"refs": [{"id": "ref-for-absolute-orientation-virtual-sensor-type"}], "title": "8.1. Absolute Orientation Sensor automation"}], "external": false};
 window.dfnpanelData['earths-reference-coordinate-system'] = {"dfnID": "earths-reference-coordinate-system", "url": "#earths-reference-coordinate-system", "dfnText": "Earth\u2019s reference\ncoordinate system", "refSections": [{"refs": [{"id": "ref-for-earths-reference-coordinate-system"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-earths-reference-coordinate-system\u2460"}], "title": "5.1. The AbsoluteOrientationSensor Model"}], "external": false};
-window.dfnpanelData['relative-orientation-virtual-sensor-type'] = {"dfnID": "relative-orientation-virtual-sensor-type", "url": "#relative-orientation-virtual-sensor-type", "dfnText": "relative-orientation", "refSections": [{"refs": [{"id": "ref-for-relative-orientation-virtual-sensor-type"}], "title": "8.2. Relative Orientation Sensor automation"}], "external": false};
 window.dfnpanelData['stationary-reference-coordinate-system'] = {"dfnID": "stationary-reference-coordinate-system", "url": "#stationary-reference-coordinate-system", "dfnText": "stationary reference coordinate system", "refSections": [{"refs": [{"id": "ref-for-stationary-reference-coordinate-system"}, {"id": "ref-for-stationary-reference-coordinate-system\u2460"}], "title": "5.2. The RelativeOrientationSensor Model"}], "external": false};
-window.dfnpanelData['typedefdef-rotationmatrixtype'] = {"dfnID": "typedefdef-rotationmatrixtype", "url": "#typedefdef-rotationmatrixtype", "dfnText": "RotationMatrixType", "refSections": [{"refs": [{"id": "ref-for-typedefdef-rotationmatrixtype"}], "title": "6.1. The OrientationSensor Interface"}, {"refs": [{"id": "ref-for-typedefdef-rotationmatrixtype\u2460"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": false};
+window.dfnpanelData['typedefdef-rotationmatrixtype'] = {"dfnID": "typedefdef-rotationmatrixtype", "url": "#typedefdef-rotationmatrixtype", "dfnText": "RotationMatrixType", "refSections": [{"refs": [{"id": "ref-for-typedefdef-rotationmatrixtype"}], "title": "6.1. The OrientationSensor Interface"}], "external": false};
 window.dfnpanelData['orientationsensor'] = {"dfnID": "orientationsensor", "url": "#orientationsensor", "dfnText": "OrientationSensor", "refSections": [{"refs": [{"id": "ref-for-orientationsensor"}, {"id": "ref-for-orientationsensor\u2460"}, {"id": "ref-for-orientationsensor\u2461"}, {"id": "ref-for-orientationsensor\u2462"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-orientationsensor\u2463"}, {"id": "ref-for-orientationsensor\u2464"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-orientationsensor\u2465"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-orientationsensor\u2466"}], "title": "5.2. The RelativeOrientationSensor Model"}, {"refs": [{"id": "ref-for-orientationsensor\u2467"}], "title": "6.2. The AbsoluteOrientationSensor Interface"}, {"refs": [{"id": "ref-for-orientationsensor\u2468"}], "title": "6.3. The RelativeOrientationSensor Interface"}, {"refs": [{"id": "ref-for-orientationsensor\u2460\u24ea"}, {"id": "ref-for-orientationsensor\u2460\u2460"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": false};
-window.dfnpanelData['dom-orientationsensor-populatematrix'] = {"dfnID": "dom-orientationsensor-populatematrix", "url": "#dom-orientationsensor-populatematrix", "dfnText": "populateMatrix", "refSections": [{"refs": [{"id": "ref-for-dom-orientationsensor-populatematrix"}, {"id": "ref-for-dom-orientationsensor-populatematrix\u2460"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": false};
+window.dfnpanelData['dom-orientationsensor-populatematrix'] = {"dfnID": "dom-orientationsensor-populatematrix", "url": "#dom-orientationsensor-populatematrix", "dfnText": "populateMatrix", "refSections": [{"refs": [{"id": "ref-for-dom-orientationsensor-populatematrix"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}], "external": false};
 window.dfnpanelData['enumdef-orientationsensorlocalcoordinatesystem'] = {"dfnID": "enumdef-orientationsensorlocalcoordinatesystem", "url": "#enumdef-orientationsensorlocalcoordinatesystem", "dfnText": "OrientationSensorLocalCoordinateSystem", "refSections": [{"refs": [{"id": "ref-for-enumdef-orientationsensorlocalcoordinatesystem"}], "title": "6.1. The OrientationSensor Interface"}], "external": false};
 window.dfnpanelData['dictdef-orientationsensoroptions'] = {"dfnID": "dictdef-orientationsensoroptions", "url": "#dictdef-orientationsensoroptions", "dfnText": "OrientationSensorOptions", "refSections": [{"refs": [{"id": "ref-for-dictdef-orientationsensoroptions"}], "title": "6.2. The AbsoluteOrientationSensor Interface"}, {"refs": [{"id": "ref-for-dictdef-orientationsensoroptions\u2460"}], "title": "6.3. The RelativeOrientationSensor Interface"}, {"refs": [{"id": "ref-for-dictdef-orientationsensoroptions\u2461"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": false};
 window.dfnpanelData['dom-orientationsensoroptions-referenceframe'] = {"dfnID": "dom-orientationsensoroptions-referenceframe", "url": "#dom-orientationsensoroptions-referenceframe", "dfnText": "referenceFrame", "refSections": [{"refs": [{"id": "ref-for-dom-orientationsensoroptions-referenceframe"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": false};
 window.dfnpanelData['absoluteorientationsensor'] = {"dfnID": "absoluteorientationsensor", "url": "#absoluteorientationsensor", "dfnText": "AbsoluteOrientationSensor", "refSections": [{"refs": [{"id": "ref-for-absoluteorientationsensor"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-absoluteorientationsensor\u2460"}, {"id": "ref-for-absoluteorientationsensor\u2461"}, {"id": "ref-for-absoluteorientationsensor\u2462"}, {"id": "ref-for-absoluteorientationsensor\u2463"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-absoluteorientationsensor\u2464"}], "title": "5.1. The AbsoluteOrientationSensor Model"}, {"refs": [{"id": "ref-for-absoluteorientationsensor\u2465"}, {"id": "ref-for-absoluteorientationsensor\u2466"}, {"id": "ref-for-absoluteorientationsensor\u2467"}], "title": "6.2. The AbsoluteOrientationSensor Interface"}], "external": false};
 window.dfnpanelData['relativeorientationsensor'] = {"dfnID": "relativeorientationsensor", "url": "#relativeorientationsensor", "dfnText": "RelativeOrientationSensor", "refSections": [{"refs": [{"id": "ref-for-relativeorientationsensor"}, {"id": "ref-for-relativeorientationsensor\u2460"}, {"id": "ref-for-relativeorientationsensor\u2461"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-relativeorientationsensor\u2462"}], "title": "5.2. The RelativeOrientationSensor Model"}, {"refs": [{"id": "ref-for-relativeorientationsensor\u2463"}, {"id": "ref-for-relativeorientationsensor\u2464"}, {"id": "ref-for-relativeorientationsensor\u2465"}], "title": "6.3. The RelativeOrientationSensor Interface"}], "external": false};
 window.dfnpanelData['construct-an-orientation-sensor-object'] = {"dfnID": "construct-an-orientation-sensor-object", "url": "#construct-an-orientation-sensor-object", "dfnText": "7.1. Construct an Orientation Sensor object", "refSections": [{"refs": [{"id": "ref-for-construct-an-orientation-sensor-object"}], "title": "6.2. The AbsoluteOrientationSensor Interface"}, {"refs": [{"id": "ref-for-construct-an-orientation-sensor-object\u2460"}], "title": "6.3. The RelativeOrientationSensor Interface"}, {"refs": [{"id": "ref-for-construct-an-orientation-sensor-object"}], "title": "7.1. Construct an Orientation Sensor object"}], "external": false};
+window.dfnpanelData['converting-a-quaternion-to-rotation-matrix'] = {"dfnID": "converting-a-quaternion-to-rotation-matrix", "url": "#converting-a-quaternion-to-rotation-matrix", "dfnText": "convert a quaternion to rotation matrix", "refSections": [{"refs": [{"id": "ref-for-converting-a-quaternion-to-rotation-matrix"}], "title": "6.1.2. OrientationSensor.populateMatrix()"}, {"refs": [{"id": "ref-for-converting-a-quaternion-to-rotation-matrix\u2460"}], "title": "7.2. Convert quaternion to rotation matrix"}], "external": false};
+window.dfnpanelData['create-a-quaternion-from-euler-angles'] = {"dfnID": "create-a-quaternion-from-euler-angles", "url": "#create-a-quaternion-from-euler-angles", "dfnText": "create a quaternion from Euler angles", "refSections": [{"refs": [{"id": "ref-for-create-a-quaternion-from-euler-angles"}], "title": "8.1. Modifications to other specifications"}], "external": false};
 </script>
 <script>/* Boilerplate: script-dom-helper */
 function query(sel) { return document.querySelector(sel); }
