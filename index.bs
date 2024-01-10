@@ -291,7 +291,7 @@ The AbsoluteOrientationSensor Model {#absoluteorientationsensor-model}
 ----------------------------------------------------------------------
 
 The <dfn id="absolute-orientation-sensor-type">Absolute Orientation Sensor</dfn> [=sensor type=] represents the sensor described in [[MOTION-SENSORS#absolute-orientation]]. Its associated [=extension sensor interface=] is {{AbsoluteOrientationSensor}}, a subclass of {{OrientationSensor}}. Its associated [=virtual sensor type=] is
-"<code><dfn data-lt="absolute-orientation virtual sensor type">absolute-orientation</dfn></code>".
+"<code><a data-lt="absolute-orientation virtual sensor type">absolute-orientation</a></code>".
 
 For the absolute orientation sensor the value of [=latest reading=]["quaternion"] represents
 the rotation of a device's [=local coordinate system=] in relation to the <dfn export>Earth's reference
@@ -314,7 +314,7 @@ The RelativeOrientationSensor Model {#relativeorientationsensor-model}
 ----------------------------------------------------------------------
 
 The <dfn id="relative-orientation-sensor-type">Relative Orientation Sensor</dfn> [=sensor type=] represents the sensor described in [[MOTION-SENSORS#relative-orientation]]. Its associated [=extension sensor interface=] is {{RelativeOrientationSensor}}, a subclass of {{OrientationSensor}}. Its associated [=virtual sensor type=] is
-"<code><dfn data-lt="relative-orientation virtual sensor type">relative-orientation</dfn></code>".
+"<code><a data-lt="relative-orientation virtual sensor type">relative-orientation</a></code>".
 
 For the relative orientation sensor the value of [=latest reading=]["quaternion"] represents the
 rotation of a device's [=local coordinate system=] in relation to a [=stationary reference coordinate
@@ -364,67 +364,48 @@ and "quaternion" as arguments.
 
 ### OrientationSensor.populateMatrix() ### {#orientationsensor-populatematrix}
 
-The {{OrientationSensor/populateMatrix()}} method populates the given object with rotation matrix
-which is converted from the value of [=latest reading=]["quaternion"] [[QUATCONV]], as shown below:
-
-<img src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;" alt="Converting quaternion to rotation matrix.">
-
-where:
-
- - W = cos(θ/2)
- - X = V<sub>x</sub> * sin(θ/2)
- - Y = V<sub>y</sub> * sin(θ/2)
- - Z = V<sub>z</sub> * sin(θ/2)
-
-The rotation matrix is flattened in |targetMatrix| object according to the column-major order.
-
 <div algorithm="populate rotation matrix">
 The {{OrientationSensor/populateMatrix(targetMatrix)}} method steps are:
-    1.  If |targetMatrix| is not of type defined by {{RotationMatrixType}} union, [=throw=] a
-        "{{TypeError!!exception}}" exception and abort these steps.
     1.  If |targetMatrix| is of type {{Float32Array}} or {{Float64Array}} with a size less than sixteen, [=throw=] a
         "{{TypeError!!exception}}" exception and abort these steps.
-    1.  Let |quaternion| be the result of invoking [=get value from latest reading=] with <emu-val>this</emu-val>
+    1.  Let |quaternion| be the result of invoking [=get value from latest reading=] with [=this=]
         and "quaternion" as arguments.
     1.  If |quaternion| is `null`, [=throw=] a "{{NotReadableError!!exception}}" {{DOMException}} and abort these steps.
-    1.  Let |x| be the value of |quaternion|[0]
-    1.  Let |y| be the value of |quaternion|[1]
-    1.  Let |z| be the value of |quaternion|[2]
-    1.  Let |w| be the value of |quaternion|[3]
-    1.  If |targetMatrix| is of  {{Float32Array}} or {{Float64Array}} type, run these sub-steps:
-        1.  Set |targetMatrix|[0] = 1 - 2 * y * y - 2 * z * z
-        1.  Set |targetMatrix|[1] = 2 * x * y - 2 * z * w
-        1.  Set |targetMatrix|[2] = 2 * x * z + 2 * y * w
-        1.  Set |targetMatrix|[3] = 0
-        1.  Set |targetMatrix|[4] = 2 * x * y + 2 * z * w
-        1.  Set |targetMatrix|[5] = 1 - 2 * x * x - 2 * z * z
-        1.  Set |targetMatrix|[6] = 2 * y * z - 2 * x * w
-        1.  Set |targetMatrix|[7] = 0
-        1.  Set |targetMatrix|[8] = 2 * x * z - 2 * y * w
-        1.  Set |targetMatrix|[9] = 2 * y * z + 2 * x * w
-        1.  Set |targetMatrix|[10] = 1 - 2 * x * x - 2 * y * y
-        1.  Set |targetMatrix|[11] = 0
-        1.  Set |targetMatrix|[12] = 0
-        1.  Set |targetMatrix|[13] = 0
-        1.  Set |targetMatrix|[14] = 0
-        1.  Set |targetMatrix|[15] = 1
+    1.  Let |rotationMatrix| be the result of [=converting a quaternion to rotation matrix=] with |quaternion|[0], |quaternion|[1], |quaternion|[2], and |quaternion|[3].
+    1.  If |targetMatrix| is of {{Float32Array}} or {{Float64Array}} type, run these sub-steps:
+        1.  Set |targetMatrix|[0] = |rotationMatrix|[0]
+        1.  Set |targetMatrix|[1] = |rotationMatrix|[1]
+        1.  Set |targetMatrix|[2] = |rotationMatrix|[2]
+        1.  Set |targetMatrix|[3] = |rotationMatrix|[3]
+        1.  Set |targetMatrix|[4] = |rotationMatrix|[4]
+        1.  Set |targetMatrix|[5] = |rotationMatrix|[5]
+        1.  Set |targetMatrix|[6] = |rotationMatrix|[6]
+        1.  Set |targetMatrix|[7] = |rotationMatrix|[7]
+        1.  Set |targetMatrix|[8] = |rotationMatrix|[8]
+        1.  Set |targetMatrix|[9] = |rotationMatrix|[9]
+        1.  Set |targetMatrix|[10] = |rotationMatrix|[10]
+        1.  Set |targetMatrix|[11] = |rotationMatrix|[11]
+        1.  Set |targetMatrix|[12] = |rotationMatrix|[12]
+        1.  Set |targetMatrix|[13] = |rotationMatrix|[13]
+        1.  Set |targetMatrix|[14] = |rotationMatrix|[14]
+        1.  Set |targetMatrix|[15] = |rotationMatrix|[15]
     1.  If |targetMatrix| is of  {{DOMMatrix}} type, run these sub-steps:
-        1.  Set |targetMatrix|.m11 = 1 - 2 * y * y - 2 * z * z
-        1.  Set |targetMatrix|.m12 = 2 * x * y - 2 * z * w
-        1.  Set |targetMatrix|.m13 = 2 * x * z + 2 * y * w
-        1.  Set |targetMatrix|.m14 = 0
-        1.  Set |targetMatrix|.m21 = 2 * x * y + 2 * z * w
-        1.  Set |targetMatrix|.m22 = 1 - 2 * x * x - 2 * z * z
-        1.  Set |targetMatrix|.m23 = 2 * y * z - 2 * x * w
-        1.  Set |targetMatrix|.m24 = 0
-        1.  Set |targetMatrix|.m31 = 2 * x * z - 2 * y * w
-        1.  Set |targetMatrix|.m32 = 2 * y * z + 2 * x * w
-        1.  Set |targetMatrix|.m33 = 1 - 2 * x * x - 2 * y * y
-        1.  Set |targetMatrix|.m34 = 0
-        1.  Set |targetMatrix|.m41 = 0
-        1.  Set |targetMatrix|.m42 = 0
-        1.  Set |targetMatrix|.m43 = 0
-        1.  Set |targetMatrix|.m44 = 1
+        1.  Set |targetMatrix|.m11 = |rotationMatrix|[0]
+        1.  Set |targetMatrix|.m12 = |rotationMatrix|[1]
+        1.  Set |targetMatrix|.m13 = |rotationMatrix|[2]
+        1.  Set |targetMatrix|.m14 = |rotationMatrix|[3]
+        1.  Set |targetMatrix|.m21 = |rotationMatrix|[4]
+        1.  Set |targetMatrix|.m22 = |rotationMatrix|[5]
+        1.  Set |targetMatrix|.m23 = |rotationMatrix|[6]
+        1.  Set |targetMatrix|.m24 = |rotationMatrix|[7]
+        1.  Set |targetMatrix|.m31 = |rotationMatrix|[8]
+        1.  Set |targetMatrix|.m32 = |rotationMatrix|[9]
+        1.  Set |targetMatrix|.m33 = |rotationMatrix|[10]
+        1.  Set |targetMatrix|.m34 = |rotationMatrix|[11]
+        1.  Set |targetMatrix|.m41 = |rotationMatrix|[12]
+        1.  Set |targetMatrix|.m42 = |rotationMatrix|[13]
+        1.  Set |targetMatrix|.m43 = |rotationMatrix|[14]
+        1.  Set |targetMatrix|.m44 = |rotationMatrix|[15]
 </div>
 
 
@@ -489,26 +470,98 @@ Abstract Operations {#abstract-operations}
     1.  Return |orientation|.
 </div>
 
+<h3 id="convert-quaternion-to-rotation-matrix">Convert quaternion to rotation matrix</h3>
+
+The [=convert a quaternion to rotation matrix=] algorithm creates a [=list=] representation of a rotation matrix in column-major order converted from a quaternion [[QUATCONV]], as shown below:
+
+<img src="images/quaternion_to_rotation_matrix.png" style="display: block;margin: auto; width: 50%; height: 50%;" alt="Converting quaternion to rotation matrix.">
+
+where:
+
+ - W = cos(θ/2)
+ - X = V<sub>x</sub> * sin(θ/2)
+ - Y = V<sub>y</sub> * sin(θ/2)
+ - Z = V<sub>z</sub> * sin(θ/2)
+
+<div algorithm>
+To <dfn lt="converting a quaternion to rotation matrix">convert a quaternion to rotation matrix</dfn> given a number |x|, a number |y|, a number |z|, and a number |w|:
+
+    1. Let |m11| be 1 - 2 * y * y - 2 * z * z
+    1. Let |m12| be 2 * x * y - 2 * z * w
+    1. Let |m13| be 2 * x * z + 2 * y * w
+    1. Let |m14| be 0
+    1. Let |m21| be 2 * x * y + 2 * z * w
+    1. Let |m22| be 1 - 2 * x * x - 2 * z * z
+    1. Let |m23| be 2 * y * z - 2 * x * w
+    1. Let |m24| be 0
+    1. Let |m31| be 2 * x * z - 2 * y * w
+    1. Let |m32| be 2 * y * z + 2 * x * w
+    1. Let |m33| be 1 - 2 * x * x - 2 * y * y
+    1. Let |m34| be 0
+    1. Let |m41| be 0
+    1. Let |m42| be 0
+    1. Let |m43| be 0
+    1. Let |m44| be 1
+    1. Return « |m11|, |m12|, |m13|, |m14|, |m21|, |m22|, |m23|, |m24|, |m31|, |m32|, |m33|, |m34|, |m41|, |m42|, |m43|, |m44| ».
+
+</div>
+
+<h3 id="helper-create-quaternion-from-euler-angles">Create a quaternion from Euler angles</h3>
+
+<div algorithm>
+<!--
+    This algorithm was copied from
+    https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/sensor/sensor_inspector_agent.cc;l=27;drc=047c7dc4ee1ce908d7fea38ca063fa2f80f92c77
+-->
+
+To <dfn>create a quaternion from Euler angles</dfn> given a number |alpha|, a number |beta| and a number |gamma|:
+
+    1. Let |alphaInRadians| be |alpha| converted from degrees to radians.
+    1. Let |betaInRadians| be |beta| converted from degrees to radians.
+    1. Let |gammaInRadians| be |gamma| converted from degrees to radians.
+    1. Let |cosZ| be the cosine of (0.5 * |alphaInRadians|).
+    1. Let |sinZ| be the sine of (0.5 * |alphaInRadians|).
+    1. Let |cosX| be the cosine of (0.5 * |betaInRadians|).
+    1. Let |sinX| be the sine of (0.5 * |betaInRadians|).
+    1. Let |cosY| be the cosine of (0.5 * |gammaInRadians|).
+    1. Let |sinY| be the sine of (0.5 * |gammaInRadians|).
+    1. Let |quaternionX| be (|sinX| * |cosY| * |cosZ| - |cosX| * |sinY| * |sinZ|).
+    1. Let |quaternionY| be (|cosX| * |sinY| * |cosZ| + |sinX| * |cosY| * |sinZ|).
+    1. Let |quaternionZ| be (|cosX| * |cosY| * |sinZ| + |sinX| * |sinY| * |cosZ|).
+    1. Let |quaternionW| be (|cosX| * |cosY| * |cosZ| - |sinX| * |sinY| * |sinZ|).
+    1. Return « |quaternionX|, |quaternionY|, |quaternionZ|, |quaternionW| ».
+
+</div>
+
 Automation {#automation}
 ==========
 
 This section extends [[GENERIC-SENSOR#automation]] by providing [=Orientation Sensor=]-specific virtual sensor metadata.
 
-<h3 id="absolute-orientation-sensor-automation">Absolute Orientation Sensor automation</h3>
+Modifications to other specifications {#modifications-to-other-specifications}
+-------------------------------------
 
-The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
-: [=map/key=]
-:: "<code>[=absolute-orientation virtual sensor type|absolute-orientation=]</code>"
-: [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse quaternion reading=].
+This specification integrates with [[DEVICE-ORIENTATION#automation]] as follows.
 
-<h3 id="relative-orientation-sensor-automation">Relative Orientation Sensor automation</h3>
+<div algorithm="parse-orientation-data-reading-modifications">
+The [=parse orientation data reading=] algorithm is modified as follows:
 
-The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
-: [=map/key=]
-:: "<code>[=relative-orientation virtual sensor type|relative-orientation=]</code>"
-: [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse quaternion reading=].
+    * Add the following steps after setting |reading|'s "`alpha`", "`beta`", and "`gamma`" keys and before returning |reading|:
+        1. [=map/Set=] |reading|["`quaternion`"] to the result of invoking [=create a quaternion from Euler angles=] with |reading|["`alpha`"], |reading|["`beta`"], and |reading|["`gamma`"].
+
+</div>
+
+Note: This specification does not currently provide a way for specifying quaternions in WebDriver (and consequently deriving Euler angles from the quaternion) directly. This decision was made for simplicity and under the assumption that automation users are much more likely to work with Euler angles as inputs (or pick specific quaternion values and provide the corresponding Euler angle values on their own). Feedback from users with different use cases who are interested in being able to provide quaternion values directly is welcome via <a href="https://github.com/w3c/orientation-sensor/issues">this specification's issue tracker</a>.
+
+Absolute Orientation Sensor automation {#absolute-orientation-sensor-automation}
+--------------------------------------
+
+The [=absolute-orientation virtual sensor type=] and its corresponding entry in the [=per-type virtual sensor metadata=] [=map=] are defined in [[DEVICE-ORIENTATION#automation]].
+
+Relative Orientation Sensor automation {#relative-orientation-sensor-automation}
+--------------------------------------
+
+The [=relative-orientation virtual sensor type=] and its corresponding entry in the [=per-type virtual sensor metadata=] [=map=] are defined in [[DEVICE-ORIENTATION#automation]].
 
 Acknowledgements {#acknowledgements}
 ================
