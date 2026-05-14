@@ -5,9 +5,9 @@
   <title>Orientation Sensor</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 3c53a5b02, updated Thu Nov 27 17:03:30 2025 +0000" name="generator">
+  <meta content="Bikeshed version 0a3d88311, updated Mon May 4 18:07:03 2026 +0000" name="generator">
   <link href="https://www.w3.org/TR/orientation-sensor/" rel="canonical">
-  <meta content="70fe2300448ea3d8259d0f13f689138fedbdcd9f" name="revision">
+  <meta content="25bc3c62f86c5f312ffea5de1a2e027025c63b7e" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -303,7 +303,7 @@ pre .property::before, pre .property::after {
 </style>
 <style>/* Boilerplate: style-counters */
 body {
-    counter-reset: example figure issue;
+    counter-reset: example figure issue table;
 }
 .issue {
     counter-increment: issue;
@@ -328,6 +328,13 @@ figcaption {
 }
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
+}
+
+figure.table figcaption {
+    counter-increment: table;
+}
+figure.table figcaption:not(.no-marker)::before {
+    content: "Table " counter(table) " ";
 }
 </style>
 <style>/* Boilerplate: style-dfn-panel */
@@ -914,6 +921,30 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     c-[vm] { color: #cb4b16 } /* Name.Variable.Magic */
     c-[il] { color: #657b83 } /* Literal.Number.Integer.Long */
 }
+
+@media print {
+    /* Darken colors for print that would otherwise print too faintly */
+    c-[c]  { color: #555555 } /* Comment */
+    c-[d]  { color: #555555 } /* Comment.Multiline */
+    c-[cp] { color: #555555 } /* Comment.Preproc */
+    c-[c1] { color: #555555 } /* Comment.Single */
+    c-[cs] { color: #555555 } /* Comment.Special */
+    c-[o]  { color: #222222 } /* Operator */
+    c-[p]  { color: #222222 } /* Punctuation */
+    c-[ow] { color: #222222 } /* Operator.Word */
+    c-[s]  { color: #664400 } /* Literal.String */
+    c-[t]  { color: #664400 } /* Literal.String.Single */
+    c-[u]  { color: #664400 } /* Literal.String.Double */
+    c-[sb] { color: #664400 } /* Literal.String.Backtick */
+    c-[sc] { color: #664400 } /* Literal.String.Char */
+    c-[sd] { color: #664400 } /* Literal.String.Doc */
+    c-[se] { color: #664400 } /* Literal.String.Escape */
+    c-[sh] { color: #664400 } /* Literal.String.Heredoc */
+    c-[si] { color: #664400 } /* Literal.String.Interpol */
+    c-[sx] { color: #664400 } /* Literal.String.Other */
+    c-[sr] { color: #664400 } /* Literal.String.Regex */
+    c-[ss] { color: #664400 } /* Literal.String.Symbol */
+}
 </style>
 <style>/* Boilerplate: style-var-click-highlighting */
 /*
@@ -966,7 +997,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
 </p>
    <h1 class="no-ref p-name" id="title">Orientation Sensor</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-02-02">2 February 2026</time></p>
+    <time class="dt-updated" datetime="2026-05-14">14 May 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1086,7 +1117,12 @@ architectural review practices.</p>
       <li><a href="#relative-orientation-sensor-automation"><span class="secno">8.3</span> <span class="content">Relative Orientation Sensor automation</span></a>
      </ol>
     <li><a href="#acknowledgements"><span class="secno">9</span> <span class="content">Acknowledgements</span></a>
-    <li><a href="#conformance"><span class="secno">10</span> <span class="content">Conformance</span></a>
+    <li>
+     <a href="#w3c-conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
+     <ol class="toc">
+      <li><a href="#w3c-conventions"><span class="secno"></span> <span class="content">Document conventions</span></a>
+      <li><a href="#w3c-conformant-algorithms"><span class="secno"></span> <span class="content">Conformant Algorithms</span></a>
+     </ol>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
@@ -1097,7 +1133,7 @@ architectural review practices.</p>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
-      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Non-Normative References</span></a>
      </ol>
     <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
    </ol>
@@ -1175,7 +1211,7 @@ describes mapping between concrete orientation sensors and permission tokens def
    <table class="def">
     <thead>
      <tr>
-      <th>OrientationSensor sublass
+      <th>OrientationSensor subclass
       <th>Permission tokens
     <tbody>
      <tr>
@@ -1203,7 +1239,7 @@ q<sub>2</sub>, q<sub>3</sub>].</p>
    <table class="def">
     <thead>
      <tr>
-      <th>OrientationSensor sublass
+      <th>OrientationSensor subclass
       <th><a data-link-type="dfn" href="https://w3c.github.io/sensors/#low-level" id="ref-for-low-level④">Low-level</a> motion sensors
     <tbody>
      <tr>
@@ -1247,7 +1283,7 @@ sensor<c- p>.</c->start<c- p>();</c->
 </pre>
    </div>
    <h3 class="heading settled" data-level="5.1" id="absoluteorientationsensor-model"><span class="secno">5.1. </span><span class="content">The AbsoluteOrientationSensor Model</span><a class="self-link" href="#absoluteorientationsensor-model"></a></h3>
-   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="absolute-orientation-sensor-type">Absolute Orientation Sensor</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type②">sensor type</a> represents the sensor described in <a href="https://w3c.github.io/motion-sensors/#absolute-orientation">Motion Sensors Explainer § absolute-orientation</a>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#extension-sensor-interface" id="ref-for-extension-sensor-interface">extension sensor interface</a> is <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑤">AbsoluteOrientationSensor</a></code>, a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor⑥">OrientationSensor</a></code>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type">virtual sensor type</a> is
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="absolute-orientation-sensor-type">Absolute Orientation Sensor</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type②">sensor type</a> represents the sensor described in <a href="https://w3c.github.io/motion-sensors/#absolute-orientation">Motion Sensors Explainer § absolute-orientation</a>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#extension-sensor-interface" id="ref-for-extension-sensor-interface">extension sensor interface</a> is <code class="idl"><a data-link-type="idl" href="#absoluteorientationsensor" id="ref-for-absoluteorientationsensor⑤">AbsoluteOrientationSensor</a></code>, a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor⑥">OrientationSensor</a></code>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type">virtual sensor type</a> is
 "<code><a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#absolute-orientation-virtual-sensor-type" id="ref-for-absolute-orientation-virtual-sensor-type">absolute-orientation</a></code>".</p>
    <p>For the absolute orientation sensor the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading②">latest reading</a>["quaternion"] represents
 the rotation of a device’s <a data-link-type="dfn" href="https://w3c.github.io/sensors/#local-coordinate-system" id="ref-for-local-coordinate-system">local coordinate system</a> in relation to the <dfn class="dfn-paneled" data-dfn-type="dfn" data-export data-lt="Earth’s reference coordinate system" id="earths-reference-coordinate-system">Earth’s reference
@@ -1267,7 +1303,7 @@ motion sensors. It can be either the <a data-link-type="dfn" href="https://w3c.g
 orientation sensor’s <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading③">latest reading</a> would represent 0 (rad) <a data-link-type="biblio" href="#biblio-si" title="SI Brochure: The International System of Units (SI), 8th edition">[SI]</a> rotation about each axis.</p>
    <p><img alt="AbsoluteOrientationSensor coordinate system." src="images/absolute_orientation_sensor_coordinate_system.png" srcset="images/absolute_orientation_sensor_coordinate_system.svg" style="display: block;margin: auto;"></p>
    <h3 class="heading settled" data-level="5.2" id="relativeorientationsensor-model"><span class="secno">5.2. </span><span class="content">The RelativeOrientationSensor Model</span><a class="self-link" href="#relativeorientationsensor-model"></a></h3>
-   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="relative-orientation-sensor-type">Relative Orientation Sensor</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type③">sensor type</a> represents the sensor described in <a href="https://w3c.github.io/motion-sensors/#relative-orientation">Motion Sensors Explainer § relative-orientation</a>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#extension-sensor-interface" id="ref-for-extension-sensor-interface①">extension sensor interface</a> is <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor③">RelativeOrientationSensor</a></code>, a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor⑦">OrientationSensor</a></code>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type①">virtual sensor type</a> is
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relative-orientation-sensor-type">Relative Orientation Sensor</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type③">sensor type</a> represents the sensor described in <a href="https://w3c.github.io/motion-sensors/#relative-orientation">Motion Sensors Explainer § relative-orientation</a>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#extension-sensor-interface" id="ref-for-extension-sensor-interface①">extension sensor interface</a> is <code class="idl"><a data-link-type="idl" href="#relativeorientationsensor" id="ref-for-relativeorientationsensor③">RelativeOrientationSensor</a></code>, a subclass of <code class="idl"><a data-link-type="idl" href="#orientationsensor" id="ref-for-orientationsensor⑦">OrientationSensor</a></code>. Its associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type①">virtual sensor type</a> is
 "<code><a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#relative-orientation-virtual-sensor-type" id="ref-for-relative-orientation-virtual-sensor-type">relative-orientation</a></code>".</p>
    <p>For the relative orientation sensor the value of <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading④">latest reading</a>["quaternion"] represents the
 rotation of a device’s <a data-link-type="dfn" href="https://w3c.github.io/sensors/#local-coordinate-system" id="ref-for-local-coordinate-system③">local coordinate system</a> in relation to a <a data-link-type="dfn" href="#stationary-reference-coordinate-system" id="ref-for-stationary-reference-coordinate-system">stationary reference coordinate system</a>. The <a data-link-type="dfn" href="#stationary-reference-coordinate-system" id="ref-for-stationary-reference-coordinate-system①">stationary reference coordinate system</a> may drift due to the bias introduced by
@@ -1570,21 +1606,63 @@ The <a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#parse
    <p>The <a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#relative-orientation-virtual-sensor-type" id="ref-for-relative-orientation-virtual-sensor-type①">relative-orientation virtual sensor type</a> and its corresponding entry in the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata" id="ref-for-per-type-virtual-sensor-metadata①">per-type virtual sensor metadata</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-ordered-map①">map</a> are defined in <a href="https://w3c.github.io/deviceorientation/#automation">Device Orientation and Motion § automation</a>.</p>
    <h2 class="heading settled" data-level="9" id="acknowledgements"><span class="secno">9. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>Tobie Langel for the work on Generic Sensor API.</p>
-   <h2 class="heading settled" data-level="10" id="conformance"><span class="secno">10. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
-   <p>Conformance requirements are expressed with a combination of
-descriptive assertions and RFC 2119 terminology. The key words "MUST",
-"MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
-"RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this
-document are to be interpreted as described in RFC 2119.
-However, for readability, these words do not appear in all uppercase
-letters in this specification.</p>
-   <p>All of the text of this specification is normative except sections
-explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a></p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="conformant-user-agent">conformant user agent</dfn> must implement all the requirements
-listed in this specification that are applicable to user agents.</p>
-   <p>The IDL fragments in this specification must be interpreted as required for
-conforming IDL fragments, as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl" title="Web IDL Standard">[WEBIDL]</a></p>
   </main>
+  <div data-fill-with="conformance">
+   <h2 class="heading no-num no-ref settled" id="w3c-conformance"><span class="content">Conformance</span><a class="self-link" href="#w3c-conformance"></a></h2>
+   <h3 class="heading no-num no-ref settled" id="w3c-conventions"><span class="content">Document conventions</span><a class="self-link" href="#w3c-conventions"></a></h3>
+   <p>Conformance requirements are expressed
+    with a combination of descriptive assertions
+    and RFC 2119 terminology.
+    The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL”
+    in the normative parts of this document
+    are to be interpreted as described in RFC 2119.
+    However, for readability,
+    these words do not appear in all uppercase letters in this specification.
+
+    </p>
+   <p>All of the text of this specification is normative
+    except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a>
+
+    </p>
+   <p>Examples in this specification are introduced with the words “for example”
+    or are set apart from the normative text
+    with <code>class="example"</code>,
+    like this:
+
+    </p>
+   <div class="example" id="w3c-example">
+    <a class="self-link" href="#w3c-example"></a>
+        
+    <p>This is an example of an informative example.
+    </p>
+   </div>
+   <p>Informative notes begin with the word “Note”
+    and are set apart from the normative text
+    with <code>class="note"</code>,
+    like this:
+
+    </p>
+   <p class="note" role="note">Note, this is an informative note.</p>
+   <section>
+    <h3 class="heading no-num no-ref settled" id="w3c-conformant-algorithms"><span class="content">Conformant Algorithms</span><a class="self-link" href="#w3c-conformant-algorithms"></a></h3>
+    <p>Requirements phrased in the imperative as part of algorithms
+    (such as "strip any leading space characters"
+    or "return false and abort these steps")
+    are to be interpreted with the meaning of the key word
+    ("must", "should", "may", etc)
+    used in introducing the algorithm.
+
+    </p>
+    <p>Conformance requirements phrased as algorithms or specific steps
+    can be implemented in any manner,
+    so long as the end result is equivalent.
+    In particular, the algorithms defined in this specification
+    are intended to be easy to understand
+    and are not intended to be performant.
+    Implementers are encouraged to optimize.
+</p>
+   </section>
+  </div>
   <script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
   <h2 class="heading no-num no-ref settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="heading no-num no-ref settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
@@ -1593,7 +1671,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li><a href="#absoluteorientationsensor">AbsoluteOrientationSensor</a><span>, in § 6.2</span>
    <li><a href="#dom-absoluteorientationsensor-absoluteorientationsensor">AbsoluteOrientationSensor()</a><span>, in § 6.2</span>
    <li><a href="#dom-absoluteorientationsensor-absoluteorientationsensor">AbsoluteOrientationSensor(sensorOptions)</a><span>, in § 6.2</span>
-   <li><a href="#conformant-user-agent">conformant user agent</a><span>, in § 10</span>
    <li><a href="#construct-an-orientation-sensor-object">Construct an Orientation Sensor object</a><span>, in § 7</span>
    <li>
     constructor()
@@ -1751,7 +1828,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dt id="biblio-webidl">[WEBIDL]
    <dd>Edgar Chen; Timothy Gu. <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
   </dl>
-  <h3 class="heading no-num no-ref settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <h3 class="heading no-num no-ref settled" id="informative"><span class="content">Non-Normative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
@@ -2143,7 +2220,6 @@ let dfnPanelData = {
 "c29c300e": {"dfnID":"c29c300e","dfnText":"start()","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-sensor-start"},{"id":"ref-for-dom-sensor-start\u2460"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors/#dom-sensor-start"},
 "c3e881ef": {"dfnID":"c3e881ef","dfnText":"SecurityError","external":true,"refSections":[{"refs":[{"id":"ref-for-securityerror"}],"title":"7.1. Construct an Orientation Sensor object"}],"url":"https://webidl.spec.whatwg.org/#securityerror"},
 "cc890cc1": {"dfnID":"cc890cc1","dfnText":"policy-controlled feature","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-controlled-feature"},{"id":"ref-for-policy-controlled-feature\u2460"}],"title":"5. Model"}],"url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"},
-"conformant-user-agent": {"dfnID":"conformant-user-agent","dfnText":"conformant user agent","external":false,"refSections":[],"url":"#conformant-user-agent"},
 "construct-an-orientation-sensor-object": {"dfnID":"construct-an-orientation-sensor-object","dfnText":"7.1. Construct an Orientation Sensor object","external":false,"refSections":[{"refs":[{"id":"ref-for-construct-an-orientation-sensor-object"}],"title":"6.2. The AbsoluteOrientationSensor Interface"},{"refs":[{"id":"ref-for-construct-an-orientation-sensor-object\u2460"}],"title":"6.3. The RelativeOrientationSensor Interface"},{"refs":[{"id":"ref-for-construct-an-orientation-sensor-object"}],"title":"7.1. Construct an Orientation Sensor object"}],"url":"#construct-an-orientation-sensor-object"},
 "converting-a-quaternion-to-rotation-matrix": {"dfnID":"converting-a-quaternion-to-rotation-matrix","dfnText":"convert a quaternion to rotation matrix","external":false,"refSections":[{"refs":[{"id":"ref-for-converting-a-quaternion-to-rotation-matrix"}],"title":"6.1.2. OrientationSensor.populateMatrix()"},{"refs":[{"id":"ref-for-converting-a-quaternion-to-rotation-matrix\u2460"}],"title":"7.2. Convert quaternion to rotation matrix"}],"url":"#converting-a-quaternion-to-rotation-matrix"},
 "create-a-quaternion-from-euler-angles": {"dfnID":"create-a-quaternion-from-euler-angles","dfnText":"create a quaternion from Euler angles","external":false,"refSections":[{"refs":[{"id":"ref-for-create-a-quaternion-from-euler-angles"}],"title":"8.1. Modifications to other specifications"}],"url":"#create-a-quaternion-from-euler-angles"},
