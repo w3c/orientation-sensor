@@ -463,7 +463,8 @@ Abstract Operations {#abstract-operations}
     :: An {{OrientationSensor}} object.
 
     1.  Let |allowed| be the result of invoking [=check sensor policy-controlled features=]
-        with the [=interface=] identified by |orientation_interface|.
+        with the [=sensor type=] whose [=extension sensor interface=] is the
+        [=interface=] identified by |orientation_interface|.
     1.  If |allowed| is false, then:
         1.  [=Throw=] a {{SecurityError}} {{DOMException}}.
     1.  Let |orientation| be a new instance of the [=interface=] identified by |orientation_interface|.
